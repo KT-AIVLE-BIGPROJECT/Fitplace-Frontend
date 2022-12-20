@@ -64,7 +64,7 @@ const SignUp = () => {
                     <Form.Label>이메일</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="이메일을 입력하세요."
+                      placeholder="이메일을 입력하세요"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                     />
