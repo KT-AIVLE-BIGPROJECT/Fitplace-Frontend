@@ -28,7 +28,8 @@ const SignUp = () => {
         console.log(response);
         if (response.status === 201){
           alert("회원가입이 완료되었습니다!");
-          navigate('/');
+          //navigate('/');
+          window.location.replace('http://localhost:3000/profile');
         } else {
          alert("입력정보를 다시 확인해주세요."); // 예외처리 더 필요할듯
         }
@@ -64,7 +65,7 @@ const SignUp = () => {
                     <Form.Label>이메일</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="이메일을 입력하세요"
+                      placeholder="이메일을 입력하세요."
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
                     />

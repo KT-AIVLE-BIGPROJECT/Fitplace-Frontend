@@ -6,18 +6,10 @@ import SignUp from './pages/SignUp';
 import Board from './pages/Board';
 import Search from './pages/Search';
 import BeforeSignUp from './pages/BeforeSignUp';
+import Profile from './pages/Profile';
+import ProfileModify from './pages/ProfileModify';
 
 function App() {
-  localStorage.setItem("isLogin", true);
-  const [isLogin, setIsLogin] = useState("false");
-
-  useEffect(()=>{
-    if (localStorage.getItem("isLogin") === true){
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  },)
   return (
     <BrowserRouter>
       <Routes>
@@ -26,6 +18,8 @@ function App() {
         <Route path="/board" element={<Board/>}></Route>
         <Route path="/search" element={<Search/>}></Route>
         <Route path="/bfsignup" element={<BeforeSignUp/>}></Route>
+        <Route path="/profile" element={<Profile/>}></Route>
+        <Route path="/prmodify" element={<ProfileModify/>}></Route>
       </Routes>
     </BrowserRouter>
   );

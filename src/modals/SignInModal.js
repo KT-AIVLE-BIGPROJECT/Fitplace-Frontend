@@ -19,13 +19,15 @@ const SignInModal = ({ show, onHide }) => {
         password: password,
       })
       .then((response) => {
-        if (response.status < 300) {
-          console.log("[SognInModals.js] ==> response arrived");
-          console.log(response)
-          localStorage.setItem("token", response.data["token"]);
-          //localStorage.setItem("username", response.data["username"]);
-          navigate("/");
-        }
+        console.log(response.data);
+        //localStorage.clear();
+        localStorage.setItem("token", response.data["token"]);
+        localStorage.setItem("username", username);
+        console.log("[SognInModals.js] ==> Login Success");
+        window.location.replace('http://localhost:3000/');
+      })
+      .catch((error) => {
+        console.log(error);
       })
   }
   return (
@@ -65,11 +67,11 @@ const SignInModal = ({ show, onHide }) => {
         </Modal.Body>
 
         <Modal.Footer>
-            <Button variant="primary" type="submit" onClick={pressSignIn}>
-                로그인
-            </Button>
             <Button variant="primary" type="button" onClick={()=>{navigate('/bfsignup');}}>
               회원가입
+            </Button>
+            <Button variant="primary" type="submit" onClick={pressSignIn}>
+                로그인
             </Button>
         </Modal.Footer>
       </Container>
