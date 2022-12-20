@@ -1,19 +1,16 @@
 import React from 'react'
-import MainTop from './MainTop'
-import MainHot from './MainHot'
-
 import {Container} from 'react-bootstrap'
+
 import Layout from '../layouts/Layout'
 
-const Main = () => {
+const Board = () => {
   return (
     <Layout>
       <Container className='container_style' style={{minHeight: "75vh"}}>
-        <MainTop />
-        <MainHot />
+        <div>게시판 화면입니다.</div>
       </Container>
     </Layout>
   )
 }
 
-export default Main
+export default Board
