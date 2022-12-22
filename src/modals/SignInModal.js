@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 import { Modal, Button, Form, Container } from 'react-bootstrap';
-// import { Routes, Route, Link, Router } from 'react-router-dom';
-// import SignUp from '../pages/SignUp';
+import { useNavigate } from 'react-router-dom';
 // import "./SignIn.css";
 
 const SignInModal = ({ show, onHide }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const pressSignIn = (event) => {
     event.preventDefault();
@@ -68,14 +67,12 @@ const SignInModal = ({ show, onHide }) => {
         </Modal.Body>
 
         <Modal.Footer>
-
-            <Button variant="primary" type="button">
-                로그인
-            </Button>
-            <Button variant="primary" type="button">
-              회원가입
-            </Button>
-         
+          <Button variant="primary" type="button" onClick={()=>{navigate('/bfsignup');}}>
+            회원가입
+          </Button>
+          <Button variant="primary" type="submit" onClick={pressSignIn}>
+              로그인
+          </Button>
         </Modal.Footer>
       </Container>
     </Modal>
