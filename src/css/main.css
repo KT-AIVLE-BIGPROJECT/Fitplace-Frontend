@@ -1,0 +1,279 @@
+.title_style {
+    width: 200px;
+    height: 55px;
+    margin-bottom: 7px;
+}
+
+.logo-size {
+    width: 200px;
+    height: 53px;
+}
+
+.z-index {
+    z-index: auto;
+}
+
+.h_row_center {
+    margin-top: 80px; 
+    width: 1180px; 
+    justify-content: space-around;
+}
+
+.items {
+    position: relative; 
+    width: 274px; 
+    height: 140px; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 80px;
+}
+
+.main_top_text {
+    margin-top: 20px; 
+    margin-left: 20px; 
+    font-weight: bold; 
+    font-size: 20px; 
+    line-height: 28px; 
+    letter-spacing: -0.2px; 
+    color: rgb(255, 255, 255);
+}
+
+img {
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    z-index: -2;
+}
+
+.h_button {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 62px;
+    height: 28px;
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+}
+
+.h_button_detail {
+    font-size: 12px;
+    line-height: 14px;
+    color: rgb(69, 75, 80);
+    margin: 0px;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+h4 {
+    margin-left: 30px;
+    margin-top: 80px;
+    padding-top: 20px;
+}
+
+.margin_box {
+    margin-top: 20px;
+}
+
+.h_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-right: 30px;
+    width: 1100px;
+    height: 250px;
+}
+
+.items {
+    position: relative; 
+    width: 240px; 
+    height: 140px; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 60px;
+}
+
+.hotimg {
+    position: relative; 
+    width: 240px; 
+    height: 140px; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.namebox {
+    position: relative; 
+    padding: 10px 0px 22px 30px;
+}
+
+h6 {
+    margin-top: 14px; 
+    margin-bottom: 15px;
+    font-weight: 550; 
+    font-size: 15px; 
+    line-height: 14px; 
+    color: rgb(27, 29, 31);
+}
+
+.goldstar {
+    width: 16px; 
+    height: 16px;
+}
+
+.area_cat {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: slategray;
+}
+
+.star_rank {
+    margin: 0px;
+    width: 20px;
+    height: 16px;
+    margin-left: 17px;
+    margin-right: 0px;
+    color: slategray;
+}
+
+.h_center {
+    margin-top: 30px;
+}
+
+.btn_view {
+    width: 280px;
+    height: 49px;
+    /* opacity: 0.8; */
+}
+
+.snsimg {
+    position: relative; 
+    width: 200px; 
+    height: 180px; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+Container {
+    position: absolute;
+    top: calc(50vh - 100px); left: calc(50vw - 200px);
+    background-color: white;
+    display: flex; justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 400px;
+    height: 200px;
+  }
+
+.h_column_center {
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 20px;
+}
+
+.signup_info {
+width: 100%;
+border-radius: 10px;
+border: 1px solid slategray;
+background-color: rgb(255, 255, 255);
+padding: 40px 50px;
+}
+
+.signup_box {
+width: 580px;
+}
+
+/* 여기부터 LikingCheck css코드 */
+.w {
+    width: 600px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex_col {
+    flex-direction: column;
+}
+
+.mb {
+    margin-bottom: 32px;
+}
+
+.mb-23 {
+    margin-bottom: 23px;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.mr-35 {
+    margin-right: 33px;
+}
+
+.align-top {
+    vertical-align: top;
+}
+
+.rounded {
+    border-radius: 12px;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.w-60 {
+    width: 65px;
+}
+
+.h-60 {
+    height: 65px;
+}
+
+.relative {
+    position: relative;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.m-0a {
+    margin: 0 auto;
+}
+
+.m-tb {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.d-table {
+    display: table;
+}
+
+.ml-55 {
+    margin-left: 55px;
+}

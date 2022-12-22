@@ -1,8 +1,6 @@
 import React from 'react';
 import { Modal, Button, Form, Container } from 'react-bootstrap';
-// import { Routes, Route, Link, Router } from 'react-router-dom';
-// import SignUp from '../pages/SignUp';
-import "./SignIn.css";
+import "../css/main.css";
 
 const SignInModal = ({ show, onHide }) => {
   return (
@@ -32,10 +30,10 @@ const SignInModal = ({ show, onHide }) => {
         </Modal.Body>
         <Modal.Footer>
 
-            <Button variant="primary" type="button">
-                로그인
+            <Button variant="primary" type="button" className='btn btn-secondary'>
+              로그인
             </Button>
-            <Button variant="primary" type="button">
+            <Button variant="primary" type="button" href='/liking' className='btn btn-secondary'>
               회원가입
             </Button>
          
