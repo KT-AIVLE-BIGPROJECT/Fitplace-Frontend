@@ -72,6 +72,7 @@ const Header = () => {
                 <Navbar bg="light" expand="lg">
                     <Container>
                         <Navbar.Brand href="/" className='title_style'>FitPlace</Navbar.Brand>
+                        {/* <Navbar.Brand href="/" className='title_style'><img src='/img/logo.png'></img></Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav class="navbar-nav me-auto">
