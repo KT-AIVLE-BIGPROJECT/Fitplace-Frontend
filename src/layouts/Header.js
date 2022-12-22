@@ -70,9 +70,16 @@ const Header = () => {
 
             <header>
                 <Navbar bg="light" expand="lg">
-                    <Container>=======
-                        <Navbar.Brand href="/" className='title_style'>FitPlace</Navbar.Brand>
-                        {/* <Navbar.Brand href="/" className='title_style'><img src='/img/logo.png'></img></Navbar.Brand> */}
+                    <Container>
+                        <Navbar.Brand className='title_style' href="/">
+                            <img
+                                alt=""
+                                src={require("../img/fitplace.png")}
+                                width="105px"
+                                height="53px"
+                                className="logo-size z-index"
+                            />
+                        </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav class="navbar-nav me-auto">
