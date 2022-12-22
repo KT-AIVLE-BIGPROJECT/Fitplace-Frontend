@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Button, Col, Form, Row, Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Layout from '../layouts/Layout';
@@ -12,7 +12,7 @@ const SignUp = () => {
   const [password2, setPassword2] = useState("");
   const [toNext, setToNext] = useState(true);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const pressSignUp = (event) => {
     event.preventDefault();
@@ -29,7 +29,7 @@ const SignUp = () => {
         if (response.status === 201){
           alert("회원가입이 완료되었습니다!");
           //navigate('/');
-          window.location.replace('http://localhost:3000/profile');
+          window.location.replace('http://localhost:3000/prmodify');
         } else {
          alert("입력정보를 다시 확인해주세요."); // 예외처리 더 필요할듯
         }
