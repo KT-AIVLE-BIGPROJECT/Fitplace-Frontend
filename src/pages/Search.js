@@ -1,16 +1,16 @@
+import React from 'react'
 import {Container} from 'react-bootstrap'
-import Layout from './layouts/Layout';
-import Main from './Main/Main';
-import './App.css';
 
-function App() {
+import Layout from '../layouts/Layout'
+
+const Search = () => {
   return (
     <Layout>
       <Container className='container_style' style={{minHeight: "75vh"}}>
-        <Main />
+        <div>검색 화면입니다.</div>
       </Container>
     </Layout>
-  );
+  )
 }
 
-export default App;
+export default Search
