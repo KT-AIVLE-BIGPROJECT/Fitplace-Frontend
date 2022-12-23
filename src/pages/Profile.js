@@ -16,8 +16,8 @@ const Profile = () => {
     "age_none": "선택안함",
   };
   var gender_dict = {
-    "male": "남성",
-    "female": "여성",
+    "gender_male": "남성",
+    "gender_female": "여성",
     "gender_none": "선택안함",
   };
   var mbti_dict = {

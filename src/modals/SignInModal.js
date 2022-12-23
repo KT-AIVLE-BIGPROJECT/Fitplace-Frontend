@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Modal, Button, Form, Container } from 'react-bootstrap';
+import { Modal, Button, Form, Container, FloatingLabel } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import "./SignInModal.css";
 // import "./SignIn.css";
 
 const SignInModal = ({ show, onHide }) => {
@@ -43,36 +44,51 @@ const SignInModal = ({ show, onHide }) => {
             <Modal.Title id="contained-modal-title-vcenter">로그인</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form>
-                <Form.Group className="mb-3">
-                    <Form.Label>아이디</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="아이디를 입력해주세요."
-                      value={username}
-                      onChange={(event)=>setUsername(event.target.value)}
-                    />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    <Form.Label>비밀번호</Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="비밀번호를 입력해주세요."
-                      value={password}
-                      onChange={(event)=>setPassword(event.target.value)}
-                    />
-                </Form.Group>
-            </Form>
+          <p>
+            <img
+                alt=""
+                src={require("../img/fitplace.png")}
+                width="105px"
+                height="53px"
+                className="logo-size z-index"
+            />
+          </p><br/><br/>
+          <Form>
+              <Form.Group className="mb-3">
+                {/* <Form.Label>아이디</Form.Label> */}
+                <FloatingLabel controlId="floatingInput" label="아이디">
+                  <Form.Control
+                    type="text"
+                    placeholder="아이디를 입력해주세요."
+                    value={username}
+                    onChange={(event)=>setUsername(event.target.value)}
+                  />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                {/* <Form.Label>비밀번호</Form.Label> */}
+                <FloatingLabel controlId="floatingInput" label="비밀번호">
+                  <Form.Control
+                    type="password"
+                    placeholder="비밀번호를 입력해주세요."
+                    value={password}
+                    onChange={(event)=>setPassword(event.target.value)}
+                  />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group>
+                <button class="loginButton" type="submit" onClick={pressSignIn}>
+                  로그인
+                </button>
+              </Form.Group>
+          </Form>
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="primary" type="button" onClick={()=>{navigate('/bfsignup');}}>
-            회원가입
-          </Button>
-          <Button variant="primary" type="submit" onClick={pressSignIn}>
-              로그인
-          </Button>
+          <div>아직 회원이 아니신가요?</div>
+          <span class="registerButton" onClick={()=>{navigate('/bfsignup');}}>
+            회원가입 하기
+          </span>
         </Modal.Footer>
       </Container>
     </Modal>

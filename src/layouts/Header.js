@@ -40,11 +40,11 @@ const HeaderRight = (props) => {
                 />
                 <Nav className="ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onClick={()=>SetSignInModalOn(true)}>로그인</a>
+                        <a class="nav-link" onClick={()=>SetSignInModalOn(true)}>로그인</a>
                     </li>
-                    <li class="nav-item">
+                    {/* <li class="nav-item">
                         <a class="nav-link" href="#" onClick={()=>{navigate('/bfsignup');}}>회원가입</a>
-                    </li>
+                    </li> */}
                 </Nav>
             </div>
         )

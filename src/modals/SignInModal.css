@@ -1,0 +1,15 @@
+.loginButton {
+    width: "100%";
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background: rgb(250, 150, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.registerButton {
+    color: rgb(250, 150, 0);
+    text-decoration: underline;
+}
