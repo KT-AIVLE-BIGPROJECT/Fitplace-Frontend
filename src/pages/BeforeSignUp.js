@@ -390,7 +390,13 @@ const BeforeSignUp = () => {
           <button class="backButton" type="button" onClick={()=>{navigate('/');}}>
             취소
           </button>
-          <button style={toNext ? {background: "rgb(146, 145, 144)"} : {background: "rgb(250, 150, 0)"}} class="nextButton" type="button" disabled={toNext} onClick={()=>{navigate('/signup');}}>
+          <button
+            style={toNext ? {background: "rgb(146, 145, 144)"} : {background: "rgb(250, 150, 0)"}}
+            class="nextButton"
+            type="button"
+            disabled={toNext}
+            onClick={()=>{navigate('/signup');}}
+          >
             다음
           </button>
         </div>

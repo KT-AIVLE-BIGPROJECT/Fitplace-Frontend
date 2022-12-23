@@ -1,0 +1,25 @@
+.profileTitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background: rgb(250, 150, 0);
+}
+
+.moveButton {
+    font-size: 1rem;
+    color: rgb(250, 150, 0);
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    background: #ffebc0;
+    
+}

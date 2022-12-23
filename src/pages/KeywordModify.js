@@ -3,13 +3,13 @@ import {Container} from 'react-bootstrap'
 
 import Layout from '../layouts/Layout'
 
-const ProfileModify = () => {
+const KeywordModify = () => {
   return (
     <Layout>
       <Container className='container_style' style={{minHeight: "75vh"}}>
       <div>
         <div className='h_row_center'>
-            <h4>프로필 수정 화면입니다.</h4>
+            <h4>취향 키워드 수정 화면입니다.</h4>
         </div>
         <h5>음식점</h5>
         <div className='margin_box'>
@@ -55,4 +55,4 @@ const ProfileModify = () => {
   )
 }
 
-export default ProfileModify
+export default KeywordModify

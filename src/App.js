@@ -11,7 +11,7 @@ import Board_page from './Board/Board_page';
 import Search from './pages/Search';
 import BeforeSignUp from './pages/BeforeSignUp';
 import Profile from './pages/Profile';
-import ProfileModify from './pages/ProfileModify';
+import KeywordModify from './pages/KeywordModify';
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
         <Route path="/search" element={<Search/>}></Route>
         <Route path="/bfsignup" element={<BeforeSignUp/>}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
-        <Route path="/prmodify" element={<ProfileModify/>}></Route>
+        <Route path="/kerword" element={<KeywordModify/>}></Route>
       </Routes>
     </BrowserRouter>
   );
