@@ -60,13 +60,13 @@ const Profile = () => {
   const selectMbti = (event) => { // MBTI 선택 시
     setMbti(event.target.value);
   }
-  const pressKeywordModify = () => { // 취향 키워드 수정 버튼 클릭 시
-    window.location.replace('http://localhost:3000/kerword');
+  const pressLikingCheck = () => { // 취향 키워드 수정 버튼 클릭 시
+    window.location.replace('http://localhost:3000/liking');
   };
 
-  const pressSaveModify = (event) => { // 수정한 내용 저장 버튼
+  const pressSaveModify = (event) => { // 수정한 내용 저장 버튼 클릭 시
     event.preventDefault();
-    console.log("[Profile.js] ==> pressSaveModify called.");
+    console.log("[Profile.js] ==> pressSaveModify called...");
     var profileForm = {
       "nickname": nickname,
       "age": age,
@@ -81,13 +81,13 @@ const Profile = () => {
       })
       .then((response) => {
         if(response.status < 300) {
-          alert("프로필 정보가 수정되었습니다.");
+          alert("프로필 정보가 수정되었습니다!");
           window.location.replace('http://localhost:3000');
         }
       })
       .cartch((error) => {
         console.log(error);
-        alert("수정 도중 에러가 발생했습니다.");
+        alert("수정 도중 문제가 발생했습니다.");
       })
   };
 
@@ -124,7 +124,7 @@ const Profile = () => {
           <button
             class="moveButton"
             type="submit"
-            onClick={pressKeywordModify}
+            onClick={pressLikingCheck}
           >
               취향 키워드 수정하러 가기
           </button>
@@ -216,44 +216,3 @@ const Profile = () => {
 }
 
 export default Profile
-
-
-
-// const [rKorea, setRKorea] = useState("");
-// const [rWest, setRWest] = useState("");
-// const [rChina, setRChina] = useState("");
-// const [rJapan, setRJapan] = useState("");
-// const [rFast, setRFast] = useState("");
-// const [rBunsik, setRBunsik] = useState("");
-// const [cCafe, setCCafe] = useState("");
-// const [cDessert, setCDessert] = useState("");
-// const [cBakery, setCBakery] = useState("");
-// const [lGallery, setLGallery] = useState("");
-// const [lCraft, setLCraft] = useState("");
-// const [lPopup, setLPopup] = useState("");
-// const [lTheater, setLTheater] = useState("");
-// const [lBook, setLBook] = useState("");
-// const [lDepartment, setLDepartment] = useState("");
-// const [wPark, setWPark] = useState("");
-// const [wMarket, setWMarket] = useState("");
-// const [wStreet, setWStreet] = useState("");
-
-
-// setRKorea(response.data.restaurant_korea);
-// setRWest(response.data.restaurant_west);
-// setRChina(response.data.restaurant_china);
-// setRJapan(response.data.restaurant_japan);
-// setRFast(response.data.restaurant_fast);
-// setRBunsik(response.data.restaurant_bunsik);
-// setCCafe(response.data.cafe_cafe);
-// setCDessert(response.data.cafe_dessert);
-// setCBakery(response.data.cafe_bakery);
-// setLGallery(response.data.leisure_gallery);
-// setLCraft(response.data.leisure_craft);
-// setLPopup(response.data.leisure_popup);
-// setLTheater(response.data.leisure_theater);
-// setLBook(response.data.leisure_book);
-// setLDepartment(response.data.leisure_department);
-// setWPark(response.data.walking_park);
-// setWMarket(response.data.walking_market);
-// setWStreet(response.data.walking_street);

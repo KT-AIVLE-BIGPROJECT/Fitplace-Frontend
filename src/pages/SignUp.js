@@ -23,7 +23,7 @@ const SignUp = () => {
   // 기타 state
   const [toNext, setToNext] = useState(true);
 
-  // 함수
+  // [ 함수 ]
   const selectAge = (event) => { // 연령대 선택 시
     setAge(event.target.value);
   }
