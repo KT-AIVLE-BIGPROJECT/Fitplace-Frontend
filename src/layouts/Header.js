@@ -23,10 +23,10 @@ const HeaderRight = (props) => {
                 />
                 <Nav className="ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onClick={()=>{navigate('/profile');}}>프로필</a>
+                        <a class="nav-link fw-bold" href="#" onClick={()=>{navigate('/profile');}}>프로필</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onClick={logout}>로그아웃</a>
+                        <a class="nav-link fw-bold" href="#" onClick={logout}>로그아웃</a>
                     </li>
                 </Nav>
             </div>
@@ -40,7 +40,7 @@ const HeaderRight = (props) => {
                 />
                 <Nav className="ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" onClick={()=>SetSignInModalOn(true)}>로그인</a>
+                        <a class="nav-link fw-bold" onClick={()=>SetSignInModalOn(true)}>로그인</a>
                     </li>
                     {/* <li class="nav-item">
                         <a class="nav-link" href="#" onClick={()=>{navigate('/bfsignup');}}>회원가입</a>
@@ -69,7 +69,7 @@ const Header = () => {
         <>
 
             <header>
-                <Navbar bg="light" expand="lg">
+                <Navbar expand="lg" fixed="top" className='backdrop main-navbar'>
                     <Container>
                         <Navbar.Brand className='title_style' href="/">
                             <img
@@ -84,10 +84,10 @@ const Header = () => {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav class="navbar-nav me-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="/search">Search</a>
+                                    <a class="nav-link fw-bold" href="/search"></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/board">FAQ</a>
+                                    <a class="nav-link fw-bold" href="/board">FAQs</a>
                                 </li>
                             </Nav>
                             <Nav>{welcomeMent}</Nav>

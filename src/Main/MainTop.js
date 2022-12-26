@@ -4,7 +4,7 @@ import "../css/main.css"
 
 const MainTop = () => {
   return (
-    <div className='h_column_center h_row d-table'>
+    <div className='container-lg'>
         <div className='h_row_center ml-55'>
             <div className='items'>
                 <img src='//img.hourplace.co.kr/image/user/7698/2022/11/09/0981c627-53ea-4b9b-bc1e-1210dae87e6c.jpeg?s=550x364&t=cover&q=80' alt='first' />
