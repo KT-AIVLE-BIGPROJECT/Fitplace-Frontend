@@ -12,6 +12,8 @@ import Search from './pages/Search';
 import BeforeSignUp from './pages/BeforeSignUp';
 import Profile from './pages/Profile';
 import LikingCheck from './pages/LikingCheck';
+import TermsOfService from './pages/TermsOfService';
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/bfsignup" element={<BeforeSignUp/>}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
         <Route path="/liking" element={<LikingCheck/>}></Route>
+        <Route path="/tos" element={<TermsOfService/>}></Route>
+        <Route path="/privacy" element={<PrivacyPolicy/>}></Route>
       </Routes>
     </BrowserRouter>
   );

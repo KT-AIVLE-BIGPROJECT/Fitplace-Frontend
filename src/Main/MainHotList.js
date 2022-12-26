@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react" // basic
-import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper"
+import SwiperCore, { Navigation, Pagination, Autoplay } from "swiper";
 
 // Import Swiper styles
 import 'swiper/css';

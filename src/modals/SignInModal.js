@@ -22,6 +22,7 @@ const SignInModal = ({ show, onHide }) => {
       .then((response) => {
         console.log(response.data);
         //localStorage.clear();
+        // sessionStorage.setItem("token", response.data["token"]); // 로컬스토리지에 저장하면 무조건 로그아웃 직접 해줘야 함
         localStorage.setItem("token", response.data["token"]);
         localStorage.setItem("username", username);
         console.log("[SognInModals.js] ==> Login Success");

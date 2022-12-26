@@ -24,7 +24,7 @@ const ClickKeyword = (props) => {
             >
                 <img
                     // 해당하는 키워드의 state 값에 따라 표시
-                    style={props.targetState ? {border: "3px solid rgb(250, 150, 0)", borderRadius: "20%"} : {}}
+                    style={props.targetState ? {border: "5px solid rgb(250, 150, 0)", borderRadius: "20%"} : {}}
                     src={props.KeywordImage} alt={props.KeywordAlt} className='align-top'
                 />
             </div>
