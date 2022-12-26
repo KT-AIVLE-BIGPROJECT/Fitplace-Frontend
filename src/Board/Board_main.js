@@ -5,7 +5,7 @@ import "./Board_style.css"
 const Board_main = () => {
   return (
     <div class="board_container">
-        <h1>FAQ</h1>
+        <h1 class = "FAQ">FAQ</h1>
         <p>질문을 남겨주세요.</p>
         
         <div class="board_list_wrap">
