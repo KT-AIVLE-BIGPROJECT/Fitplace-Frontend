@@ -42,7 +42,7 @@
 }
 
 img {
-    position: absolute; 
+    /* position: absolute;  */
     width: 100%; 
     height: 100%; 
     object-fit: cover; 
@@ -326,7 +326,7 @@ width: 580px;
     border-radius: 12px;
     cursor: pointer;
     margin: 13px 4px;
-    height: 250px;
+    height: 260px;
     overflow: hidden;
 }
 .hot-title {
@@ -375,4 +375,10 @@ width: 580px;
 }
 .h-row-center.margin-top.fw-light {
     color: rgb(114, 120, 127);
+}
+.location-img {
+    margin-right: 4px;
+    margin-bottom: 4px;
+    width: 15px;
+    height: 15px;
 }
