@@ -11,6 +11,7 @@
 
 .z-index {
     z-index: auto;
+    margin-left: -5px;
 }
 
 .h_row_center {
@@ -276,4 +277,102 @@ width: 580px;
 
 .ml-55 {
     margin-left: 55px;
+}
+
+/*MAIN화면*/
+.backdrop {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+
+.main-navbar{
+    background-image: none;
+    background-color: #ffffffe3!important;
+}
+
+@media ( max-width: 992px ) {
+    div#basic-navbar-nav {
+        padding-left: 44px;
+    }
+    a.nav-link.fw-bold {
+        padding: 9px 0;
+    }
+}
+
+.container_style {
+    padding: 75px 0 0 0;
+}
+
+/*HOT PLACES*/
+.hot-items {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.hot-places {
+    margin: 55px 0px;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+.swiper-box {
+    position: relative;
+    box-shadow: 3px 3px 12px 0 #e9e9e9;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 13px 4px;
+    height: 250px;
+    overflow: hidden;
+}
+.hot-title {
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: -0.3px;
+    margin-bottom: 14px;
+}
+.hot-detail{
+    position: relative;
+    padding: 10px 14px 22px;
+    font-size: 11px;
+}
+.hot-category{
+    justify-content: space-between;
+}
+.h-row-center{
+    display: flex;
+    align-items: center;
+}
+.hot-name{
+    margin-top: 14px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 14px;
+    color: rgb(27, 29, 31);
+}
+.hot-rating{
+    /* border: solid 1px #cfcfcf;
+    border-radius: 3px;
+    width: 47px;
+    height: 20px;
+    text-align: center; */
+}
+.hot-rating-img{
+    width: 16px;
+    height: 16px;
+    position: relative;
+    margin: 0 3px 2px 0;
+}
+.margin-top{
+    margin-top: 10px;
+}
+.margin-right {
+    margin-right: 13px;
+}
+.h-row-center.margin-top.fw-light {
+    color: rgb(114, 120, 127);
 }
