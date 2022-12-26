@@ -27,7 +27,7 @@ const Places100List = ({places}) =>{
     return (
         <Swiper
             spaceBetween={10}
-            autoplay={{ delay: 2000, disableOnInteraction: false }}
+            autoplay={{ delay: 10000, disableOnInteraction: false }}
             loop={true}
             breakpoints={{
                 768: {
@@ -59,7 +59,7 @@ const Places100List = ({places}) =>{
                                     {place.place_rating}
                                 </div>
                             </div>
-                            <div className="hot-name">{place.place_name}</div>
+                            <div className="hot-name"><img className="location-img" src ={require("../img/fitplace_logo.png")} />{place.place_name}</div>
                             <div className="h-row-center margin-top fw-light ">
                                 <div className="margin-right">
                                     네이버리뷰 <span className="fw-bold">{place.review_count}</span>
