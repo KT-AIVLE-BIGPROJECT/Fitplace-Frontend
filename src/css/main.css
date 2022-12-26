@@ -371,7 +371,7 @@ width: 580px;
     margin-top: 10px;
 }
 .margin-right {
-    margin-right: 13px;
+    margin-right: 6px;
 }
 .h-row-center.margin-top.fw-light {
     color: rgb(114, 120, 127);
@@ -381,4 +381,10 @@ width: 580px;
     margin-bottom: 4px;
     width: 15px;
     height: 15px;
+}
+.pointer{
+    cursor: pointer;
+}
+.h-row-center.margin-top.fw-light {
+    font-size: 10px;
 }

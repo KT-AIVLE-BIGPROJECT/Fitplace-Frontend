@@ -39,7 +39,7 @@ const Places100List = ({places}) =>{
                     spaceBetween: 20
                   },
                   1400: {
-                    slidesPerView: 4.5,
+                    slidesPerView: 5.5,
                     spaceBetween: 25
                   }
             }}

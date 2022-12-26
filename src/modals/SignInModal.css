@@ -1,15 +1,91 @@
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    border-radius: 12px;
+    box-shadow: rgb(0 0 0 / 10%) 2px 2px 8px 0px;
+    border: 1px solid rgb(239, 243, 245);
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+.modal-header{
+    text-align: center;
+    display: block;
+    border-bottom: 0;
+}
+.modal-title{
+    font-size: 20px;
+    letter-spacing: -0.1px;
+    color: rgb(27, 29, 31);
+    margin-top: 15px;
+}
+
+.btn-close {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 37px;
+    top: 33px;
+}
 .loginButton {
-    width: "100%";
+    width: 100%;
     font-size: 1.5rem;
     color: rgb(255, 255, 255);
     text-align: center;
-    background: rgb(250, 150, 0);
     border: none;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 8px;
+    padding: 11px;
+    font-size: 18px;
 }
-
+.unactiveBtn{
+    background: #d1d1d1;
+}
+.activeBtn{
+    background: #FFA432;
+}
 .registerButton {
-    color: rgb(250, 150, 0);
-    text-decoration: underline;
+    color: #FFA432;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+.login-margin-top{
+    margin-top: 50px;
+}
+.login-form {
+    padding: 0px 39px;
+}
+input#floatingInput {
+    position: relative;
+    width: 100%;
+    height: 52px;
+    border: 0px;
+    border-radius: 0;
+    border-bottom: 1px solid #dfe2e7;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.fw-light.form-floating {
+    font-size: 15px;
+    color: #8d8d8d;
+}
+.loginFooter{
+    border-top: 0px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    justify-content: center;
+    font-size: 14px;
+}
+.loginRigth{
+    display: none;
+}
+.loginWrong{
+    display: block!important;
+}
+.loginError{
+    font-size: 11px;
+    text-align: left;
+    color: #ee0000;
 }
