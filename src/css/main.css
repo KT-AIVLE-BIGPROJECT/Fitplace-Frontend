@@ -388,6 +388,10 @@ width: 580px;
 .h-row-center.margin-top.fw-light {
     font-size: 10px;
 }
+img.hot-place-sparkle {
+    width: 31px;
+    margin-bottom: 4px;
+}
 
 
 /* Search 페이지 css */

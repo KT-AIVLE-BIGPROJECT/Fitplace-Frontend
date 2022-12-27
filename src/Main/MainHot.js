@@ -21,7 +21,7 @@ const MainHot = () => {
     return (
         <div class="hot-places">
             <div class="hot-title fw">
-                ✨ 요즘 인기 있는 장소
+                <img className='hot-place-sparkle' src = {require("../img/sparkle.png")}/>요즘 인기 있는 장소
             </div>
             <Places100List places = {places}/>
         </div>
