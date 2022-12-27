@@ -27,7 +27,8 @@ function Board_main(){
       })
       .then((response)=>{
         setCount(response.data.count);
-        setResults(response.data.results);
+        var posts = response.data.results;
+
       })
 
     // axios({
@@ -65,7 +66,7 @@ function Board_main(){
         {/* {posts.slice(offset, offset + limit).map(({ count }) => ( */}
           <article>
             <h3>
-              {count}
+                {count}
             </h3>
           </article>
         {/* ))} */}
