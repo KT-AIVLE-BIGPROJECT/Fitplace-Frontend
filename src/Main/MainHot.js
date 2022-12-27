@@ -10,7 +10,8 @@ const MainHot = () => {
         try{
             axios.get('http://localhost:8000/places100/')
             .then((response)=>{
-                //console.log(response.data);
+                // console.log(response.data);
+                // console.log(typeof(response.data));
                 setPlaces(response.data);
             });
         }catch(error){

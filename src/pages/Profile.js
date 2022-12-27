@@ -114,7 +114,7 @@ const Profile = () => {
         console.log(error);
         alert("프로필 정보를 불러오는 데 문제가 생겼습니다.");
       })
-  },[]);
+  }, []);
 
   return (
     <Layout>
