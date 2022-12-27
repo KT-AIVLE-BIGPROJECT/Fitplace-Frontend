@@ -48,7 +48,8 @@ const Profile = () => {
   const [gender, setGender] = useState("");
   const [mbti, setMbti] = useState("");
 
-  const token = localStorage.getItem("token"); // 사용자 토큰
+  //const token = localStorage.getItem("token"); // 사용자 토큰
+  const token = sessionStorage.getItem("token"); // 사용자 토큰
 
   // [ 함수 ]
   const selectAge = (event) => { // 연령대 선택 시

@@ -14,10 +14,10 @@ const ClickKeyword = (props) => {
                 // 키워드 클릭 시 state값 변경
                 onClick={(event)=>{
                     event.preventDefault();
-                    if(props.targetState === false){
-                        props.targetSetState(true);
+                    if(props.targetState === 0){
+                        props.targetSetState(1);
                     } else{
-                        props.targetSetState(false);
+                        props.targetSetState(0);
                     }}
                 }
                 className='relative rounded overflow-hidden w-60 h-60'
@@ -40,26 +40,27 @@ const LikingCheck = () => {
   // [ State ]
   const [nickname, setNickname] = useState("");
   // 취향 설정 여부
-  const [restaurantKorea, setRestaurantKorea] = useState(false);
-  const [restaurantWest , setRestaurantWest] =  useState(false);
-  const [restaurantChina, setRestaurantChina] = useState(false);
-  const [restaurantJapan, setRestaurantJapan] = useState(false);
-  const [restaurantFast , setRestaurantFast] =  useState(false);
-  const [restaurantBunsik, setRestaurantBunsik] = useState(false);
-  const [cafeCafe, setCafeCafe] = useState(false);
-  const [cafeDessert, setCafeDessert] = useState(false);
-  const [cafeBakery, setCafeBakery] = useState(false);
-  const [leisureGallery, setLeisureGallery] = useState(false);
-  const [leisureCraft, setLeisureCraft] = useState(false);
-  const [leisurePopup , setLeisurePopup] = useState(false);
-  const [leisureTheater, setLeisureTheater] = useState(false);
-  const [leisureBook, setLeisureBook] = useState(false);
-  const [leisureDepartment, setLeisureDepartment] = useState(false);
-  const [walkingPark, setWalkingPark] = useState(false);
-  const [walkingMarket, setWalkingMarket] = useState(false);
-  const [walkingStreet, setWalkingStreet] = useState(false);
+  const [restaurantKorea, setRestaurantKorea] = useState(0);
+  const [restaurantWest , setRestaurantWest] =  useState(0);
+  const [restaurantChina, setRestaurantChina] = useState(0);
+  const [restaurantJapan, setRestaurantJapan] = useState(0);
+  const [restaurantFast , setRestaurantFast] =  useState(0);
+  const [restaurantBunsik, setRestaurantBunsik] = useState(0);
+  const [cafeCafe, setCafeCafe] = useState(0);
+  const [cafeDessert, setCafeDessert] = useState(0);
+  const [cafeBakery, setCafeBakery] = useState(0);
+  const [leisureGallery, setLeisureGallery] = useState(0);
+  const [leisureCraft, setLeisureCraft] = useState(0);
+  const [leisurePopup , setLeisurePopup] = useState(0);
+  const [leisureTheater, setLeisureTheater] = useState(0);
+  const [leisureBook, setLeisureBook] = useState(0);
+  const [leisureDepartment, setLeisureDepartment] = useState(0);
+  const [walkingPark, setWalkingPark] = useState(0);
+  const [walkingMarket, setWalkingMarket] = useState(0);
+  const [walkingStreet, setWalkingStreet] = useState(0);
 
-  const token = localStorage.getItem("token"); // 사용자 토큰
+  //const token = localStorage.getItem("token"); // 사용자 토큰
+  const token = sessionStorage.getItem("token"); // 사용자 토큰
 
   // [ 함수 ]
   const goBackProfile = () => { // 프로필 수정으로 돌아가기
