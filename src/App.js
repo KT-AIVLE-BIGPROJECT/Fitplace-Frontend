@@ -15,6 +15,7 @@ import Profile from './pages/Profile';
 import LikingCheck from './pages/LikingCheck';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import DetailPage from './detailpage/DetailPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/liking" element={<LikingCheck/>}></Route>
         <Route path="/tos" element={<TermsOfService/>}></Route>
         <Route path="/privacy" element={<PrivacyPolicy/>}></Route>
+        <Route path="/detailpage" element={<DetailPage/>}></Route>
       </Routes>
     </BrowserRouter>
   );
