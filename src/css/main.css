@@ -3,6 +3,9 @@
     height: 55px;
     margin-bottom: 7px;
 }
+.text-center{
+    text-align: center;
+}
 
 .logo-size {
     width: 200px;
@@ -67,12 +70,6 @@ img {
     text-align: center;
     margin-top: 8px;
     font-weight: bold;
-}
-
-h4 {
-    margin-left: 30px;
-    margin-top: 80px;
-    padding-top: 20px;
 }
 
 .margin_box {
@@ -167,6 +164,7 @@ h6 {
 }
 
 Container {
+    min-width: 720px;
     position: absolute;
     top: calc(50vh - 100px); left: calc(50vw - 200px);
     background-color: white;
@@ -298,9 +296,11 @@ width: 580px;
         padding: 9px 0;
     }
 }
-
 .container_style {
-    padding: 75px 0 0 0;
+    min-width: 720px;
+    padding-top: 75px;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
 }
 
 /*HOT PLACES*/
