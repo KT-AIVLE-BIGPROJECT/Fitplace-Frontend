@@ -49,20 +49,20 @@ const Places100List = ({places}) =>{
                 <SwiperSlide key = {place.id}>
                     <div className="swiper-box">
                         <div className="hot-items">
-                            <img src={place.place_photo} />
+                            <img src={place.photo} />
                         </div>
                         <div className="hot-detail">
                             <div className="fw-bold h-row-center hot-category">
-                                <div>{place.place_ncategory}</div>
+                                <div>{place.category}</div>
                                 <div class="hot-rating">
                                     <img src = {require("../img/star.png")} className="hot-rating-img"/>
-                                    {place.place_rating}
+                                    {place.rating}
                                 </div>
                             </div>
-                            <div className="hot-name"><img className="location-img" src ={require("../img/fitplace_logo.png")} />{place.place_name}</div>
+                            <div className="hot-name"><img className="location-img" src ={require("../img/fitplace_logo.png")} />{place.name}</div>
                             <div className="h-row-center margin-top fw-light ">
                                 <div className="margin-right">
-                                    네이버리뷰 <span className="fw-bold">{place.review_count}</span>
+                                    네이버리뷰 <span className="fw-bold">{place.review_visitor_count}</span>
                                 </div>
                                 <div className="margin-right">
                                     블로그 리뷰 <span className="fw-bold" value={place.review_blog_count} onChange={IsAlphaNume}>{place.review_blog_count}</span>
