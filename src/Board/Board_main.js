@@ -12,7 +12,7 @@ function Board_main(){
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     const [count, setCount] = useState("");
-    const [results, setResults] = useState("");
+    const [results, setResults] = useState([]);
 
     // useEffect(() => {
     //     fetch("http://localhost:8000/posts/")
@@ -22,8 +22,6 @@ function Board_main(){
 
     axios
       .get("http://localhost:8000/posts/", {
-        "count": count,
-        "results": results,
       })
       .then((response)=>{
         setCount(response.data.count);
@@ -40,7 +38,7 @@ function Board_main(){
     // });
 
 
-
+    
 
     return (
     <div class="board_container">
@@ -66,12 +64,12 @@ function Board_main(){
         {/* {posts.slice(offset, offset + limit).map(({ count }) => ( */}
           <article>
             <h3>
-                {count}
+              {count}
             </h3>
           </article>
         {/* ))} */}
       </main>
-
+      
 
 
         <div class="board_list_wrap">
