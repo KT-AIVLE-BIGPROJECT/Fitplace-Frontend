@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { Modal, Button, Form, Container } from 'react-bootstrap';
 import Layout from '../layouts/Layout'
 import axios from 'axios';
+import Board from '../pages/Board'
+
+const cancel_Board = <Board />
 
 const token = localStorage.getItem("token"); // 사용자 토큰
 
@@ -72,8 +75,9 @@ const Board_write = () => {
                             <button class="board_write_button" type="submit" onClick={pressBoardwrite}>
                                 등록
                             </button>
-                            
-                            <button class="board_cancel_button" href="/board">취소</button>
+        
+                            <button class="board_cancel_button" type="submit" onClick= "cancel_Board(); return false;">취소</button>
+                
                         </div>
                     </Form.Group>
                 </Form>

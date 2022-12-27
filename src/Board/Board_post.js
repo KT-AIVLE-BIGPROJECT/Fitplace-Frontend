@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Board_pagination from "./Board_pagination";
@@ -37,9 +38,10 @@ function Posts() {
       </label>
 
       <main>
-      {posts.slice(offset, offset + limit).map(({ id, title, body }) => (
+      {posts.slice(offset, offset + limit).map(({ userId, id, title, body }) => (
           <article key={id}>
             <h3>
+              {userId}.
               {id}. {title}
             </h3>
             <p>{body}</p>
