@@ -129,8 +129,12 @@ const Profile = () => {
               취향 키워드 수정하러 가기
           </button>
         </h3><br/>
-        
-        <Form.Group className="mb-3">
+
+        {/* <Form.Group>
+          <img class="profileImg" src={userImage}></img><br/>
+          <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)" />
+        </Form.Group><br/> */}
+        <Form.Group>
           <FloatingLabel controlId="floatingInput" label="닉네임">
             <Form.Control
               type="text"
@@ -140,7 +144,6 @@ const Profile = () => {
             />
           </FloatingLabel>
         </Form.Group><br/>
-        {/* <img src={userImage}></img> */}
         <Form.Group>
           <Form.Label>연령대</Form.Label>
           <Form.Select aria-label="Default select example" size="md" value={age} onChange={selectAge}>

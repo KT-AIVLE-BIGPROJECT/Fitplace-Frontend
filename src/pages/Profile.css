@@ -1,3 +1,11 @@
+.profileImg {
+    position: absolute; 
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+    z-index: -2;
+}
+
 .profileTitle {
     display: flex;
     justify-content: space-between;

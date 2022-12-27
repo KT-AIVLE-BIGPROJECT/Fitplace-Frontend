@@ -23,10 +23,10 @@ const HeaderRight = (props) => {
                 />
                 <Nav className="ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link fw-bold" href="#" onClick={()=>{navigate('/profile');}}>프로필</a>
+                        <a class="nav-link fw-bold pointer" href="#" onClick={()=>{navigate('/profile');}}>프로필</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fw-bold" href="#" onClick={logout}>로그아웃</a>
+                        <a class="nav-link fw-bold pointer" href="#" onClick={logout}>로그아웃</a>
                     </li>
                 </Nav>
             </div>
@@ -40,7 +40,7 @@ const HeaderRight = (props) => {
                 />
                 <Nav className="ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link fw-bold" onClick={()=>SetSignInModalOn(true)}>로그인</a>
+                        <a class="nav-link fw-bold pointer" onClick={()=>SetSignInModalOn(true)}>로그인</a>
                     </li>
                     {/* <li class="nav-item">
                         <a class="nav-link" href="#" onClick={()=>{navigate('/bfsignup');}}>회원가입</a>
@@ -84,7 +84,7 @@ const Header = () => {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav class="navbar-nav me-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bold" href="/search">장소검색</a>
+                                    <a class="nav-link fw-bold" href="/search">장소검색<img className="location-img" src ={require("../img/find-location.png")} /></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bold" href="/board">FAQs</a>

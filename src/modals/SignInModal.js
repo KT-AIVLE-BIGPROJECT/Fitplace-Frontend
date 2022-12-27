@@ -11,6 +11,20 @@ const SignInModal = ({ show, onHide }) => {
 
   const navigate = useNavigate();
 
+  const [isActive,setIsActive] = useState(false);
+  const [loginRight,setLoginRight] = useState(true);
+
+  const ActiveIsPassedLogin = () =>{
+    return username.length>0 && password.length>7
+    ? setIsActive(true):setIsActive(false);
+  }
+  const handleUsername = e => {
+    setUsername(e.target.value);
+  };
+  const handlePw = e => {
+    setPassword(e.target.value);
+  };
+
   const pressSignIn = (event) => {
     event.preventDefault();
     console.log("[SignInModal.js] ==> pressSignIn called.");
@@ -22,6 +36,7 @@ const SignInModal = ({ show, onHide }) => {
       .then((response) => {
         console.log(response.data);
         //localStorage.clear();
+        // sessionStorage.setItem("token", response.data["token"]); // 로컬스토리지에 저장하면 무조건 로그아웃 직접 해줘야 함
         localStorage.setItem("token", response.data["token"]);
         localStorage.setItem("username", username);
         console.log("[SognInModals.js] ==> Login Success");
@@ -29,6 +44,7 @@ const SignInModal = ({ show, onHide }) => {
       })
       .catch((error) => {
         console.log(error);
+        setLoginRight(false);
       })
   }
   return (
@@ -44,7 +60,7 @@ const SignInModal = ({ show, onHide }) => {
             <Modal.Title id="contained-modal-title-vcenter">로그인</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
+          <div className='login-margin-top'>
             <img
                 alt=""
                 src={require("../img/fitplace.png")}
@@ -52,41 +68,48 @@ const SignInModal = ({ show, onHide }) => {
                 height="53px"
                 className="logo-size z-index"
             />
-          </p><br/><br/>
-          <Form>
+          </div>
+          <div className='login-margin-top login-form'>
+            <Form>
               <Form.Group className="mb-3">
-                {/* <Form.Label>아이디</Form.Label> */}
-                <FloatingLabel controlId="floatingInput" label="아이디">
-                  <Form.Control
-                    type="text"
-                    placeholder="아이디를 입력해주세요."
-                    value={username}
-                    onChange={(event)=>setUsername(event.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                {/* <Form.Label>비밀번호</Form.Label> */}
-                <FloatingLabel controlId="floatingInput" label="비밀번호">
-                  <Form.Control
-                    type="password"
-                    placeholder="비밀번호를 입력해주세요."
-                    value={password}
-                    onChange={(event)=>setPassword(event.target.value)}
-                  />
-                </FloatingLabel>
-              </Form.Group>
-              <Form.Group>
-                <button class="loginButton" type="submit" onClick={pressSignIn}>
-                  로그인
-                </button>
-              </Form.Group>
-          </Form>
+                  {/* <Form.Label>아이디</Form.Label> */}
+                  <FloatingLabel controlId="floatingInput" label="아이디" className='fw-light'>
+                    <Form.Control
+                      type="text"
+                      placeholder="아이디를 입력해주세요."
+                      value={username}
+                      onKeyUp={ActiveIsPassedLogin}
+                      onChange={handleUsername}
+                    />
+                  </FloatingLabel>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  {/* <Form.Label>비밀번호</Form.Label> */}
+                  <FloatingLabel controlId="floatingInput" label="비밀번호" className='fw-light'>
+                    <Form.Control
+                      type="password"
+                      placeholder="비밀번호를 입력해주세요."
+                      value={password}
+                      onKeyUp={ActiveIsPassedLogin}
+                      onChange={handlePw}
+                    />
+                  </FloatingLabel>
+                </Form.Group>
+                <div className={loginRight? 'loginError loginRigth':'loginError loginWrong'}>아이디 및 비밀번호를 확인하세요.</div>
+                <Form.Group>
+                  <button class="loginButton login-margin-top" className={isActive? 'loginButton login-margin-top activeBtn':'loginButton login-margin-top unactiveBtn'} type="submit" onClick={pressSignIn}
+                  disabled={username===''||password.length<8 ?true:false}>
+                    로그인
+                  </button>
+                </Form.Group>
+            </Form>
+          </div>
+          
         </Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer className='loginFooter'>
           <div>아직 회원이 아니신가요?</div>
-          <span class="registerButton" onClick={()=>{navigate('/bfsignup');}}>
+          <span class="registerButton pointer" onClick={()=>{navigate('/bfsignup');}}>
             회원가입 하기
           </span>
         </Modal.Footer>

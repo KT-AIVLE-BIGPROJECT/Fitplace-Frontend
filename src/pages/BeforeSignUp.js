@@ -52,7 +52,8 @@ const BeforeSignUp = () => {
   return (
     <Layout>
       <Container className='container_style' style={{minHeight: "75vh"}}>
-        <h3>이용약관</h3><br/>
+        <br/><h3>이용약관</h3>
+        <hr></hr><br/>
         
         <Form.Check
             type="checkbox"
@@ -399,7 +400,7 @@ const BeforeSignUp = () => {
           >
             다음
           </button>
-        </div>
+        </div><br/>
       </Container>
     </Layout>
   )
