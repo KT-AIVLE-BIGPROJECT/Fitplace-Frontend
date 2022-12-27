@@ -42,14 +42,59 @@ span.category{
 div.left_margin_box{
   text-align: left;
   justify-content : left;
-  padding-left: 35%;
+  padding-left: 30%;
 }
 
+hr{
+  margin-left :auto;
+  margin-right:auto;
+  width : 60%;
+}
+
+
+
+/* test2 */
+.naver_map_link{
+  display: inline-block;
+  background: white;
+  color: rgb(4,207,92);
+  padding: 1px 15px;
+  border: 1px solid rgb(4,207,92);
+  border-radius: 18px;
+  font-weight: bold;
+}
+/* .naver_logo{
+  display: inline-block;
+  float:left;
+  overflow: hidden;
+  color: transparent;
+  white-space: nowrap;
+  vertical-align: top;
+  background: url(https://ssl.pstatic.net/sstatic/search/pc/img/sp_common2_12db1541.png) 0 0 no-repeat;
+  background-size: 367px 347px;
+  background-position: -286px -196px;
+  width: 22px;
+  height: 22px; 
+  vertical-align: top;
+} */
+
+.test{
+  color:rgba(255,164,50,.8);
+  font-weight: bold;
+}
 
 
 /* test */
 .place_section{
   display: block;
+  padding-left: 25%;
+  padding-right: 25%;
+}
+.place_section_title{
+  text-align: left;
+  padding-left: 10%;
+  font-weight: bold;
+  /* color:rgba(255,164,50,.8); */
 }
 .place_section_content{
   padding: 0 18px 30px;
@@ -63,7 +108,7 @@ ul{
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-end: 0px; 
   padding-inline-start: 40px; 
 }
 .bar_background{
@@ -72,9 +117,12 @@ ul{
   border-radius: 5px;
   background: #f4f7f8;
   line-height: 3rem;
+  margin: 10px;
+  padding: 0;
 }
 .bar{
   display: flex;
+  background:rgba(255,164,50,.8);
   /* background:rgba(0,180,155,.35); */
   position: absolute;
   top: 0;
@@ -84,27 +132,27 @@ ul{
   border-radius: 5px;
   box-sizing: border-box;
 }
-.test2{
-  flex: 1 1 auto;
-  display: flex;
-  /* vertical-align: middle; */
-  /* align-items: center; */
-  color: #242424;
-}
-.test3{
-  flex: none;
-  margin-left: 7px;
-  /* font-size: 1.3rem; */
-  font-weight: 600;
-  color: #07b495;
-  letter-spacing: -0.2px;
-}
-.test4{
+.bar_contents{
   display: flex;
   align-items: center;
   position: relative;
   padding: 0 18px 0 13px;
   font-weight: bold;
   color: #242424;
-  /* color: rgba(var(--place-color-text2), 1); */
+}
+.review_summary{
+  flex: 1 1 auto;
+  display: flex;
+  /* vertical-align: middle; */
+  /* align-items: center; */
+  color: #242424;
+}
+.review_summary_cnt{
+  color:rgba(255,164,50,.8);
+  /* font-size: 1.3rem; */
+  /* flex: none;
+  margin-left: 7px;
+  font-weight: 600;
+  color: #07b495;
+  letter-spacing: -0.2px; */
 }

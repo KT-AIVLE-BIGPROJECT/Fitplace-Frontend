@@ -4,6 +4,61 @@ textarea {
     resize: none;
 }
 
+label.form-check-label {
+    cursor: pointer;
+}
+
+.linemap.area {
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 22px;
+}
+.container h4{
+    font-weight: lighter;
+    margin-top: 13px;
+
+}
+.join_step_box.on {
+    background: #FFA432!important;
+    color: #282828;
+    font-weight: bold;
+    border: 0px!important;
+}
+
+.subtitle,.subtitle span {
+    margin-left: 10px;
+}
+
+.homeImg{
+    height: 20px;
+    margin-bottom: 3px;
+}
+.homeImg:hover {
+    filter: brightness(0.5);
+}
+.join_content{
+    margin: 58px 64px;
+}
+.join_step{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 53px;
+    color: #626262;
+}
+
+.join_step .join_step_box {
+    padding: 23px 14px;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #cdcdcd;
+    border-radius: 50px;
+    font-size: 15px;
+}
+.join_step_box span{
+    display: block;
+}
+
 .nextButton {
     font-size: 1rem;
     color: rgb(255, 255, 255);

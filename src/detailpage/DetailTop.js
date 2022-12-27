@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import {Container} from 'react-bootstrap'
 
@@ -11,13 +11,13 @@ const DetailTop = () => {
   // 1.가게사진 
   const jpg_url = 'https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220224_94%2F1645683168628PCvEz_JPEG%2F20220113_205201.jpg'
   // 2. 혼잡도, 가게 이름, 카테고리
-  let conjestion_message = "붐빔"; 
-  const place_name = "떡도리탕";
-  const category = "닭볶음탕";
+  const [conjestion_message, setConjestion_message] = useState("붐빔");
+  const [place_name, setPlace_name] = useState("떡도리탕");
+  const [category, setCategory] = useState('닭볶음탕');
   // 2-2. 별점, 방문자 리뷰, 블로그 리뷰 수
-  const rating = 4.47;
-  const visitor_review_cnt = 1204;
-  const blog_review_cnt = 1565;
+  const [rating, setRating] = useState(4.47);
+  const [visitor_review_cnt, setVisitor_review_cnt] = useState(1204);
+  const [blog_review_cnt, setBlog_review_cnt] = useState(1565);
   // 2-3. 가게 태그(키워드)
   const place_tags = {
     'tag1': '#tag1',
@@ -29,38 +29,47 @@ const DetailTop = () => {
   const naver_link = 'https://pcmap.place.naver.com/restaurant/34461836/review/';
   //4. 네이버 리뷰 요약
   let review_summary_exists = false;
-  const review_summary = {
-    'review_summary1': 543,
-    'review_summary2': 400,
-    'review_summary3': 300,
-    'review_summary4': 200,
-    'review_summary5': 100,
-  }
+  const data = [
+    {'review_summary': '"음식이 맛있어요"',
+     'review_summary_cnt':543},
+    {'review_summary': '"식당이 깨끗해요"',
+     'review_summary_cnt':400},
+    {'review_summary':'"test3"',
+     'review_summary_cnt':200}
+  ];
+  const maximum = data[0]['review_summary_cnt'];
+  const review_summary = data.map((datum)=>(
+    {'review_summary':datum['review_summary'],
+     'review_summary_cnt':datum['review_summary_cnt'],
+     'review_summary_cnt_percent':datum['review_summary_cnt']/maximum*87 +'%'}
+  ))
+  // console.log("review_summary")
+  // console.log(review_summary)
 
 
   function ShowCongestion(){
     let conjest_icon = null;  
-    console.log(conjestion_message)
-    console.log(typeof conjestion_message)
+    let message = null;
+    // console.log(conjestion_message)
+    // console.log(typeof conjestion_message)
     switch(conjestion_message){
       case "보통":
         conjest_icon = '🙂';
-        conjestion_message = '보통';
+        message = '보통';
         break;
       case "붐빔":
         conjest_icon = '😫';
-        conjestion_message = '혼잡';
+        message = '혼잡';
         break;
       case "매우 붐빔":
         conjest_icon = "😡";
-        conjestion_message = "매우 혼잡";
+        message = "매우 혼잡";
         break;
       default: //여유
-        console.log("why?");
         conjest_icon = '😀';
-        conjestion_message = '여유';
+        message = '여유';
     }
-    return conjest_icon + conjestion_message
+    return conjest_icon + message
   }
 
 
@@ -68,12 +77,11 @@ const DetailTop = () => {
     const lis = []
     for(let key in place_tags){
       lis.push(
-        <span>{place_tags[key]} </span>
+        <span className='test'>{place_tags[key]} </span>
       )
     }
     return lis
   }
-
 
   function check_review_summary_exists(){
     // '이런 점이 좋았어요' 가 존재할 때
@@ -83,25 +91,25 @@ const DetailTop = () => {
     }
   }
   function ShowReviewSummary(){
-    const lis = [];
-    let t = 0;
+    let lis = null;
     if (check_review_summary_exists()){
-      for(let key in review_summary){
-        // console.log("key : " + key +", value : " + review_summary[key]);
-        lis.push(<li key={t}>
-          <div> 
-            <span>{key} </span>
-            <span>{review_summary[key]}</span>
-          </div>
+
+    } 
+    lis = review_summary.map(review => {
+      return (
+        // <span className='test'>test</span>
+        <li className="bar_background">
+          <div className="bar" style={{width:review['review_summary_cnt_percent']}}></div>
+          <div className="bar_contents">
+            <span className="review_summary">{review['review_summary']} </span>
+            <span className="review_summary_cnt">{review['review_summary_cnt']}</span>
+          </div>                  
         </li>
-        )
-        t++;
-      }
-    }  
-    return <ul>{lis}</ul>
+      )
+    }) 
+    return lis
   }
 
-  const test = "50%"
 
   return (
     <div>
@@ -112,7 +120,9 @@ const DetailTop = () => {
       <div class='main'>
         <div class = "title_box">
           <div>
-            <span class='_conjest'><ShowCongestion></ShowCongestion></span>
+            <span class='_conjest'>
+              <ShowCongestion></ShowCongestion>
+            </span>
           </div>
           <div>
             <span class="title">{place_name} </span>
@@ -133,45 +143,46 @@ const DetailTop = () => {
         <hr></hr>
         
         <div class = "left_margin_box">
-          <span class='_blue'>전화번호 </span>
-          <span>{phone_num}</span>
-          <br/>
-          <span class='_blue'>주소 </span>
-          <span>{place_address}</span>
-          <br/>
-          <span class="_blue">네이버 지도에서 보기 </span>
-          <a href={naver_link}>네이버 지도</a>
+          <div>
+            <span class='_blue'>전화번호 </span>
+            <span>{phone_num}</span>
+          </div>
+          <div>
+            <span class='_blue'>주소 </span>
+            <span>{place_address}</span>
+          </div>
+          <div>
+            <span class="_blue">네이버 지도에서 보기 </span>
+            <a href={naver_link} target="_blank" role="button" class="naver_map_link">
+              {/* <i class="naver_logo"></i> */}
+              네이버 지도
+            </a>
+          </div>
         </div>  
         <hr></hr>
 
-        <div class = "left_margin_box">
-          <ShowReviewSummary className='ReviewSummary'></ShowReviewSummary>
-        </div>                
-        <hr></hr>
-
         <div class="place_section">
+          <div class="place_section_title">
+            <span>"방문하신 분들이 뽑은 장점"</span> 
+          </div>
           <div class = "place_section_content">
             <div class = "bar_chart">
               <ul>
-                <li class="bar_background">
-                  <div class="bar" style={{width:test, background:'rgba(255,164,50,.8)'}}></div>
-                  <div class="test4">
-                    <span class="test2"> "음식이 맛있어요" </span>
-                    <span class="test3">591</span>
+                <ShowReviewSummary></ShowReviewSummary>
+                {/* <li class="bar_background">
+                  <div class="bar" style={{width:"87%"}}></div>
+                  <div class="bar_contents">
+                    <span class="review_summary"> "음식이 맛있어요" </span>
+                    <span class="review_summary_cnt">591</span>
                   </div>                  
-                </li>
-
-                <li class="bar_background">
-                  <div class="bar"></div>
-                  <div class="test4">
-                    <span class="test2"> "식당이 깨끗해요" </span>
-                    <span class="test3">168</span>
-                  </div>                
-                </li>
+                </li> */}            
               </ul>
             </div>
           </div>            
         </div>
+      <hr></hr>
+
+        
       </div>        
     </div>    
   )

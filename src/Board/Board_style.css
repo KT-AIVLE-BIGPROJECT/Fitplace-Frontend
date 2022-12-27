@@ -37,7 +37,10 @@
 }
 
 .bt_wrap a.on {
-    background: #000;
+    background: rgb(250, 150, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
     color: #fff;
 }
 
@@ -273,4 +276,30 @@ BORDER:#999 1px solid; COLOR: #666;
     box-sizing: border-box;
     border: 0;
     resize: vertical;
+}
+
+.board_write_button {
+    width: "100%";
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background: rgb(250, 150, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.board_cancel_button{
+    width: "100%";
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background: rgb(228, 186, 101);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.FAQ{
+    color: rgb(250, 150, 0);
 }

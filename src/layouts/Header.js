@@ -71,7 +71,7 @@ const Header = () => {
 
             <header>
                 <Navbar expand="lg" fixed="top" className='backdrop main-navbar'>
-                    <Container>
+                    <Container style={{'min-width':'720px'}}>
                         <Navbar.Brand className='title_style' href="/">
                             <img
                                 alt=""

@@ -30,7 +30,7 @@ const Places100List = ({places}) =>{
             autoplay={{ delay: 10000, disableOnInteraction: false }}
             loop={true}
             breakpoints={{
-                768: {
+                720: {
                     slidesPerView: 2.5,
                     spaceBetween: 20
                   },
