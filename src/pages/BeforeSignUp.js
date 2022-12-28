@@ -72,7 +72,7 @@ const BeforeSignUp = () => {
                     </div>
                 </div>
                 <br/>
-                <h4>회원가입</h4>
+                <h4 className='mt-1'>회원가입</h4>
                 <div class="mem_content">
                     <div className='join_content'>
                         <div class="join_step">
@@ -89,7 +89,7 @@ const BeforeSignUp = () => {
                                 <div class="join_step_box">
                                     <div>
                                         <span>02</span>
-                                        <span>회원가입</span>
+                                        <span>정보입력</span>
                                     </div>
                                 </div>
                             </div>

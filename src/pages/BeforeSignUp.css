@@ -14,10 +14,8 @@ label.form-check-label {
     font-weight: bold;
     margin-top: 22px;
 }
-.container h4{
+.container h4,.container h5{
     font-weight: lighter;
-    margin-top: 13px;
-
 }
 .join_step_box.on {
     background: #FFA432!important;
@@ -97,4 +95,62 @@ label.form-check-label {
     font-size: 1.2rem;
     padding: 12px 53px;
     width: 187px;
+}
+
+/*회원가입 페이지*/
+span.signup_title {
+    width: 24%;
+}
+.signup_title span,.signup_required {
+    color: #e40202;
+}
+.mb-50.join_content {
+    margin-left: 15%;
+    margin-top: 90px;
+}
+input.form-control {
+    width: 350px;
+    border: solid 1px #dadada;
+    border-radius: 0px;
+}
+.form-group {
+    margin-bottom: 50px;
+    border: 1px solid rgb(87 87 87 / 19%);
+    padding: 8% 7%;
+    border-radius: 5px;
+    font-weight:400;
+}
+.form_split{
+    margin: auto;
+    width: 100%;
+}
+
+select.form-select.form-select-sm {
+    width: 350px;
+    border: solid 1px #dadada;
+    border-radius: 0px;
+    padding: 0.5rem 1.1rem;
+}
+.genderBtn {
+    width: 134px;
+    border: 0px;
+    background-color: #ffddb3;
+    border-radius: 0px;
+    padding: 0.5rem 1.1rem;
+    border-radius: 3px;
+    font-weight: lighter;
+    font-size: 1rem;
+}
+.genderBtn.select {
+    width: 134px;
+    border: 0px;
+    background-color: #FFA432;
+    border-radius: 0px;
+    padding: 0.5rem 1.1rem;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 1rem;
+}
+.genderBtn.ml-1 {
+    margin-left: 1rem!important;
 }

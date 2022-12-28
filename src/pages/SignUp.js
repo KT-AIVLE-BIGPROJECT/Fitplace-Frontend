@@ -81,10 +81,7 @@ const SignUp = () => {
                                     })
                                     .then((response) => {
                                         if (response.status < 300) {
-                                            alert("회원가입이 완료되었습니다!");
-                                            window
-                                                .location
-                                                .replace('http://localhost:3000');
+                                            window.location.replace('http://localhost:3000/signUpFinished');
                                         }
                                     })
                             }
@@ -119,7 +116,7 @@ const SignUp = () => {
                     </div>
                 </div>
                 <br/>
-                <h4>회원가입</h4>
+                <h4 className='mt-1'>회원가입</h4>
                 <div className='mem_content'>
                     <div className='join_content'>
                         <div class="join_step">
@@ -136,7 +133,7 @@ const SignUp = () => {
                                 <div class="join_step_box on">
                                     <div>
                                         <span>02</span>
-                                        <span>회원가입</span>
+                                        <span>정보입력</span>
                                     </div>
                                 </div>
                             </div>
@@ -151,135 +148,127 @@ const SignUp = () => {
                             </div>
                         </div>
                     </div>
-                    <Form.Group className="mb-3">
-                        <FloatingLabel controlId="floatingInput" label="아이디*">
-                            <Form.Control
-                                type="text"
-                                placeholder="아이디를 입력해주세요."
-                                value={username}
-                                onChange={(event) => setUsername(event.target.value)}/>
-                        </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <FloatingLabel controlId="floatingInput" label="이메일*">
-                            <Form.Control
-                                type="email"
-                                placeholder="이메일을 입력해주세요."
-                                value={email}
-                                onChange={(event) => setEmail(event.target.value)}/>
-                        </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <FloatingLabel controlId="floatingInput" label="비밀번호*">
-                            <Form.Control
-                                type="password"
-                                placeholder="********"
-                                value={password}
-                                onChange={(event) => setPassword(event.target.value)}/>
-                        </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <FloatingLabel controlId="floatingInput" label="비밀번호 확인*">
-                            <Form.Control
-                                type="password"
-                                placeholder="********"
-                                value={password2}
-                                onChange={(event) => setPassword2(event.target.value)}/>
-                        </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <FloatingLabel controlId="floatingInput" label="닉네임">
-                            <Form.Control
-                                type="text"
-                                placeholder="닉네임을 입력하세요."
-                                value={nickname}
-                                onChange={(event) => setNickname(event.target.value)}/>
-                        </FloatingLabel>
-                    </Form.Group><br/>
-
-                    <h3>장소 추천에 필요한 사용자 정보를 입력해주세요.(선택)</h3><br/>
-                    <Form.Group>
-                        <Form.Label>연령대</Form.Label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            size="sm"
-                            defaultValue={age}
-                            onChange={selectAge}>
-                            {/* <option>연령대를 선택해주세요.</option> */}
-                            <option value="age_none">선택안함</option>
-                            <option value="age_10">10대</option>
-                            <option value="age_20">20대</option>
-                            <option value="age_30">30대</option>
-                            <option value="age_40">40대</option>
-                            <option value="age_50">50대</option>
-                            <option value="age_60">60대</option>
-                        </Form.Select>
-                    </Form.Group><br/>
-                    <Form.Label>성별</Form.Label>
-                    <Form.Group>
-                        <button
-                            style={gender === "gender_male"
-                                ? {
-                                    background: "rgb(250, 150, 0)"
-                                }
-                                : {
-                                    background: "rgb(146, 145, 144)"
-                                }}
-                            class="genderButton"
-                            onClick={() => selectGender("gender_male")}>
-                            남성
-                        </button>
-                        <button
-                            style={gender === "gender_female"
-                                ? {
-                                    background: "rgb(250, 150, 0)"
-                                }
-                                : {
-                                    background: "rgb(146, 145, 144)"
-                                }}
-                            class="genderButton"
-                            onClick={() => selectGender("gender_female")}>
-                            여성
-                        </button>
-                        <button
-                            style={gender === "gender_none"
-                                ? {
-                                    background: "rgb(250, 150, 0)"
-                                }
-                                : {
-                                    background: "rgb(146, 145, 144)"
-                                }}
-                            class="genderNoneButton"
-                            onClick={() => selectGender("gender_none")}>
-                            선택안함
-                        </button>
-                    </Form.Group><br/>
-                    <Form.Group>
-                        <Form.Label>MBTI</Form.Label>
-                        <Form.Select
-                            aria-label="Default select example"
-                            size="sm"
-                            defaultValue={mbti}
-                            onChange={selectMbti}>
-                            <option value="mbti_none">선택안함</option>
-                            <option value="mbti_istj">ISTJ</option>
-                            <option value="mbti_istp">ISTP</option>
-                            <option value="mbti_isfj">ISFJ</option>
-                            <option value="mbti_isfp">ISFP</option>
-                            <option value="mbti_intj">INTJ</option>
-                            <option value="mbti_intp">INTP</option>
-                            <option value="mbti_infj">INFJ</option>
-                            <option value="mbti_infp">INFP</option>
-                            <option value="mbti_estj">ESTJ</option>
-                            <option value="mbti_estp">ESTP</option>
-                            <option value="mbti_esfj">ESFJ</option>
-                            <option value="mbti_esfp">ESFP</option>
-                            <option value="mbti_entj">ENTJ</option>
-                            <option value="mbti_entp">ENTP</option>
-                            <option value="mbti_enfj">ENFJ</option>
-                            <option value="mbti_enfp">ENFP</option>
-                        </Form.Select>
-                    </Form.Group><br/>
+                    <div class="mb-50 form-group">
+                        <div>
+                        <h5 className='mb-5'><span className='fontWeight-400'>필수입력</span><span className="signup_required">*</span></h5>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>아이디<span className='ml-10'>*</span></span>
+                                    <Form.Control
+                                        type="text"
+                                        value={username}
+                                        onChange={(event) => setUsername(event.target.value)}/>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>이메일<span className='ml-10'>*</span></span>
+                                    <Form.Control
+                                        type="email"
+                                        value={email}
+                                        onChange={(event) => setEmail(event.target.value)}/>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>비밀번호<span className='ml-10'>*</span></span>
+                                    <Form.Control
+                                        type="password"
+                                        value={password}
+                                        onChange={(event) => setPassword(event.target.value)}/>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>비밀번호 확인<span className='ml-10'>*</span></span>
+                                    <Form.Control
+                                        type="password"
+                                        value={password2}
+                                        onChange={(event) => setPassword2(event.target.value)}/>
+                                </div>
+                            </Form.Group>
+                            <hr className='form_split mb-5'/>
+                            <h5 className='mb-5'><span className='fontWeight-400'>선택사항</span> <span className='fontSize-1'>( 장소 추천에 필요한 사용자 정보를 입력해주세요 )</span></h5>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>닉네임</span>
+                                    <Form.Control
+                                        type="text"
+                                        value={nickname}
+                                        onChange={(event) => setNickname(event.target.value)}/>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>연령대</span>
+                                    <Form.Select
+                                    aria-label="Default select example"
+                                    size="sm"
+                                    defaultValue={age}
+                                    onChange={selectAge}>
+                                    {/* <option>연령대를 선택해주세요.</option> */}
+                                    <option value="age_none">선택안함</option>
+                                    <option value="age_10">10대</option>
+                                    <option value="age_20">20대</option>
+                                    <option value="age_30">30대</option>
+                                    <option value="age_40">40대</option>
+                                    <option value="age_50">50대</option>
+                                    <option value="age_60">60대</option>
+                                    </Form.Select>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>성별</span>
+                                    <button
+                                        className={gender === "gender_male"?'genderBtn select':'genderBtn'}
+                                        onClick={() => selectGender("gender_male")}>
+                                        남성
+                                    </button>
+                                    <button
+                                        className={gender === "gender_female"?'genderBtn select ml-1':'genderBtn ml-1'}
+                                        onClick={() => selectGender("gender_female")}>
+                                        여성
+                                    </button>
+                                    <button
+                                        className={gender === "gender_none"?'genderBtn select ml-1':'genderBtn ml-1'}
+                                        onClick={() => selectGender("gender_none")}>
+                                        선택안함
+                                    </button>
+                                </div>
+                            </Form.Group>
+                            <Form.Group>
+                                <div className='flex_row'>
+                                    <span className='signup_title'>MBTI</span>
+                                    <Form.Select
+                                        aria-label="Default select example"
+                                        size="sm"
+                                        defaultValue={mbti}
+                                        onChange={selectMbti}>
+                                        <option value="mbti_none">선택안함</option>
+                                        <option value="mbti_istj">ISTJ</option>
+                                        <option value="mbti_istp">ISTP</option>
+                                        <option value="mbti_isfj">ISFJ</option>
+                                        <option value="mbti_isfp">ISFP</option>
+                                        <option value="mbti_intj">INTJ</option>
+                                        <option value="mbti_intp">INTP</option>
+                                        <option value="mbti_infj">INFJ</option>
+                                        <option value="mbti_infp">INFP</option>
+                                        <option value="mbti_estj">ESTJ</option>
+                                        <option value="mbti_estp">ESTP</option>
+                                        <option value="mbti_esfj">ESFJ</option>
+                                        <option value="mbti_esfp">ESFP</option>
+                                        <option value="mbti_entj">ENTJ</option>
+                                        <option value="mbti_entp">ENTP</option>
+                                        <option value="mbti_enfj">ENFJ</option>
+                                        <option value="mbti_enfp">ENFP</option>
+                                    </Form.Select>
+                                </div>
+                            </Form.Group>
+                        </div>
+                    </div>
+                    
+                    
 
                     <div class="align-center">
                         <button
@@ -303,7 +292,7 @@ const SignUp = () => {
                             disabled={toNext}
                             onClick={pressSignUp}>
           
-                            회원가입
+                            완료
                         </button>
                     </div>
                 </div>

@@ -13,6 +13,12 @@ p {
     width: 200px;
     height: 53px;
 }
+.fontWeight-400{
+    font-weight: 400!important;
+}
+.fontSize-1 {
+    font-size: 1rem;
+}
 
 .z-index {
     z-index: auto;
@@ -281,6 +287,9 @@ width: 580px;
 
 .ml-13{
     margin-left:13px
+}
+.ml-10 {
+    margin-left: 3px;
 }
 
 /*MAIN화면*/
