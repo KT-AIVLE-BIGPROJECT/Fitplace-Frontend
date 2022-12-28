@@ -5,7 +5,7 @@ import {Container} from 'react-bootstrap'
 import Layout from '../layouts/Layout'
 import '../css/main.css'
 import './DetailTop.css'
-
+import './DetailBot'
 
 const DetailTop = () => {
   // 1.가게사진 
@@ -183,9 +183,7 @@ const DetailTop = () => {
             </div>
           </div>            
         </div>
-      <hr></hr>
-      <a name="방문자 리뷰"></a>        
-      <a name="블로그 리뷰"></a>
+        <hr></hr>
       </div>        
     </div>    
   )
