@@ -1,12 +1,14 @@
 import React from 'react'
 import '../css/main.css'
 
+// 사용XX
 const SearchPlace = () => {
   return (
     <div>
         <div className='margin_box mb-130'>
                       
           <div className='flex h-60 right-sort mb-23'>
+
             <div className='h_row_center2'>
                 <div className='flex mr-60 sort-box z-idx'>
                     <h6 className='sort-text'>평점순</h6>
@@ -19,6 +21,7 @@ const SearchPlace = () => {
                     <img src="https://s3.hourplace.co.kr/web/images/icon/sort.svg" alt='arrow_pic' className='arrow-size sort-img' />
                 </div>
             </div>
+
           </div>
         <div className='h_row'>
             
@@ -236,6 +239,8 @@ const SearchPlace = () => {
                     </div>
                 </div>
             </div>
+
+            
         </div>
     </div>
 
