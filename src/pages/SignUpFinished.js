@@ -28,7 +28,7 @@ const SignUpFinished = () => {
                     <div className='join_content'>
                         <div class="join_step">
                             <div className="join_step_inner">
-                                <div class="join_step_box pointer" onClick={() => {window.location.href='/bfsignup';}}>
+                                <div class="join_step_box" onClick={() => {window.location.href='/bfsignup';}}>
                                     <div>
                                         <span>01</span>
                                         <span>약관동의</span>
@@ -37,7 +37,7 @@ const SignUpFinished = () => {
                             </div>
                             <span>&#8250;</span>
                             <div className="join_step_inner">
-                                <div class="join_step_box on">
+                                <div class="join_step_box">
                                     <div>
                                         <span>02</span>
                                         <span>정보입력</span>
@@ -46,7 +46,7 @@ const SignUpFinished = () => {
                             </div>
                             <span>&#8250;</span>
                             <div className="join_step_inner">
-                                <div class="join_step_box">
+                                <div class="join_step_box on">
                                     <div>
                                         <span>03</span>
                                         <span>가입완료</span>
@@ -64,21 +64,6 @@ const SignUpFinished = () => {
                             }}>
                             뒤로
                         </button>
-                        <button
-                            style={toNext
-                                ? {
-                                    background: "rgb(146, 145, 144)"
-                                }
-                                : {
-                                    background: "rgb(250, 150, 0)"
-                                }}
-                            class="nextButton btn_lg ml-13"
-                            type="button"
-                            disabled={toNext}
-                            onClick={pressSignUp}>
-          
-                            완료
-                        </button>
                     </div>
                 </div>
 
@@ -87,4 +72,4 @@ const SignUpFinished = () => {
     )
 }
 
-export default SignUp
+export default SignUpFinished

@@ -81,7 +81,7 @@ const SignUp = () => {
                                     })
                                     .then((response) => {
                                         if (response.status < 300) {
-                                            window.location.replace('http://localhost:3000/signUpFinished');
+                                            window.location.replace('http://localhost:3000/signupFinished');
                                         }
                                     })
                             }

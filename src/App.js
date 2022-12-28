@@ -11,6 +11,7 @@ import Board_page from './Board/Board_page';
 import Board_post from './Board/Board_post';
 import Search from './pages/Search';
 import BeforeSignUp from './pages/BeforeSignUp';
+import SignUpFinished from './pages/SignUpFinished';
 import Profile from './pages/Profile';
 import LikingCheck from './pages/LikingCheck';
 import TermsOfService from './pages/TermsOfService';
@@ -31,6 +32,7 @@ function App() {
         <Route path="/board/test" element={<Board_post/>}></Route>
         <Route path="/search" element={<Search/>}></Route>
         <Route path="/bfsignup" element={<BeforeSignUp/>}></Route>
+        <Route path="/signupFinished" element={<SignUpFinished/>}></Route>
         <Route path="/profile" element={<Profile/>}></Route>
         <Route path="/liking" element={<LikingCheck/>}></Route>
         <Route path="/tos" element={<TermsOfService/>}></Route>
