@@ -33,7 +33,7 @@ function App() {
         <Route path="/liking" element={<LikingCheck/>}></Route>
         <Route path="/tos" element={<TermsOfService/>}></Route>
         <Route path="/privacy" element={<PrivacyPolicy/>}></Route>
-        <Route path="/detailpage" element={<DetailPage/>}></Route>
+        <Route path="/detailpage/:id" element={<DetailPage/>}></Route>
       </Routes>
     </BrowserRouter>
   );

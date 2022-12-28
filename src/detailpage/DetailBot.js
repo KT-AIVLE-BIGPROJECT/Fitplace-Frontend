@@ -9,6 +9,10 @@ import './DetailBot.css'
 
 const DetailBot = () => {
   //5.복잡도 1주일치, 
+  function ShowCongestion(){
+    return "일주일간 혼잡도 표시 자리"
+  }
+  
   //6.네이버 리뷰들
   function ShowVisitorReview(){
     return "방문자 리뷰 자리"
@@ -21,14 +25,21 @@ const DetailBot = () => {
   return(
     <div>
       <div class="left_margin_box">
+        <ShowCongestion></ShowCongestion>
+      </div>
+      <hr></hr>
+      
+      <div class="left_margin_box">
         <ShowVisitorReview></ShowVisitorReview>
       </div>
       <hr></hr>
+
       <div class = "left_margin_box">
         <ShowBlogReview></ShowBlogReview>
       </div>
     </div>    
   )
 }
+    
 
 export default DetailBot
