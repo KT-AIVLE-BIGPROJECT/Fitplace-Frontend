@@ -38,6 +38,9 @@ const BeforeSignUp = () => {
         setCheck2(false);
     }
   }
+  const term = {
+    0:''
+  }
 
   useEffect(()=>{
     if (check1===true && check2===true){
@@ -48,18 +51,59 @@ const BeforeSignUp = () => {
         setToNext(true);
     }
   }, [check1, check2])
-
+  
   return (
     <Layout>
-      <Container className='container_style' style={{minHeight: "75vh"}}>
-        <br/><h3>이용약관</h3>
-        <hr></hr><br/>
-        
+      <Container className='container_style'>
+        <div className='linemap area'>
+          <div>
+            <a href="/"><img className = "homeImg"src ={require("../img/home.png")} /></a>
+          </div>
+          <div className='subtitle'>
+            &gt; <span>회원가입</span>
+          </div>
+        </div>
+        <br/><h4>회원가입</h4>
+        <div className='join_content'>
+          <div class="join_step">
+            <div className="join_step_inner">
+              <div class="join_step_box on">
+                <div>
+                  <span>01</span>
+                  <span>약관동의</span>
+                </div>
+              </div>
+            </div>
+            <span>&#8250;</span>
+            <div className="join_step_inner">
+              <div class="join_step_box">
+                <div>
+                  <span>02</span>
+                  <span>회원가입</span>
+                </div>
+              </div>
+            </div>
+            <span>&#8250;</span>
+            <div className="join_step_inner">
+              <div class="join_step_box">
+                <div>
+                  <span>03</span>
+                  <span>가입완료</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div class="text-center">
+          <img src = {require("../img/term2.png")}/>
+        </div> */}
         <Form.Check
             type="checkbox"
             label="이용약관, 개인정보 수집 및 이용 모두 동의합니다."
             checked={allCheck}
             onChange={pressAll}
+            id="allCheck"
+            className="pointer"
         /><br/>
 
         <div>
@@ -68,10 +112,13 @@ const BeforeSignUp = () => {
                 label="이용약관 동의(필수)"
                 checked={check1}
                 onChange={pressCheck1}
+                id="check1"
+                className="pointer"
             />
-            <textarea class="col-12 w-100" name="" id="">
+            <div class="col-12 w-100 prewrap" name="" id="">
+            
             핏플레이스 이용약관
-            본 약관(이하 ‘본 약관’이라 함)은 주식회사 여기어때컴퍼니(이하 ‘당사’라 함)가 소유하고 운영하는 핏플레이스 어플리케이션과 모바일 및 PC 포함 이와 관련된 웹사이트들(이하 ‘핏플레이스’라 함)을 통하여 제공되는 모든 제품 및 서비스(이하 ‘본 서비스’라 함)와 관련하여 본 약관에 따라 당사와 이용계약을 체결하고 본 서비스를 이용하는 고객(이하 ‘회원’이라 함)과 당사 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다. 당사에 회원가입을 하지 않고 단순 열람을 원하는 경우, 비회원 이용자를 위한 이용정책이 적용됩니다. 또한 당사는 별도의 커뮤니티 가이드라인(https://www.fitplace.com/terms/community_guidelines)을 둘 수 있으며, 커뮤니티 가이드라인은 본 약관에 포함됩니다.
+            본 약관(이하 ‘본 약관’이라 함)은 주식회사 핏플레이스(이하 ‘당사’라 함)가 소유하고 운영하는 핏플레이스 어플리케이션과 모바일 및 PC 포함 이와 관련된 웹사이트들(이하 ‘핏플레이스’라 함)을 통하여 제공되는 모든 제품 및 서비스(이하 ‘본 서비스’라 함)와 관련하여 본 약관에 따라 당사와 이용계약을 체결하고 본 서비스를 이용하는 고객(이하 ‘회원’이라 함)과 당사 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다. 당사에 회원가입을 하지 않고 단순 열람을 원하는 경우, 비회원 이용자를 위한 이용정책이 적용됩니다. 또한 당사는 별도의 커뮤니티 가이드라인(https://www.fitplace.com/terms/community_guidelines)을 둘 수 있으며, 커뮤니티 가이드라인은 본 약관에 포함됩니다.
             핏플레이스는 관련법을 위배하지 않는 범위에서 본 약관의 내용을 수정할 수 있습니다. 본 약관을 개정할 경우에는 적용일자 및 개정사유를 명시하여 현행 약관과 함께 핏플레이스의 관련 화면에 그 적용일자 7일 이전부터 적용일자 전일까지 공지합니다. 다만, 회원에게 불리하게 약관내용을 변경하는 경우에는 최소한 30일 이상의 사전 유예기간을 두고 공지합니다. 이 경우 당사는 개정 전 내용과 개정 후 내용을 명확하게 비교하여 회원이 알기 쉽도록 표시합니다. 회사가 개정약관을 공지 또는 통지하면서 회원에게 30일 기간 내에 의사표시를 하지 않으면 의사표시가 표명된 것으로 본다는 뜻을 명확하게 공지 또는 통지하였음에도 회원이 명시적으로 거부의 의사표시를 하지 아니한 경우 회원이 개정약관에 동의한 것으로 봅니다. 회원이 개정약관의 적용에 동의하지 않는 경우 회사는 개정 약관의 내용을 적용할 수 없으며, 이 경우 회원은 이용계약을 해지할 수 있습니다. 또한 기존 약관을 적용할 수 없는 특별한 사정이 있는 경우에는 회사는 회원에게 통지하고 이용계약을 해지할 수 있습니다. 본 약관이나 개정된 내용에 동의하지 않으면 서비스 이용을 중단해 주시기 바랍니다.
             
             제1조 (약관 동의 및 자격 요건)
@@ -142,7 +189,7 @@ const BeforeSignUp = () => {
             본 약관은 2022년 12월 23일부터 적용됩니다.
 
 
-            </textarea>
+            </div>
         </div><br/>
 
         <div>
@@ -151,6 +198,8 @@ const BeforeSignUp = () => {
                 label="개인정보 수집 및 이용 동의(필수)"
                 checked={check2}
                 onChange={pressCheck2}
+                id="check2"
+                className="pointer"
             />
             <textarea class="col-12" name="" id="">
             &#60; 핏플레이스 &#62;('http://www.fitplace.com'이하 'FitPlace')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.

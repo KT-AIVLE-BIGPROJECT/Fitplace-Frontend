@@ -7,7 +7,7 @@ const Board_detail = () => {
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong>FAQ</strong>
+            <strong class = "FAQ">FAQ</strong>
             <p>질문을 남겨주세요.</p>
         </div>
         <div class="board_view_wrap">

@@ -1,43 +1,88 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react';
 import { Modal, Button, Form, Container } from 'react-bootstrap';
 import Layout from '../layouts/Layout'
+import axios from 'axios';
+import Board from '../pages/Board'
 
-const Board_write = () => {
-  return (
+const cancel_Board = <Board />
+
+const token = localStorage.getItem("token"); // 사용자 토큰
+
+function Board_write(){
+    const [author, setAuthor] = useState("");
+    const [title, setTitle] = useState("");
+    const [user, setUser] = useState("");
+    const [body, setBody] = useState("");
+
+    const results = {
+        title: title,
+        body: body
+      }
+
+
+    const HandleQuestionSubmit = async({results}) => {
+    axios.post('http://localhost:8000/posts/',
+          results,
+          {
+            headers: {
+                "Authorization": `Token ${token}`
+            },
+          }
+        )
+        .then((response) => {
+            if(response.status < 300) {
+              alert("등록이 완료되었습니다!");
+              window.location.replace('http://localhost:3000/board/');
+            }
+          })
+    }
+
+    return (
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong>FAQ</strong>
+            <strong class = "FAQ">FAQ</strong>
             <p>질문을 남겨주세요.</p>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
                 <div class="title">
-                <Form>
-                <Form.Group className="title">
-                    <Form.Label>제목</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="제목을 입력하시오."
-                    />
-                </Form.Group>
+                    <Form>
+                        <Form.Group>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">제목</label>
+                            <input type="title" class="form-control" id="exampleFormControlInput1" value = {title} placeholder="제목을 입력해주세요." onChange={(event) => setTitle(event.target.value)}>
+                            </input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">내용</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={body} onChange={(event) => setBody(event.target.value)}></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">파일 첨부</label>
+                            <input class="form-control" type="file" id="formFile"/>
+                        </div>
+                        </Form.Group>                    
+                    <Form.Group>
+                        <div class="bt_wrap">
+                            <button className="board_write_button" onClick={() => HandleQuestionSubmit({results})}>
+                                등록
+                            </button>
+        
+                            <button class="board_cancel_button" type="submit" onClick= "cancel_Board(); return false;">취소</button>
                 
+                        </div>
+                    </Form.Group>
                 </Form>
-                </div>
-                <div class="cont">
-                    <textarea placeholder="내용 입력">
-                    </textarea>
-                </div>
-                <div class="bt_wrap">
-                    <a href="view.html" class="on">등록</a>
-                    
-                    <a href="/board">취소</a>
                 </div>
             </div>
         </div>
     </div>
     </Layout>
-  )
+    )
 }
+
+
+
 
 export default Board_write
