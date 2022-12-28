@@ -43,6 +43,7 @@ div.left_margin_box{
   text-align: left;
   justify-content : left;
   padding-left: 30%;
+  padding-right: 30%;
 }
 
 hr{
@@ -155,4 +156,8 @@ ul{
   font-weight: 600;
   color: #07b495;
   letter-spacing: -0.2px; */
+}
+
+a{
+  text-decoration-line: none;
 }

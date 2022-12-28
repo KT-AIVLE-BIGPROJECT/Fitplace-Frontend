@@ -1,5 +1,16 @@
-div.left_margin_box{
+.review_title{
+  font-weight: bold;
   text-align: left;
-  justify-content : left;
-  padding-left: 30%;
+  padding-left: 10%;
+}
+
+.review_box{
+  display: block;
+  padding-left: 25%;
+  padding-right: 25%;
+  padding-bottom: 2%;
+}
+
+.review_content{
+  padding-inline-start: 40px;
 }

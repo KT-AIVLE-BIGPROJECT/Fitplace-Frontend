@@ -131,17 +131,20 @@ const DetailTop = () => {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" class="_star"><path d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path></svg>
           <span>{rating}</span>
           <span>/5 </span>
-          <span class='_blue'>방문자 리뷰 </span>
-          <span>{visitor_review_cnt} </span>
-          <span class='_blue'>블로그 리뷰 </span>
-          <span>{blog_review_cnt} </span>
+          <a href="#방문자 리뷰">
+            <span class='_blue'>방문자 리뷰 </span>
+            <span>{visitor_review_cnt} </span>
+          </a>     
+          <a href="#블로그 리뷰">
+            <span class='_blue'>블로그 리뷰 </span>
+            <span>{blog_review_cnt} </span>
+          </a>          
           <br></br>
           <div>
             <ShowTags></ShowTags>
           </div>          
         </div>
         <hr></hr>
-        
         <div class = "left_margin_box">
           <div>
             <span class='_blue'>전화번호 </span>
@@ -181,8 +184,8 @@ const DetailTop = () => {
           </div>            
         </div>
       <hr></hr>
-
-        
+      <a name="방문자 리뷰"></a>        
+      <a name="블로그 리뷰"></a>
       </div>        
     </div>    
   )
