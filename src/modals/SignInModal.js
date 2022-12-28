@@ -111,7 +111,7 @@ const SignInModal = ({ show, onHide }) => {
 
         <Modal.Footer className='loginFooter'>
           <div>아직 회원이 아니신가요?</div>
-          <span class="registerButton pointer" onClick={()=>{navigate('/bfsignup');}}>
+          <span class="registerButton pointer" onClick={()=>{window.location.href='/bfsignup'}}>
             회원가입 하기
           </span>
         </Modal.Footer>

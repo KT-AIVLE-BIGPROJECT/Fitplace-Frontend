@@ -277,6 +277,10 @@ width: 580px;
     margin-left: 55px;
 }
 
+.ml-13{
+    margin-left:13px
+}
+
 /*MAIN화면*/
 .backdrop {
     -webkit-backdrop-filter: blur(4px);
@@ -397,6 +401,9 @@ img.hot-place-sparkle {
 /* Search 페이지 css */
 .mr-60 {
     margin-right: 60px;
+}
+.mr-13{
+    margin-left: 13px;
 }
 
 .search_box {

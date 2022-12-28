@@ -37,6 +37,11 @@ label.form-check-label {
 .homeImg:hover {
     filter: brightness(0.5);
 }
+.mem_content {
+    max-width: 975px;
+    margin: 0 auto;
+    padding-bottom: 7%;
+}
 .join_content{
     margin: 58px 64px;
 }
@@ -58,6 +63,16 @@ label.form-check-label {
 .join_step_box span{
     display: block;
 }
+.term{
+    overflow-y: auto;
+    height: 230px;
+    margin: 7px 0 48px 0;
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+}
+.align-center {
+    text-align: center;
+}
 
 .nextButton {
     font-size: 1rem;
@@ -77,4 +92,9 @@ label.form-check-label {
     border-radius: 5px;
     padding: 10px;
     margin-right: 10px;
+}
+.btn_lg{
+    font-size: 1.2rem;
+    padding: 12px 53px;
+    width: 187px;
 }
