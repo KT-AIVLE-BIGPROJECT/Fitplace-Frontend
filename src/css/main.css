@@ -6,7 +6,9 @@
 .text-center{
     text-align: center;
 }
-
+p {
+    font-family: auto;
+}
 .logo-size {
     width: 200px;
     height: 53px;
