@@ -1,29 +1,61 @@
 import React from 'react'
+import Dropdown from 'react-bootstrap/Dropdown';
 import '../css/main.css'
 
-// 사용XX
+
+const CATEGORIES = [
+    {
+      id: 1,
+      name: "먹기",
+      subcategories: [
+            { subCategoryId: 1, name: "한식" },
+            { subCategoryId: 2, name: "양식" },
+            { subCategoryId: 3, name: "중식" },
+            { subCategoryId: 4, name: "일식" },
+            { subCategoryId: 5, name: "분식" },
+            { subCategoryId: 6, name: "패스트푸드" },
+        ],
+        },
+  
+    ]
+
 const SearchPlace = () => {
   return (
     <div>
-        <div className='margin_box mb-130'>
-                      
-          <div className='flex h-60 right-sort mb-23'>
+        <div className='margin_box mb-130'>              
+            <div className='flex h-60 mb-23 mr-35 sb-bw'>
+                
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic" className='bg-white btn-outline-secondary dd-style'>
+                        지역 선택
+                    </Dropdown.Toggle>
 
-            <div className='h_row_center2'>
-                <div className='flex mr-60 sort-box z-idx'>
-                    <h6 className='sort-text'>평점순</h6>
-                    <img src="https://s3.hourplace.co.kr/web/images/icon/sort.svg" alt='arrow_pic' className='arrow-size sort-img' />
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">강남구</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">구로구</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">마포구</Dropdown.Item>
+                        <Dropdown.Item href="#/action-4">용산구</Dropdown.Item>
+                        <Dropdown.Item href="#/action-5">종로구</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+           
+                <div className='flex'>
+                <div className='h_row_center2'>
+                    <div className='flex mr-60 sort-box z-idx'>
+                        <h6 className='sort-text'>평점순</h6>
+                        <img src="https://s3.hourplace.co.kr/web/images/icon/sort.svg" alt='arrow_pic' className='arrow-size sort-img' />
+                    </div>
                 </div>
-            </div>
             <div className='h_row_center2'>
                 <div className='flex mr-60 sort-box z-idx'>
                     <h6 className='sort-text'>리뷰순</h6>
                     <img src="https://s3.hourplace.co.kr/web/images/icon/sort.svg" alt='arrow_pic' className='arrow-size sort-img' />
                 </div>
             </div>
+          </div>
 
           </div>
-        <div className='h_row'>
+        <div className='h_row ml-120'>
             
             <div className='single_box'>
                 <img className='hotimg' src="https://mp-seoul-image-production-s3.mangoplate.com/528686_1634124503122115.jpg?fit=around|362:362&crop=362:362;*,*&output-format=jpg&output-quality=80" alt="profile" />
@@ -133,7 +165,7 @@ const SearchPlace = () => {
     </div>
 
     <div className='margin_box mb-130'>
-        <div className='h_row'>
+        <div className='h_row ml-120'>
             
             <div className='single_box'>
                 <img className='hotimg' src="https://search.pstatic.net/common/?autoRotate=true&type=w560_sharpen&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220622_181%2F1655893228328oitIx_JPEG%2F836E6F26-AB6D-4CDB-AB4F-CE9E9F4E43AA.jpeg" alt="profile" />
@@ -239,8 +271,6 @@ const SearchPlace = () => {
                     </div>
                 </div>
             </div>
-
-            
         </div>
     </div>
 

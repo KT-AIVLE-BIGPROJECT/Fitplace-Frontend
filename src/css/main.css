@@ -485,11 +485,10 @@ img.hot-place-sparkle {
 .sort-img {
     position: relative;
     margin-top: 5px;
-    margin-left: 5px;
 }
 
 .sort-box {
-    width: 110px;
+    width: 92px;
     height: 40px;
     border-radius: 4px;
     border: solid 1px #cad0d8;
@@ -507,7 +506,7 @@ img.hot-place-sparkle {
 }
 
 .sort-text {
-    margin-left: 15px;
+    margin-left: 12px;
     font-size: 15px;
     font-weight: 500;
     line-height: 10px;
@@ -530,4 +529,21 @@ img.hot-place-sparkle {
 
 .z-idx {
     z-index: 9999;
+}
+
+.ml-120 {
+    margin-left: 120px;
+}
+
+.dd-style {
+    width: 200px;
+    border-color: #cad0d8;
+    height: 40px;
+    margin-top: 12px;
+    border-radius: 8px;
+    margin-left: 16px;
+}
+
+.sb-bw {
+    justify-content: space-between;
 }
