@@ -14,28 +14,34 @@ function Board_main(){
     const [count, setCount] = useState("");
     const [results, setResults] = useState([]);
 
-    // useEffect(() => {
-    //     fetch("http://localhost:8000/posts/")
-    //       .then((res) => res.json())
-    //       .then((data) => setPosts(data));
-    //   }, []);
+  
+    useEffect(()=>{
+      axios
+        .get("http://localhost:8000/posts/", {
+        })
+        .then((response)=>{
+          setCount(response.data.count);
+          setResults(response.data.results);
 
-    axios
-      .get("http://localhost:8000/posts/", {
-      })
-      .then((response)=>{
-        setCount(response.data.count);
-        var posts = response.data.results;
+        })
+    },[])
 
-      })
+    function Board_Read(){
+      const list = []
+      for(let i=0;i < 10;i++){
+        list.push(
+          <div>
+            <div className="num">{results[i].pk}</div>
+            <div className="title"><a href="/board/detail/">{results[i].title}</a></div>
+            <div className="writer">익명</div>
+            <div className="date">{results[i].published_date}</div>
+          </div>
+        )
+      }
+      return list
+    }
 
-    // axios({
-    //     method: "get",
-    //     url: "http://localhost:8000/posts/",
-    //     responseType: "type"
-    // }).then(function (response) {
-    //     // response Action
-    // });
+    
 
 
     
@@ -61,17 +67,15 @@ function Board_main(){
         </label>
 
         <main>
-        {/* {posts.slice(offset, offset + limit).map(({ count }) => ( */}
           <article>
             <h3>
               {count}
             </h3>
           </article>
-        {/* ))} */}
       </main>
       
 
-
+      <body>
         <div class="board_list_wrap">
             <div class="board_list">
                 <div class="top">
@@ -79,14 +83,24 @@ function Board_main(){
                     <div class="title">제목</div>
                     <div class="writer">글쓴이</div>
                     <div class="date">작성일</div>
-                    <div class="count">조회</div>
                 </div>
+                
+                <Board_Read />
+                
+    
+                
                 <div>
-                    <div class="num">1</div>
-                    <div class="title"><a href="/board/detail">글</a></div>
-                    <div class="writer">홍길동</div>
-                    <div class="date">2022-02-02</div>
-                    <div class="count">1</div>
+                    {/* <div class="num">{results[0].pk}</div> */}
+                    {/* <div class="title"><a href="/board/detail">{results[0].title}</a></div>
+                    <div class="writer">익명</div>
+                    <div class="date">{results[0].published_date}</div> */}
+                </div>
+
+                <div>
+                    {/* <div class="num">{results[1].pk}</div> */}
+                    {/* <div class="title"><a href="/board/detail">{results[1].title}</a></div>
+                    <div class="writer">익명</div>
+                    <div class="date">{results[1].published_date}</div> */}
                 </div>
                 
             </div>
@@ -113,7 +127,9 @@ function Board_main(){
                 <a href="/board/write" class="on">글쓰기</a>
             </div>
         </div>
+        </body>
     </div>
+    
     )
 }
 

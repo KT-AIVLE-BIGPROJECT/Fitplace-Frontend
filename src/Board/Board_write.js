@@ -6,7 +6,7 @@ import Board from '../pages/Board'
 
 const cancel_Board = <Board />
 
-const token = localStorage.getItem("token"); // 사용자 토큰
+const token = sessionStorage.getItem("token"); // 사용자 토큰
 
 function Board_write(){
     const [author, setAuthor] = useState("");

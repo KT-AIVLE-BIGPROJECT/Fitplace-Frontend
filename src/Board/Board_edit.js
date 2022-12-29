@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout'
 import axios from 'axios';
 
 
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 function Board_edit(){
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");

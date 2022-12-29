@@ -20,8 +20,8 @@ function Posts() {
     <Layout>
       <header>
         <h1>게시물 목록</h1>
-      </header>
 
+      </header>
       <label>
         페이지 당 표시할 게시물 수:&nbsp;
         <select
