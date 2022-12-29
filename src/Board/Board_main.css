@@ -122,6 +122,10 @@ table.dataTable td {
 }
 
 
+.Board_Reader{
+  display: flex !important;
+}
+
 
 
 
@@ -140,7 +144,7 @@ table.dataTable td {
   }
 
   .board_list .date {
-      width: 40%;
+      width: 30px;
   }
 
   .board_list .title {

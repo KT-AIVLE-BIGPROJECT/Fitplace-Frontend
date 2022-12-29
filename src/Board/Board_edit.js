@@ -16,8 +16,26 @@ function Board_edit(){
         body: body
       }
 
+    var link =  document.location.pathname.replace('/board/edit/','');
+
+
+    useEffect(()=>{
+        axios.get(`http://localhost:8000/posts/${link}/`,
+        results,
+    {
+        headers: {
+            "Authorization": `Token ${token}`
+        },
+    }
+    )
+    .then((response) => {
+        setTitle(response.data.title);
+        setBody(response.data.body);
+    })
+    }, [])
+
     const HandleQuestionSubmit = async({results}) => {
-        axios.put('http://localhost:8000/posts/5/',
+        axios.put(`http://localhost:8000/posts/${link}/`,
               results,
               {
                 headers: {
@@ -34,28 +52,12 @@ function Board_edit(){
         }
 
 
-    useEffect(()=>{
-        axios.get('http://localhost:8000/posts/5/',
-    results,
-    {
-        headers: {
-            "Authorization": `Token ${token}`
-        },
-    }
-    )
-    .then((response) => {
-        setTitle(response.data.title);
-        setBody(response.data.body);
-    })
-    }, [])
-
-
 
     return (
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">FAQ</strong>
+            <strong class = "FAQ">FAQs</strong>
             <p>질문을 남겨주세요.</p>
         </div>
         <div class="board_write_wrap">

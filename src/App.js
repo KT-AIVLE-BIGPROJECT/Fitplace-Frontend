@@ -25,8 +25,8 @@ function App() {
         <Route path="/" element={<Main/>}></Route>
         <Route path="/signup" element={<SignUp/>}></Route>
         <Route path="/board" element={<Board/>}></Route>
-        <Route path="/board/detail" element={<Board_detail/>}></Route>
-        <Route path="/board/edit" element={<Board_edit/>}></Route>
+        <Route path="/board/detail/:no" element={<Board_detail/>}></Route>
+        <Route path="/board/edit/:no" element={<Board_edit/>}></Route>
         <Route path="/board/write" element={<Board_write/>}></Route>
         <Route path="/board/page" element={<Board_page/>}></Route>
         <Route path="/board/test" element={<Board_post/>}></Route>

@@ -4,6 +4,7 @@ import "./Board_main.css"
 import "./Board_style.css"
 import Board_pagination from "./Board_pagination";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 function Board_main(){
@@ -26,20 +27,52 @@ function Board_main(){
         })
     },[])
 
-    function Board_Read(){
-      const list = []
-      for(let i=0;i < 10;i++){
-        list.push(
-          <div>
-            <div className="num">{results[i].pk}</div>
-            <div className="title"><a href="/board/detail/">{results[i].title}</a></div>
-            <div className="writer">익명</div>
-            <div className="date">{results[i].published_date}</div>
+    // function Board_Read(){
+    //   const list = []
+    //   for(let i=0;i < 10;i++){
+    //     list.push(
+    //       <div>
+    //         <div className="num">{results[i].pk}</div>
+    //         <div className="title"><a href="/board/detail/">{results[i].title}</a></div>
+    //         <div className="writer">익명</div>
+    //         <div className="date">{results[i].published_date}</div>
+    //       </div>
+    //     )
+    //   }
+    //   return list
+    // }
+
+    const Board_Read = () => {
+      return (
+        <div>
+          {results.slice(offset, offset + limit).map((result, idx) => {
+            const date = result.published_date.split('T')
+            return (
+              <div class = "Board_Reader">
+                <div className="num">{result.pk}</div>
+                <div className="title"><Link to={`/board/detail/${result.pk}`}>{ result.title }</Link>
+                </div>
+                <div className="writer">익명</div>
+                <div className="date">{date[0]}</div>
+              </div>
+            )
+          })}
           </div>
-        )
-      }
-      return list
+      )
     }
+      
+      //   return (
+      //     <div>
+      //     {results.map((pk, title, published_date) => {
+      //       <div>
+      //         <div className="num">{pk}</div>
+      //         <div className="title"><a href="/board/detail/">{title}</a></div>
+      //         <div className="writer">익명</div>
+      //         <div className="date">{published_date}</div>
+      //       </div>
+          
+      // })}
+      // </div>)}
 
     
 
@@ -48,7 +81,7 @@ function Board_main(){
 
     return (
     <div class="board_container">
-        <h1 class = "FAQ">FAQ</h1>
+        <h1 class = "FAQ">FAQs</h1>
         <p>질문을 남겨주세요.</p>
 
         <label>
@@ -58,21 +91,13 @@ function Board_main(){
             value={limit}
             onChange={({ target: { value } }) => setLimit(Number(value))}
             >
+            <option value="5">5</option>
             <option value="10">10</option>
-            <option value="12">12</option>
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
             </select>
         </label>
-
-        <main>
-          <article>
-            <h3>
-              {count}
-            </h3>
-          </article>
-      </main>
       
 
       <body>
@@ -89,12 +114,12 @@ function Board_main(){
                 
     
                 
-                <div>
-                    {/* <div class="num">{results[0].pk}</div> */}
-                    {/* <div class="title"><a href="/board/detail">{results[0].title}</a></div>
+                {/* <div><div>
+                    <div class="num">{results[0].pk}</div>
+                    <div class="title"><a href="/board/detail">{results[0].title}</a></div>
                     <div class="writer">익명</div>
-                    <div class="date">{results[0].published_date}</div> */}
-                </div>
+                    <div class="date">{results[0].published_date}</div>
+                </div></div> */}
 
                 <div>
                     {/* <div class="num">{results[1].pk}</div> */}

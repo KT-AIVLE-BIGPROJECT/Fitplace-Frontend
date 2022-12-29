@@ -41,7 +41,7 @@ function Board_write(){
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">FAQ</strong>
+            <strong class = "FAQ">FAQs</strong>
             <p>질문을 남겨주세요.</p>
         </div>
         <div class="board_write_wrap">
