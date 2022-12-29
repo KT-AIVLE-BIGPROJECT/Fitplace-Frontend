@@ -491,7 +491,7 @@ const Search = () => {
                     <div className='flex h-60 right-sort mb-23'>
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic" className='bg-white btn-outline-secondary dd-style'>
-                                지역 선택
+                                지역 선택 (현재 : {filterRegion})
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
