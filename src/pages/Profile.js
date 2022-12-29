@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import {Container, Form, ButtonGroup, Button, FloatingLabel} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 
 import Layout from '../layouts/Layout';
 import './Profile.css';
@@ -42,6 +43,7 @@ const Profile = () => {
     }
 
     // [ State ]
+    const navigate = useNavigate();
     const [toNext, setToNext] = useState(true);
     const [nickname, setNickname] = useState("");
     const [userImage, setUserImage] = useState("");
@@ -88,7 +90,7 @@ const Profile = () => {
                     alert("프로필 정보가 수정되었습니다!");
                     window
                         .location
-                        .replace('http://localhost:3000');
+                        .replace('http://localhost:3000/profile');
                 }
             })
             .cartch((error) => {
@@ -144,16 +146,18 @@ const Profile = () => {
                     </div>
                 </div>
                 <br/>
-                <h4 className='mb-5'>프로필</h4>
+                <h4 className='mb-5'>프로필<img src={require('../img/user.png')} className='profileImg ml-1'/></h4>
                 <div className='flex-row'>
                     <div className='width-40'>
                         <h3 class="profileTitle">
                             <h4
-                                className="pointer mb-3"
+                                className="pointer mb-3 select"
                                 onClick={() => {
                                     window.location.href = '/profile';
                                 }}>회원정보 수정</h4>
-                            <h4 type="submit" onClick={pressLikingCheck}>
+                            <h4 type="submit" onClick={() => {
+                                    navigate('/liking');
+                                }} className="pointer mb-3 unselect">
                                 취향 키워드 수정
                             </h4>
                         </h3><br/>

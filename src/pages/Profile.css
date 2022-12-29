@@ -34,3 +34,19 @@
 .profileTitle h3:hover {
     filter: brightness(0.5);
 }
+
+.profileTitle h4 {
+    font-weight: bold;
+}
+.pointer.mb-3.unselect{
+    color: #C9CDD2;
+}
+.pointer.mb-3.select{
+    color: #313131;
+}
+.profileImg{
+    width: 21px;
+    height: 21px;
+    margin-left:0.6rem;
+    margin-top: 0.3rem;
+}
