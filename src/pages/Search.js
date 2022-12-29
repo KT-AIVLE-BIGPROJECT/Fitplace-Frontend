@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {Container} from 'react-bootstrap'
+import Dropdown from 'react-bootstrap/Dropdown';
 import SearchPlace from './SearchPlace'
+import SearchBar from './SearchBar'
 import Layout from '../layouts/Layout'
 import axios from 'axios'
 import './SignUp.css';
+import './SearchBar.css'
+import '../css/main.css'
 
 import { useNavigate } from 'react-router-dom';
 
@@ -338,16 +342,18 @@ const Search = () => {
     // 화면 상단 카테고리 버튼 컴포넌트
     const CategoryButton = (props) => {
         return (
-            <div className='items-center justify-center mr-60'>
+            <div className='items-center justify-center'>
                 <div onClick={()=>{
                     props.clicked(props.value);
                     }} 
-                    className='relative rounded overflow-hidden w-60 h-60 img-hover z-idx'
+                    className='relative rounded overflow-hidden img-hover z-idx'
                 >
-                    <img src={props.src} alt='rice_pic' className='align-top' />
+                    <img src={props.src} alt='rice_pic' className='align-top img-size' />
                 </div>
                 <div className='relative flex flex_col items-center'>
-                    <h6>{props.category}</h6>
+                    <div className='flex'>
+                        <div className='word_style'>{props.category}</div>
+                    </div>
                 </div>
             </div>
         )
@@ -384,13 +390,77 @@ const Search = () => {
     return (
         <Layout>
           <Container className='container_style' style={{minHeight: "75vh"}}>
-            <div className='flex flex_col w mt-4 m-0a'>
+            <div className='h_column_center2 cat_box'>
+                <div className='h_row_center2 cat_box_size'>
+                    <div className='category category_size'>
+                        <ul className='h-44 mb-0'>
+                            <li className='cat_start flex'>
+                                <div className='flex img-hover'>
+                                    <div className='word_style'>전체</div>
+                                    <CategoryButton src={require('../img/eat2.png')} value="all" alt='eat_cat' clicked={setMainCategory}/>
+                                </div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='flex img-hover'>
+                                    <div className='word_style'>먹기</div>
+                                    <CategoryButton src={require('../img/eat2.png')} value="restaurant" clicked={setMainCategory}/>
+                                </div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='flex img-hover'>
+                                    <div className='word_style'>마시기</div>
+                                    <CategoryButton src={require('../img/drink3.png')} value="restaurant" clicked={setMainCategory}/>
+                                </div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='flex img-hover'>
+                                    <div className='word_style'>놀기</div>
+                                    <CategoryButton src={require('../img/dice.png')} value="restaurant" clicked={setMainCategory}/>
+                                </div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='flex img-hover'>
+                                    <div className='word_style'>걷기</div>
+                                    <CategoryButton src={require('../img/walk2.png')} value="restaurant" clicked={setMainCategory}/>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div className='h_column_center2 cat_box'>
+                <div className='h_row_center2 cat_box_size'>
+                    <div className='category category_size'>
+                        <ul className='h-44 mb-0'>
+                            <li className='cat_start flex'>
+                                <div className='word_style'>한식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='word_style'>양식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='word_style'>중식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='word_style'>일식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='word_style'>분식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div className='word_style'>패스트푸드</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {/* <div className='flex flex_col w mt-4 m-0a'>
               <div className='flex h-60'>
               </div>
               <div className='mb-50'>
-                <div className='flex items-center w-auto'>
+                <div className='flex items-center w-auto'> */}
                     {/* <div>{mainCategory}</div> */}
-                    <CategoryButton src={require('../img/all.png')} category="전체" value="all" clicked={setMainCategory}/>
+                    {/* <CategoryButton src={require('../img/all.png')} category="전체" value="all" clicked={setMainCategory}/>
                     <CategoryButton src={require('../img/eat.png')} category="먹기" value="restaurant" clicked={setMainCategory}/>
                     <CategoryButton src={require('../img/drink.png')} category="마시기" value="cafe" clicked={setMainCategory}/>
                     <CategoryButton src={require('../img/game.png')} category="놀기" value="leisure" clicked={setMainCategory}/>
@@ -398,16 +468,33 @@ const Search = () => {
                 </div>
               </div>
               
-            </div>
+            </div> */}
     
             <div>
                 <div className='margin_box mb-130'>
-                            
-                <div className='flex h-60 right-sort mb-23'>
-                    {/* <button onClick={console.log(recommendPlaces)}/> */}
+
+                <div className='flex sb-bw'>
+                    <div className='flex h-60 right-sort mb-23'>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" className='bg-white btn-outline-secondary dd-style'>
+                                지역 선택
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="#/action-1">강남구</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">구로구</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">마포구</Dropdown.Item>
+                                <Dropdown.Item href="#/action-4">용산구</Dropdown.Item>
+                                <Dropdown.Item href="#/action-5">종로구</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                    <div className='flex'>
                     <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
                     <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
-                </div>
+                    </div>
+                </div>     
+                
                 
                 <div className='h_row'>
                     <RecommendBox
