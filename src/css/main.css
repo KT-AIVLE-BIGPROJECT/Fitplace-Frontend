@@ -37,6 +37,9 @@ p {
 .fontSize-1 {
     font-size: 1rem;
 }
+.fontSize-12{
+    font-size: 1.2rem!important;
+}
 
 .z-index {
     z-index: auto;
