@@ -10,8 +10,10 @@ import { useLocation } from 'react-router-dom';
 
 const DetailTop = () => {
   const location = useLocation();
+  const getPath = location.pathname.split('/')
   // 장소 데이터
-  const [placeCode, setPlaceCode] = useState(location.state.place_code);
+  // const [placeCode, setPlaceCode] = useState(location.state.place_code);
+  const [placeCode, setPlaceCode] = useState(getPath[getPath.length-1]); // URL에서 장소코드 받아옴
   const [photo, setPhoto] = useState("");
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -34,18 +36,6 @@ const DetailTop = () => {
   //const [congestLvl, setConjestLvl] = useState("");
   const [congestIcon, setConjestIcon] = useState("");
   const [congestMessage, setCongestMessage] = useState("혼잡도 파악 중...");
-  
-
-
-  // const maximum = data[0]['review_summary_cnt'];
-  // const review_summary = data.map((datum)=>(
-  //   {'review_summary':datum['review_summary'],
-  //    'review_summary_cnt':datum['review_summary_cnt'],
-  //    'review_summary_cnt_percent':datum['review_summary_cnt']/maximum*87 +'%'}
-  // ))
-  // console.log("review_summary")
-  // console.log(review_summary)
-
 
   const getCongestion = () => {
     var KEY = "63466d4c516c7373313758755a6d45";
@@ -60,6 +50,9 @@ const DetailTop = () => {
       console.log(congestMessage);
     })
     switch(congestMessage){
+      case "여유":
+        setConjestIcon('😀');
+        break;
       case "보통":
         setConjestIcon('🙂');
         break;
@@ -69,9 +62,6 @@ const DetailTop = () => {
         break;
       case "매우 붐빔":
         setConjestIcon("😡");
-        break;
-      case "여유":
-        setConjestIcon('😀');
         break;
       default:
         break;
@@ -113,32 +103,32 @@ const DetailTop = () => {
     }
   }
 
-  // function check_review_summary_exists(){
-  //   // '이런 점이 좋았어요' 가 존재할 때
-  //   if (Object.keys(review_summary).length){
-  //     review_summary_exists = true;
-  //     return review_summary_exists
-  //   }
-  // }
-  // function ShowReviewSummary(){
-  //   let lis = null;
-  //   if (check_review_summary_exists()){
-
-  //   } 
-  //   lis = review_summary.map(review => {
-  //     return (
-  //       // <span className='test'>test</span>
-  //       <li className="bar_background">
-  //         <div className="bar" style={{width:review['review_summary_cnt_percent']}}></div>
-  //         <div className="bar_contents">
-  //           <span className="review_summary">{review['review_summary']} </span>
-  //           <span className="review_summary_cnt">{review['review_summary_cnt']}</span>
-  //         </div>                  
-  //       </li>
-  //     )
-  //   }) 
-  //   return lis
-  // }
+  function ShowReviewSummary(){
+    if(reviewSumCnt1 != 0){
+      var maximumCnt = Math.max(reviewSumCnt1, reviewSumCnt2, reviewSumCnt3);
+      var reviews = [
+        {"text":reviewSum1, "cnt":reviewSumCnt1, "percent":reviewSumCnt1/maximumCnt*87},
+        {"text":reviewSum2, "cnt":reviewSumCnt2, "percent":reviewSumCnt2/maximumCnt*87},
+        {"text":reviewSum3, "cnt":reviewSumCnt3, "percent":reviewSumCnt3/maximumCnt*87},
+      ];
+      
+      return (
+        <ul>
+          {reviews.map((review, idx) => {
+            return (
+              <li key={idx} class="bar_background">
+                <div class="bar" style={{width:review['percent']+"%"}}></div>
+                <div class="bar_contents">
+                  <span class="review_summary">{review['text']}</span>
+                  <span class="review_summary_cnt">{review['cnt']}</span>
+                </div>     
+              </li>   
+            )
+          })}
+        </ul>
+      )
+    }
+  }
 
 
   useEffect(()=>{
@@ -232,14 +222,7 @@ const DetailTop = () => {
           <div class = "place_section_content">
             <div class = "bar_chart">
               <ul>
-                {/* <ShowReviewSummary></ShowReviewSummary> */}
-                <li class="bar_background">
-                  <div class="bar" style={{width:"87%"}}></div>
-                  <div class="bar_contents">
-                    <span class="review_summary"> "음식이 맛있어요" </span>
-                    <span class="review_summary_cnt">591</span>
-                  </div>                  
-                </li>       
+                <ShowReviewSummary></ShowReviewSummary>
               </ul>
             </div>
           </div>            

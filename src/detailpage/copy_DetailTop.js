@@ -1,3 +1,4 @@
+//  사용XXXXXXX
 import React, { useState } from 'react'
 import axios from 'axios';
 import {Container} from 'react-bootstrap'
@@ -172,13 +173,14 @@ const DetailTop = () => {
             <div class = "bar_chart">
               <ul>
                 <ShowReviewSummary></ShowReviewSummary>
-                {/* <li class="bar_background">
+                <li class="bar_background">
                   <div class="bar" style={{width:"87%"}}></div>
                   <div class="bar_contents">
                     <span class="review_summary"> "음식이 맛있어요" </span>
                     <span class="review_summary_cnt">591</span>
                   </div>                  
-                </li> */}            
+                </li>         
+                
               </ul>
             </div>
           </div>            

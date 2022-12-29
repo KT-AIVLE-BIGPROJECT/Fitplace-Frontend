@@ -1,3 +1,5 @@
+// 사용XXXXXXX
+
 import React, {useState, useEffect} from 'react'
 import {Container} from 'react-bootstrap'
 import SearchPlace from './SearchPlace'
@@ -347,7 +349,10 @@ const Search = () => {
                     <img src={props.src} alt='rice_pic' className='align-top' />
                 </div>
                 <div className='relative flex flex_col items-center'>
-                    <h6>{props.category}</h6>
+                    {/* <h6>{props.category}</h6> */}
+                    <div className='flex'>
+                        <div className='word_style'>{props.category}</div>
+                    </div>
                 </div>
             </div>
         )
