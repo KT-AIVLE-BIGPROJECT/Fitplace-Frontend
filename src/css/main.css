@@ -3,6 +3,24 @@
     height: 55px;
     margin-bottom: 7px;
 }
+.flex-row {
+    display: flex;
+}
+.width-100{
+    width: 100%!important;;
+}
+.width-30{
+    width:30%!important;
+}
+.width-40{
+    width:40%!important;
+}
+.width-60{
+    width:60%!important;
+}
+.width-70{
+    width:70%;
+}
 .text-center{
     text-align: center;
 }
@@ -284,7 +302,9 @@ width: 580px;
 .ml-55 {
     margin-left: 55px;
 }
-
+.ml-3 {
+    margin-left: 2rem;
+}
 .ml-13{
     margin-left:13px
 }
@@ -465,11 +485,10 @@ img.hot-place-sparkle {
 .sort-img {
     position: relative;
     margin-top: 5px;
-    margin-left: 5px;
 }
 
 .sort-box {
-    width: 110px;
+    width: 92px;
     height: 40px;
     border-radius: 4px;
     border: solid 1px #cad0d8;
@@ -487,7 +506,7 @@ img.hot-place-sparkle {
 }
 
 .sort-text {
-    margin-left: 15px;
+    margin-left: 12px;
     font-size: 15px;
     font-weight: 500;
     line-height: 10px;
@@ -510,4 +529,21 @@ img.hot-place-sparkle {
 
 .z-idx {
     z-index: 9999;
+}
+
+.ml-120 {
+    margin-left: 120px;
+}
+
+.dd-style {
+    width: 200px;
+    border-color: #cad0d8;
+    height: 40px;
+    margin-top: 12px;
+    border-radius: 8px;
+    margin-left: 16px;
+}
+
+.sb-bw {
+    justify-content: space-between;
 }

@@ -6,11 +6,6 @@
     z-index: -2;
 }
 
-.profileTitle {
-    display: flex;
-    justify-content: space-between;
-}
-
 .button {
     font-size: 1rem;
     color: rgb(255, 255, 255);
@@ -30,4 +25,12 @@
     padding: 10px;
     background: #ffebc0;
     
+}
+
+.input-form-padding{
+    padding: 0.7rem 1.1rem!important;
+}
+
+.profileTitle h3:hover {
+    filter: brightness(0.5);
 }
