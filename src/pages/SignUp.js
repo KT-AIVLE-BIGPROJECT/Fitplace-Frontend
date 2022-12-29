@@ -42,6 +42,35 @@ const SignUp = () => {
         setMbti(event.target.value);
     }
 
+    //이메일 유효성 검사 
+    const [isEmail,setIsEmail] = useState(true);
+    const checkEmail = (e) => {
+        let regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        // 형식에 맞는 경우 true 리턴
+        console.log(regExp.test(e.target.value));
+        setIsEmail(regExp.test(e.target.value));
+    };
+
+    //비밀번호 유효성 검사 
+    const [chkPwd,setChkPwd] = useState(true);
+    const checkPwd = (e) => {
+        let regExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i;
+        console.log(regExp.test(e.target.value));
+        setChkPwd(regExp.test(e.target.value));
+        setPassword2('');
+        setMatchPwd(true);
+    };
+
+    //비밀번호 일치 여부 확인
+    const [matchPwd,setMatchPwd] = useState(true);
+    const matchPassword = (e) => {
+        if(password==(e.target.value)){
+            setMatchPwd(true);
+        }else{
+            setMatchPwd(false);
+        }
+    };
+
     const pressSignUp = (event) => { // 회원가입 버튼 누를 시
         event.preventDefault();
         console.log("[Signup.js] ==> pressSignUp called.");
@@ -54,12 +83,7 @@ const SignUp = () => {
         }
         // 회원가입 요청 보내기
         axios
-            .post("http://localhost:8000/users/register/", {
-                "username": username,
-                "email": email,
-                "password": password,
-                "password2": password2
-            })
+            .post("http://localhost:8000/users/register/", {"username": username,"email": email,"password": password,"password2": password2})
             .then((response) => {
                 console.log(response);
                 if (response.status === 201) {
@@ -93,7 +117,7 @@ const SignUp = () => {
     }
 
     useEffect(() => {
-        if (username != "" && email != "" && password != "" && password2 != "") {
+        if (username != "" && nickname != "" && isEmail && chkPwd && matchPwd && password!='' && password2!='') {
             setToNext(false);
         } else {
             setToNext(true);
@@ -157,47 +181,64 @@ const SignUp = () => {
                                     <Form.Control
                                         type="text"
                                         value={username}
-                                        onChange={(event) => setUsername(event.target.value)}/>
+                                        onChange={(event) => setUsername(event.target.value)} maxlength={150}/>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className="mb-5">
+                                <div className='flex_row'>
+                                    <span className='signup_title'>닉네임<span className="signup_required">*</span></span>
+                                    <Form.Control
+                                        type="text"
+                                        value={nickname}
+                                        onChange={(event) => setNickname(event.target.value)} maxlength={150}/>
                                 </div>
                             </Form.Group>
                             <Form.Group className="mb-5">
                                 <div className='flex_row'>
                                     <span className='signup_title'>이메일<span className='ml-10'>*</span></span>
-                                    <Form.Control
-                                        type="email"
-                                        value={email}
-                                        onChange={(event) => setEmail(event.target.value)}/>
+                                    <div style={isEmail?{'margin-top':0}:{'margin-top':'1rem'}}>
+                                        <Form.Control
+                                            type="email"
+                                            value={email}
+                                            onChange={(event) => setEmail(event.target.value)} 
+                                            maxlength={150}
+                                            onKeyUp={checkEmail}/>
+                                        <div className='signupError' style={isEmail?{'display':'none'}:{'display':'inherit'}}>이메일 형식이 올바르지 않습니다.</div>
+                                    </div>
                                 </div>
                             </Form.Group>
                             <Form.Group className="mb-5">
                                 <div className='flex_row'>
                                     <span className='signup_title'>비밀번호<span className='ml-10'>*</span></span>
-                                    <Form.Control
-                                        type="password"
-                                        value={password}
-                                        onChange={(event) => setPassword(event.target.value)}/>
+                                    <div style={chkPwd?{'margin-top':0}:{'margin-top':'1rem'}}>
+                                        <Form.Control
+                                            type="password"
+                                            value={password}
+                                            onChange={(event) => setPassword(event.target.value)} 
+                                            maxlength={150}
+                                            onKeyUp={checkPwd}/>
+                                        <div className='signupError' style={chkPwd?{'display':'none'}:{'display':'inherit'}}>8자 이상.하나 이상의 문자와 하나 이사의 숫자 작성.</div>
+                                    </div>
                                 </div>
                             </Form.Group>
                             <Form.Group className="mb-5">
                                 <div className='flex_row'>
-                                    <span className='signup_title'>비밀번호 확인<span className='ml-10'>*</span></span>
-                                    <Form.Control
-                                        type="password"
-                                        value={password2}
-                                        onChange={(event) => setPassword2(event.target.value)}/>
+                                    <span className='signup_title'>비밀번호 확인<span className='ml-10' >*</span></span>
+                                    <div style={matchPwd?{'margin-top':0}:{'margin-top':'1rem'}}>
+                                        <Form.Control
+                                            type="password"
+                                            value={password2}
+                                            onChange={(event) => setPassword2(event.target.value)}
+                                            maxlength={150}
+                                            onKeyUp={matchPassword}/>
+                                        <div className='signupError' style={matchPwd?{'display':'none'}:{'display':'inherit'}}>비밀번호가 일치하지 여부 확인.</div>
+                                    </div>
+                                    
                                 </div>
                             </Form.Group>
                             <hr className='form_split mb-5'/>
                             <h5 className='mb-5'><span className='fontWeight-400'>선택사항</span> <span className='fontSize-1'>( 장소 추천에 필요한 사용자 정보를 입력해주세요 )</span></h5>
-                            <Form.Group className="mb-5">
-                                <div className='flex_row'>
-                                    <span className='signup_title'>닉네임</span>
-                                    <Form.Control
-                                        type="text"
-                                        value={nickname}
-                                        onChange={(event) => setNickname(event.target.value)}/>
-                                </div>
-                            </Form.Group>
+                           
                             <Form.Group className="mb-5">
                                 <div className='flex_row'>
                                     <span className='signup_title'>연령대</span>

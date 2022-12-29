@@ -55,18 +55,20 @@ const SignUpFinished = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="align-center">
+                    <div className='mb-50 form-group text-center'>
+                        <img src={require('../img/check.png')} className='checkImg mb-50'/>
+                        <h4 className='mb-50'>회원가입을 축하합니다.</h4>
                         <button
-                            class="backButton btn_lg mr-13"
+                            class="backButton btn_lg mr-13 checkBtn"
                             type="button"
                             onClick={() => {
-                              window.location.href='/bfsignup';
+                            window.location.href='/';
                             }}>
-                            뒤로
+                            FIT.PLACE 이용하기
                         </button>
                     </div>
+                    
                 </div>
-
             </Container>
         </Layout>
     )
