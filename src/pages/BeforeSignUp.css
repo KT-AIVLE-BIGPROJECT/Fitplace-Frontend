@@ -79,17 +79,18 @@ label.form-check-label {
     border: none;
     border-radius: 5px;
     padding: 10px;
+    background: rgb(146, 145, 144);
 }
 
 .backButton {
     font-size: 1rem;
     color: rgb(255, 255, 255);
     text-align: center;
-    background: rgb(146, 145, 144);
     border: none;
     border-radius: 5px;
     padding: 10px;
     margin-right: 10px;
+    background: rgb(146, 145, 144);
 }
 .btn_lg{
     font-size: 1.2rem;
