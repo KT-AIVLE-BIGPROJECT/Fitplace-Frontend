@@ -204,12 +204,12 @@ const Profile = () => {
                                         남성
                                     </button>
                                     <button
-                                        className={gender === "gender_female"?'genderBtn select ml-3 width-30':'genderBtn ml-3 width-30'}
+                                        className={gender === "gender_female"?'genderBtn select ml-p5 width-30':'genderBtn ml-p5 width-30'}
                                         onClick={() => selectGender("gender_female")}>
                                         여성
                                     </button>
                                     <button
-                                        className={gender === "gender_none"?'genderBtn select ml-3 width-30':'genderBtn ml-3 width-30'}
+                                        className={gender === "gender_none"?'genderBtn select ml-p5 width-30':'genderBtn ml-p5 width-30'}
                                         onClick={() => selectGender("gender_none")}>
                                         선택안함
                                     </button>
@@ -246,7 +246,7 @@ const Profile = () => {
                             
                         </div>
                         <div className='mb-130'>
-                            <div className="d-grid gap-1 align-center mb-130 width-30 m-0a">
+                            <div className="d-grid gap-1 align-center mb-130 width-35 m-0a">
                                 <button 
                                 style={toNext
                                     ? {
@@ -257,7 +257,7 @@ const Profile = () => {
                                     }}
                                 class="nextButton btn_lg width-100" type="submit" onClick={pressSaveModify
                                 }>
-                                    회원정보 수정
+                                    수정완료
                                 </button>
                             </div>
                         </div>
