@@ -12,6 +12,9 @@
 .width-30{
     width:30%!important;
 }
+.width-35{
+    width:35%!important;
+}
 .width-40{
     width:40%!important;
 }
@@ -302,6 +305,9 @@ width: 580px;
 .d-table {
     display: table;
 }
+.ml-p5{
+    margin-left:5%;
+}
 
 .ml-55 {
     margin-left: 55px;
@@ -439,6 +445,9 @@ img.hot-place-sparkle {
 }
 .mr-13{
     margin-left: 13px;
+}
+.mr-8p{
+    margin-right: 8%;
 }
 
 .search_box {
