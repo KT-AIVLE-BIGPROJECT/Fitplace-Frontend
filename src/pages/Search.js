@@ -10,7 +10,7 @@ import './SearchBar.css'
 import '../css/main.css'
 
 import { useNavigate } from 'react-router-dom';
-
+  
 // 추천 장소 박스 컴포넌트
 const RecommendBox = (props) => {
     const navigate = useNavigate();
@@ -83,7 +83,9 @@ const RecommendBox = (props) => {
 
     // 상세페이지 새 탭에서 열리도록 해줌
     const handleOpenNewTab = (url) => {
-        window.open(url, "_blank", "noopener, noreferrer");
+        // 부모 탭과 sesssionStorage에 있는 로그인 정보를 공유하려면 window.name이 같아야 해서 설정
+        window.name = "Tab"
+        window.open(url, `_blank ${window.name}`);
     };
 
     return (
@@ -109,6 +111,12 @@ const RecommendBox = (props) => {
 const Search = () => {
     // 요청 유효성 검증 state (사용자 프로필 받아온 후 닉네임값으로 세팅 되면 추천 응답 받도록)
     const [effectFlag, setEffectFlag] = useState(-1);
+    // 추천 근거 사용자 정보 표시용
+    const [nickname, setNickname] = useState("");
+    const [age, setAge] = useState("연령대(선택X)");
+    const [gender, setGender] = useState("성별(선택X)");
+    const [mbti, setMbti] = useState("MBTI(선택X)");
+
     // 필터링 관련 state
     const [mainCategory, setMainCategory] = useState("all"); // 대분류 필터링
     const [subCategory, setsubCategory] = useState(""); // 중분류 필터링
@@ -152,12 +160,20 @@ const Search = () => {
     const [recommendPlaces, setRecommendPlaces] = useState(0);
 
     // 페이지네이션
-    const [placeIdx, setPlaceIdx] = useState(0);
-    const [totalIdx, setTotalIdx] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPage, setTotalPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+    const [totalCount, setTotalCount] = useState(0); // 총 데이터 개수
+    const [totalPage, setTotalPage] = useState(1); // 총 페이지 개수
+    const [pageGroup, setPageGroup] = useState(1); // 현재 페이지 그룹
+    const [firstNumber, setFirstNumber] = useState(1); // 현재 페이지 그룹의 첫번째 숫자
+    const [lastNumber, setLastNumber] = useState(5); // 현재 페이지 그룹의 마지막 숫자
+    const [prev, setPrev] = useState(0); // 왼쪽 화살표 누를 시 페이지 (<)
+    const [next, setNext] = useState(6); // 오른쪽 화살표 누를 시 페이지 (>)
+    const [pageGroupList, setPageGroupList] = useState([]); // 페이지네이션 버튼 그룹
     
-
+    const [pageCount, setPageCount] = useState(5); // 화면에 나타날 페이지 개수(5개)
+    const [limit, setLimit] = useState(20); // 한 페이지 당 나타낼 데이터 개수
+    const [pageInfo, setPageInfo] = useState({}); // 페이지 갱신 작업용
+    
     const token = sessionStorage.getItem("token"); // 사용자 토큰
 
     // 사용자 프로필 정보 불러오는 함수
@@ -170,31 +186,39 @@ const Search = () => {
             }
         )
         console.log("[Search.js] ==> Loading profile...", response);
+        setNickname(response.data.nickname);
+
         setEffectFlag(response.data.nickname);
         // 연령대 설정
         switch(response.data.age){
             case "age_10":
                 setAge10(1);
+                setAge("10대");
                 console.log("AGE 10 SET");
                 break;
             case "age_20":
                 setAge20(1);
+                setAge("20대");
                 console.log("AGE 20 SET");
                 break;
             case "age_30":
                 setAge30(1);
+                setAge("30대");
                 console.log("AGE 30 SET");
                 break;
             case "age_40":
                 setAge40(1);
+                setAge("40대");
                 console.log("AGE 40 SET");
                 break;
             case "age_50":
                 setAge50(1);
+                setAge("50대");
                 console.log("AGE 50 SET");
                 break;
             case "age_60":
                 setAge60(1);
+                setAge("60대");
                 console.log("AGE 60 SET");
                 break;
             default:
@@ -204,10 +228,12 @@ const Search = () => {
         switch(response.data.gender){
             case 'gender_male':
                 setMale(1);
+                setGender("남성");
                 console.log("GENDER MALE SET");
                 break;
             case 'gender_female':
                 setFemale(1);
+                setGender("여성");
                 console.log("GENDER FEMALE SET");
                 break;
             default:
@@ -215,36 +241,92 @@ const Search = () => {
         }
         // MBTI 설정
         switch(response.data.mbti){
+            // IS__
             case 'mbti_istj':
-                case 'mbti_istp':
-                case 'mbti_isfj':
-                case 'mbti_isfp':
-                    setMbtiIS(1);
-                    console.log("MBTI IS__ SET");
-                    break;
-                case 'mbti_intj':
-                case 'mbti_intp':
-                case 'mbti_infj':
-                case 'mbti_infp':
-                    setMbtiIN(1);
-                    console.log("MBTI IN__ SET");
-                    break;
-                case 'mbti_estj':
-                case 'mbti_estp':
-                case 'mbti_esfj':
-                case 'mbti_esfp':
-                    setMbtiES(1);
-                    console.log("MBTI ES__ SET");
-                    break;
-                case 'mbti_entj':
-                case 'mbti_entp':
-                case 'mbti_enfj':
-                case 'mbti_enfp':
-                    setMbtiEN(1);
-                    console.log("MBTI EN__ SET");
-                    break;
-                default:
-                    break;
+                setMbti("ISTJ");
+                setMbtiIS(1);
+                console.log("MBTI IS__ SET");
+                break;
+            case 'mbti_istp':
+                setMbti("ISTP");
+                setMbtiIS(1);
+                console.log("MBTI IS__ SET");
+                break;
+            case 'mbti_isfj':
+                setMbti("ISFJ");
+                setMbtiIS(1);
+                console.log("MBTI IS__ SET");
+                break;
+            case 'mbti_isfp':
+                setMbti("ISFP");
+                setMbtiIS(1);
+                console.log("MBTI IS__ SET");
+                break;
+            // IN__
+            case 'mbti_intj':
+                setMbti("INTJ");
+                setMbtiIN(1);
+                console.log("MBTI IN__ SET");
+                break;
+            case 'mbti_intp':
+                setMbti("INTP");
+                setMbtiIN(1);
+                console.log("MBTI IN__ SET");
+                break;
+            case 'mbti_infj':
+                setMbti("INFJ");
+                setMbtiIN(1);
+                console.log("MBTI IN__ SET");
+                break;
+            case 'mbti_infp':
+                setMbti("INFP");
+                setMbtiIN(1);
+                console.log("MBTI IN__ SET");
+                break;
+            // ES__
+            case 'mbti_estj':
+                setMbti("ESTJ");
+                setMbtiES(1);
+                console.log("MBTI ES__ SET");
+                break;
+            case 'mbti_estp':
+                setMbti("ESTP");
+                setMbtiES(1);
+                console.log("MBTI ES__ SET");
+                break;
+            case 'mbti_esfj':
+                setMbti("ESFJ");
+                setMbtiES(1);
+                console.log("MBTI ES__ SET");
+                break;
+            case 'mbti_esfp':
+                setMbti("ESFP");
+                setMbtiES(1);
+                console.log("MBTI ES__ SET");
+                break;
+            // EN__
+            case 'mbti_entj':
+                setMbti("ENTJ");
+                setMbtiEN(1);
+                console.log("MBTI EN__ SET");
+                break;
+            case 'mbti_entp':
+                setMbti("ENTP");
+                setMbtiEN(1);
+                console.log("MBTI EN__ SET");
+                break;
+            case 'mbti_enfj':
+                setMbti("ENFJ");
+                setMbtiEN(1);
+                console.log("MBTI EN__ SET");
+                break;
+            case 'mbti_enfp':
+                setMbti("ENFP");
+                setMbtiEN(1);
+                console.log("MBTI EN__ SET");
+                break;
+            default:
+                break;
         }
         // 키워드 설정
         setResKorea(response.data.restaurant_korea);
@@ -324,17 +406,71 @@ const Search = () => {
             }
         )
         setRecommendPlaces(response.data);
-        //setTotalIdx(parseInt(response.data.name.length / 20));
-        setTotalIdx(response.data.name.length);
-        setTotalPage(parseInt(response.data.name.length / 20) + 1)
-        // console.log(typeof(recommendPlaces));
-        // console.log(recommendPlaces.name[0]);
-        // console.log(recommendPlaces.photo[0]);
-        // console.log(recommendPlaces.search_category[0]);
-        // console.log(recommendPlaces.rating[0]);
-        // console.log(recommendPlaces.address[0]);
-        // console.log(recommendPlaces.review_keywords[0]);
+
+        // 초기 페이지네이션 세팅 (장소 불러오면서 1페이지로)
+        setTotalCount(response.data.name.length); // 총 데이터 개수 계산
+        setTotalPage( Math.ceil(response.data.name.length/limit) ); // 총 페이지 개수 계산 (마지막 페이지 올림 처리)
+        
+        setCurrentPage(1);
     };
+
+    // 페이지네이션 갱신 함수
+    const updatePage1 = () => {
+        var current_page = currentPage;
+        var page_group = pageGroup;
+        var last_number = lastNumber;
+        var first_number = firstNumber;
+        var prev_tmp = prev;
+        var next_tmp = next;
+        var temp = [];
+
+        // 현재 페이지 그룹 계산
+        page_group = Math.ceil(current_page/pageCount);
+
+        // 현재 페이지 그룹 첫번째,마지막 숫자 계산
+        last_number = page_group * pageCount;
+        if(last_number > totalPage){
+            last_number = totalPage;
+        }
+        first_number = pageCount*(page_group-1)+1;
+
+        // <<< >>> 버튼 값(prev, next) 계산
+        if(first_number === 1){
+            prev_tmp = 1;
+        } else{
+            prev_tmp = first_number - 1;
+        }
+        if(last_number === totalPage){
+            next_tmp = totalPage;
+        } else{
+            next_tmp = last_number + 1;
+        }
+        
+        for(var i=first_number; i<=last_number; i++){
+            temp.push(i);
+        }
+        
+        // 변경된 값들에 대한 state 갱신
+        setPageInfo({
+            "current_page": current_page,
+            "page_group": page_group,
+            "last_number": last_number,
+            "first_number": first_number,
+            "prev_tmp": prev_tmp,
+            "next_tmp": next_tmp,
+            "page_group_list": temp
+        })
+    }
+
+    // 페이지네이션 정보 state들 변경된 내용으로 갱신해주는 함수
+    const updatePage2 = () => {
+        setPageGroup( pageInfo.page_group );
+        setLastNumber( pageInfo.last_number );
+        setFirstNumber( pageInfo.first_number );
+        setPrev( pageInfo.prev_tmp );
+        setNext( pageInfo.next_tmp );
+        setPageGroupList( pageInfo.page_group_list );
+    }
     
     useEffect(()=>{
         getProfile();
@@ -344,25 +480,12 @@ const Search = () => {
         getRecommend();
     }, [effectFlag, mainCategory, subCategory, filterRating, filterReview, filterRegion])
 
-    // // 화면 상단 카테고리 버튼 컴포넌트
-    // const CategoryButton = (props) => {
-    //     return (
-    //         <div className='items-center justify-center'>
-    //             <div onClick={()=>{
-    //                 props.clicked(props.value);
-    //                 }} 
-    //                 className='relative rounded overflow-hidden img-hover z-idx'
-    //             >
-    //                 <img src={props.src} alt='rice_pic' className='align-top img-size' />
-    //             </div>
-    //             <div className='relative flex flex_col items-center'>
-    //                 <div className='flex'>
-    //                     <div className='word_style'>{props.category}</div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // };
+    useEffect(()=>{
+        updatePage1(); // 현재 페이지가 변경되면 페이지네이션 정보 수정
+    }, [recommendPlaces, currentPage])
+    useEffect(()=>{
+        updatePage2(); // pageInfo가 변경되면 (페이지네이션 정보가 모두 수정되면) 페이지네이션 state값들 모두 갱신해줌
+    }, [pageInfo])
 
     // 화면 상단 카테고리 버튼 컴포넌트
     const CategoryButton = (props) => {
@@ -413,6 +536,73 @@ const Search = () => {
             </div>
         )
     };
+
+    // 현재 페이지에 대해 20개(limit으로 지정) 만큼의 장소를 보여줌
+    const RecommendRow = () => {
+        var rows = [] // 현재 페이지의 장소들의 인덱스를 담아준다.
+        var i = (currentPage-1)*limit;
+        while(i < currentPage*limit){
+          var temp = [];
+          for(var j=0; j<=3; j++){
+            temp.push(i+j);
+          }
+          rows.push(temp);
+          i = i + 4;
+        }
+      
+        return (
+          <div>
+            {rows.map((row, idx1) => {
+              return (
+                <div key={idx1} className='margin_box mb-130'>
+                  <div className='h_row'>
+                    {row.map((r, idx2) => {
+                        if(r < totalCount){
+                            return (
+                                <RecommendBox key={idx2}
+                                photo={recommendPlaces.photo[r]}
+                                search_category={recommendPlaces.search_category[r]}
+                                name={recommendPlaces.name[r]}
+                                rating={recommendPlaces.rating[r]}
+                                address={recommendPlaces.address[r]}
+                                keywords={recommendPlaces.review_keywords[r]}
+                                place_code={recommendPlaces.place_code[r]}
+                                />
+                            );
+                        } else{
+                            return (
+                                <div>더 이상 결과가 없습니다.</div>
+                            );
+                        }
+                    })}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        )
+    };
+
+    // 페이지네이션
+    const Pagenation = () => {
+        return (
+            <div>
+                <button className='btn btn-default' onClick={()=>setCurrentPage(prev)}>&#60;</button>
+                {pageGroupList.map((page, idx) => {
+                    if(page === currentPage){
+                        return (
+                            <button className='btn btn-default activeBtn' onClick={()=>setCurrentPage(page)} key={idx}>{page}</button>
+                        );
+                    } else{
+                        return (
+                            <button className='btn btn-default unactiveBtn'onClick={()=>setCurrentPage(page)} key={idx}>{page}</button>
+                        );
+                    }
+                })}
+                <button className='btn btn-default' onClick={()=>setCurrentPage(next)}>&#62;</button>
+            </div>
+        )
+    }
 
   if(recommendPlaces === 0){
     return (
@@ -485,8 +675,6 @@ const Search = () => {
             </div>
     
             <div>
-                <div className='margin_box mb-130'>
-
                 <div className='flex sb-bw'>
                     <div className='flex h-60 right-sort mb-23'>
                         <Dropdown>
@@ -503,238 +691,25 @@ const Search = () => {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
+                    <div style={{color: '#FFA432'}}>{age} + {gender} + {mbti}</div>
+                    <div>인 [{nickname}] 님을 위한 추천 결과입니다.</div>
                     <div className='flex'>
                     <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
                     <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
                     </div>
-                </div>     
-                
-                
-                <div className='h_row'>
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 0]}
-                        search_category={recommendPlaces.search_category[placeIdx + 0]}
-                        name={recommendPlaces.name[placeIdx + 0]}
-                        rating={recommendPlaces.rating[placeIdx + 0]}
-                        address={recommendPlaces.address[placeIdx + 0]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 0]}
-                        place_code={recommendPlaces.place_code[placeIdx + 0]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 1]}
-                        search_category={recommendPlaces.search_category[placeIdx + 1]}
-                        name={recommendPlaces.name[placeIdx + 1]}
-                        rating={recommendPlaces.rating[placeIdx + 1]}
-                        address={recommendPlaces.address[placeIdx + 1]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 1]}
-                        place_code={recommendPlaces.place_code[placeIdx + 1]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 2]}
-                        search_category={recommendPlaces.search_category[placeIdx + 2]}
-                        name={recommendPlaces.name[placeIdx + 2]}
-                        rating={recommendPlaces.rating[placeIdx + 2]}
-                        address={recommendPlaces.address[placeIdx + 2]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 2]}
-                        place_code={recommendPlaces.place_code[placeIdx + 2]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 3]}
-                        search_category={recommendPlaces.search_category[placeIdx + 3]}
-                        name={recommendPlaces.name[placeIdx + 3]}
-                        rating={recommendPlaces.rating[placeIdx + 3]}
-                        address={recommendPlaces.address[placeIdx + 3]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 3]}
-                        place_code={recommendPlaces.place_code[placeIdx + 3]}
-                    />
                 </div>
-            </div>
-    
-            <div className='margin_box mb-130'>
-                <div className='h_row'>
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 4]}
-                        search_category={recommendPlaces.search_category[placeIdx + 4]}
-                        name={recommendPlaces.name[placeIdx + 4]}
-                        rating={recommendPlaces.rating[placeIdx + 4]}
-                        address={recommendPlaces.address[placeIdx + 4]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 4]}
-                        place_code={recommendPlaces.place_code[placeIdx + 4]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 5]}
-                        search_category={recommendPlaces.search_category[placeIdx + 5]}
-                        name={recommendPlaces.name[placeIdx + 5]}
-                        rating={recommendPlaces.rating[placeIdx + 5]}
-                        address={recommendPlaces.address[placeIdx + 5]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 5]}
-                        place_code={recommendPlaces.place_code[placeIdx + 5]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 6]}
-                        search_category={recommendPlaces.search_category[placeIdx + 6]}
-                        name={recommendPlaces.name[placeIdx + 6]}
-                        rating={recommendPlaces.rating[placeIdx + 6]}
-                        address={recommendPlaces.address[placeIdx + 6]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 6]}
-                        place_code={recommendPlaces.place_code[placeIdx + 6]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 7]}
-                        search_category={recommendPlaces.search_category[placeIdx + 7]}
-                        name={recommendPlaces.name[placeIdx + 7]}
-                        rating={recommendPlaces.rating[placeIdx + 7]}
-                        address={recommendPlaces.address[placeIdx + 7]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 7]}
-                        place_code={recommendPlaces.place_code[placeIdx + 7]}
-                    />
-                </div>
-            </div>
 
-            <div className='margin_box mb-130'>
-                <div className='h_row'>
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 8]}
-                        search_category={recommendPlaces.search_category[placeIdx + 8]}
-                        name={recommendPlaces.name[placeIdx + 8]}
-                        rating={recommendPlaces.rating[placeIdx + 8]}
-                        address={recommendPlaces.address[placeIdx + 8]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 8]}
-                        place_code={recommendPlaces.place_code[placeIdx + 8]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 9]}
-                        search_category={recommendPlaces.search_category[placeIdx + 9]}
-                        name={recommendPlaces.name[placeIdx + 9]}
-                        rating={recommendPlaces.rating[placeIdx + 9]}
-                        address={recommendPlaces.address[placeIdx + 9]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 9]}
-                        place_code={recommendPlaces.place_code[placeIdx + 9]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 10]}
-                        search_category={recommendPlaces.search_category[placeIdx + 10]}
-                        name={recommendPlaces.name[placeIdx + 10]}
-                        rating={recommendPlaces.rating[placeIdx + 10]}
-                        address={recommendPlaces.address[placeIdx + 10]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 10]}
-                        place_code={recommendPlaces.place_code[placeIdx + 10]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 11]}
-                        search_category={recommendPlaces.search_category[placeIdx + 11]}
-                        name={recommendPlaces.name[placeIdx + 11]}
-                        rating={recommendPlaces.rating[placeIdx + 11]}
-                        address={recommendPlaces.address[placeIdx + 11]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 11]}
-                        place_code={recommendPlaces.place_code[placeIdx + 11]}
-                    />
-                </div>
-            </div>
+                {/* 추천 장소 보여주기 */}
+                <RecommendRow/>
 
-            <div className='margin_box mb-130'>
-                <div className='h_row'>
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 12]}
-                        search_category={recommendPlaces.search_category[placeIdx + 12]}
-                        name={recommendPlaces.name[placeIdx + 12]}
-                        rating={recommendPlaces.rating[placeIdx + 12]}
-                        address={recommendPlaces.address[placeIdx + 12]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 12]}
-                        place_code={recommendPlaces.place_code[placeIdx + 12]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 13]}
-                        search_category={recommendPlaces.search_category[placeIdx + 13]}
-                        name={recommendPlaces.name[placeIdx + 13]}
-                        rating={recommendPlaces.rating[placeIdx + 13]}
-                        address={recommendPlaces.address[placeIdx + 13]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 13]}
-                        place_code={recommendPlaces.place_code[placeIdx + 13]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 14]}
-                        search_category={recommendPlaces.search_category[placeIdx + 14]}
-                        name={recommendPlaces.name[placeIdx + 14]}
-                        rating={recommendPlaces.rating[placeIdx + 14]}
-                        address={recommendPlaces.address[placeIdx + 14]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 14]}
-                        place_code={recommendPlaces.place_code[placeIdx + 14]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 15]}
-                        search_category={recommendPlaces.search_category[placeIdx + 15]}
-                        name={recommendPlaces.name[placeIdx + 15]}
-                        rating={recommendPlaces.rating[placeIdx + 15]}
-                        address={recommendPlaces.address[placeIdx + 15]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 15]}
-                        place_code={recommendPlaces.place_code[placeIdx + 15]}
-                    />
-                </div>
-            </div>
-
-            <div className='margin_box mb-130'>
-                <div className='h_row'>
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 16]}
-                        search_category={recommendPlaces.search_category[placeIdx + 16]}
-                        name={recommendPlaces.name[placeIdx + 16]}
-                        rating={recommendPlaces.rating[placeIdx + 16]}
-                        address={recommendPlaces.address[placeIdx + 16]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 16]}
-                        place_code={recommendPlaces.place_code[placeIdx + 16]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 17]}
-                        search_category={recommendPlaces.search_category[placeIdx + 17]}
-                        name={recommendPlaces.name[placeIdx + 17]}
-                        rating={recommendPlaces.rating[placeIdx + 17]}
-                        address={recommendPlaces.address[placeIdx + 17]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 17]}
-                        place_code={recommendPlaces.place_code[placeIdx + 17]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 18]}
-                        search_category={recommendPlaces.search_category[placeIdx + 18]}
-                        name={recommendPlaces.name[placeIdx + 18]}
-                        rating={recommendPlaces.rating[placeIdx + 18]}
-                        address={recommendPlaces.address[placeIdx + 18]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 18]}
-                        place_code={recommendPlaces.place_code[placeIdx + 18]}
-                    />
-                    <RecommendBox
-                        photo={recommendPlaces.photo[placeIdx + 19]}
-                        search_category={recommendPlaces.search_category[placeIdx + 19]}
-                        name={recommendPlaces.name[placeIdx + 19]}
-                        rating={recommendPlaces.rating[placeIdx + 19]}
-                        address={recommendPlaces.address[placeIdx + 19]}
-                        keywords={recommendPlaces.review_keywords[placeIdx + 19]}
-                        place_code={recommendPlaces.place_code[placeIdx + 19]}
-                    />
-                </div>
-            </div>
-    
-            {/* 이전페이지 버튼 */}
-            <button onClick={()=>{
-                if(placeIdx >= 20){
-                    setPlaceIdx(placeIdx-20);
-                    setCurrentPage(currentPage-1)
-                }
-            }}
-            >
-                &#60;&#60;&#60;
-            </button>
-            {/* 다음페이지 버튼 */}
-            <button onClick={()=>{
-                if(totalIdx > placeIdx){
-                    setPlaceIdx(placeIdx+20);
-                    setCurrentPage(currentPage+1)
-                }
-            }}>
-                &#62;&#62;&#62;
-            </button>
-            <div>현재 페이지 : {currentPage} / {totalPage}</div>
-            <div>현재 장소 인덱스 : {placeIdx}~{placeIdx + 19} / {totalIdx}</div>
+                {/* 페이지네이션 버튼 */}
+                <Pagenation></Pagenation>
+                {/* <div>총 데이터 개수 : {totalCount}</div>
+                <div>현재 페이지 : {currentPage} / {totalPage}</div>
+                <div>현재 페이지 그룹 : {pageGroup}</div>
+                <div>첫번째 숫자 ({firstNumber}) / 마지막 숫자 ({lastNumber})</div>
+                <div>prev({prev}) / next({next})</div>
+                <div>버튼 그룹 {pageGroupList}</div> */}
             </div>
               
           </Container>

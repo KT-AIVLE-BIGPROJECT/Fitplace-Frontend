@@ -1,18 +1,20 @@
-// 사용XXXXXXX
-
 import React, {useState, useEffect} from 'react'
 import {Container} from 'react-bootstrap'
+import Dropdown from 'react-bootstrap/Dropdown';
 import SearchPlace from './SearchPlace'
+import SearchBar from './SearchBar'
 import Layout from '../layouts/Layout'
 import axios from 'axios'
 import './SignUp.css';
+import './SearchBar.css'
+import '../css/main.css'
 
 import { useNavigate } from 'react-router-dom';
 
 // 추천 장소 박스 컴포넌트
 const RecommendBox = (props) => {
     const navigate = useNavigate();
-    var midCategory = "";
+    var subCategory = "";
     var keywords = props.keywords;
     var keywords_list;
     var is_keywords = true;
@@ -23,12 +25,12 @@ const RecommendBox = (props) => {
         case "일식":
         case "패스트푸드":
         case "분식":
-            midCategory = "먹기";
+            subCategory = "먹기";
             break;
         case "카페":
         case "디저트카페":
         case "베이커리":
-            midCategory = "마시기";
+            subCategory = "마시기";
             break;
         case "전시관":
         case "공방":
@@ -36,12 +38,12 @@ const RecommendBox = (props) => {
         case "극장":
         case "서점":
         case "복합쇼핑몰":
-            midCategory = "놀기";
+            subCategory = "놀기";
             break;
         case "공원":
         case "시장":
         case "거리":
-            midCategory = "걷기";
+            subCategory = "걷기";
             break;
     }
     if(keywords != "no result"){ // 리뷰 요약 키워드가 있으면 
@@ -79,12 +81,19 @@ const RecommendBox = (props) => {
         }
     }
 
+    // 상세페이지 새 탭에서 열리도록 해줌
+    const handleOpenNewTab = (url) => {
+        // 부모 탭과 sesssionStorage에 있는 로그인 정보를 공유하려면 window.name이 같아야 해서 설정
+        window.name = "Tab"
+        window.open(url, `_blank ${window.name}`);
+    };
+
     return (
-        // 새 탭 여는걸로 바꿔보기
-        <div className='single_box' onClick={()=>{navigate(`/detailpage/:${props.place_code}`,{state:{place_code:props.place_code}});}}>
+        // <div className='single_box' onClick={()=>{navigate(`/detailpage/${props.place_code}`,{state:{place_code:props.place_code}});}}>
+        <div className='single_box' onClick={() => handleOpenNewTab(`/detailpage/${props.place_code}`)}>
             <img className='hotimg' src={props.photo} alt="profile" />
             <div className='namebox'>
-                <h6 className='area_cat'>{midCategory} / {props.search_category}</h6>
+                <h6 className='area_cat'>{subCategory} / {props.search_category}</h6>
                 <div className='flex_row'>
                     <h6>{props.name}</h6>
                     <div className='flex'>
@@ -104,7 +113,7 @@ const Search = () => {
     const [effectFlag, setEffectFlag] = useState(-1);
     // 필터링 관련 state
     const [mainCategory, setMainCategory] = useState("all"); // 대분류 필터링
-    // const [midCategory, setMidCategory] = useState(""); // 중분류 필터링
+    const [subCategory, setsubCategory] = useState(""); // 중분류 필터링
     const [filterRating, setFilterRating] = useState(0); // 1: 높은 순 / 2: 낮은 순
     const [filterReview, setFilterReview] = useState(0);
     const [filterRegion, setFilterRegion] = useState("강남구"); // 지역구 필터링
@@ -149,6 +158,15 @@ const Search = () => {
     const [totalIdx, setTotalIdx] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(1);
+    const [pageBtnNum, setPageBtnNum] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+    // const [totalCount, setTotalCount] = useState(0); // 총 데이터 개수
+    // const [pageCount, setPageCount] = useState(5); // 화면에 나타날 페이지 개수(5개)
+    // const [limit, setLimit] = useState(20); // 한 페이지 당 나타낼 데이터 개수
+    // const [totalPage, setTotalPage] = useState(0); // 총 페이지 개수
+    // const [pageGroup, setPageGroup] = useState(1); // 현재 페이지 그룹
+    // const [firstNumber, setFirstNumber] = useState(1); // 현재 페이지 그룹의 첫번째 숫자
+    // const [lastNumber, setLastNumber] = useState(1); // 현재 페이지 그룹의 마지막 숫자
     
 
     const token = sessionStorage.getItem("token"); // 사용자 토큰
@@ -301,7 +319,7 @@ const Search = () => {
             "filter_region": filterRegion,
 
             "main_category": mainCategory,
-            //"mid_category": midCategory,
+            "sub_category": subCategory,
             "filter_rating": filterRating,
             "filter_review": filterReview,
 
@@ -320,13 +338,17 @@ const Search = () => {
         //setTotalIdx(parseInt(response.data.name.length / 20));
         setTotalIdx(response.data.name.length);
         setTotalPage(parseInt(response.data.name.length / 20) + 1)
-        // console.log(typeof(recommendPlaces));
-        // console.log(recommendPlaces.name[0]);
-        // console.log(recommendPlaces.photo[0]);
-        // console.log(recommendPlaces.search_category[0]);
-        // console.log(recommendPlaces.rating[0]);
-        // console.log(recommendPlaces.address[0]);
-        // console.log(recommendPlaces.review_keywords[0]);
+
+        // // 장소 불러오면서 페이지네이션 세팅
+        // setTotalCount(response.data.name.length); // 총 데이터 개수 계산
+        // setCurrentPage(1); // 현재 페이지 1로
+        // setTotalPage( Math.ceil(totalCount/limit) ); // 총 페이지 개수 계산 (마지막 페이지 올림 처리)
+        // setPageGroup( Math.ceil(currentPage/pageCount) ); // 현재 페이지 그룹 계산
+        // setLastNumber(pageGroup * pageCount);
+        // if(lastNumber > totalPage){
+        //     setLastNumber(totalPage);
+        // }
+        // setFirstNumber(lastNumber - (pageCount) + 1);
     };
     
     useEffect(()=>{
@@ -335,26 +357,52 @@ const Search = () => {
     // 처음에 사용자 정보 불러올 때 닉네임 정보로 세팅해주고, 이 값이 변할때만 useEffect 실행
     useEffect(()=>{
         getRecommend();
-    }, [effectFlag, mainCategory, filterRating, filterReview])
+    }, [effectFlag, mainCategory, subCategory, filterRating, filterReview, filterRegion])
+
+    // // 화면 상단 카테고리 버튼 컴포넌트
+    // const CategoryButton = (props) => {
+    //     return (
+    //         <div className='items-center justify-center'>
+    //             <div onClick={()=>{
+    //                 props.clicked(props.value);
+    //                 }} 
+    //                 className='relative rounded overflow-hidden img-hover z-idx'
+    //             >
+    //                 <img src={props.src} alt='rice_pic' className='align-top img-size' />
+    //             </div>
+    //             <div className='relative flex flex_col items-center'>
+    //                 <div className='flex'>
+    //                     <div className='word_style'>{props.category}</div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )
+    // };
 
     // 화면 상단 카테고리 버튼 컴포넌트
     const CategoryButton = (props) => {
         return (
-            <div className='items-center justify-center mr-60'>
+            <li className={props.className}>
                 <div onClick={()=>{
+                    setsubCategory(0);
+                    setFilterRating(0);
+                    setFilterReview(0);
                     props.clicked(props.value);
-                    }} 
-                    className='relative rounded overflow-hidden w-60 h-60 img-hover z-idx'
+                    }}
+                    className='flex img-hover'
                 >
-                    <img src={props.src} alt='rice_pic' className='align-top' />
-                </div>
-                <div className='relative flex flex_col items-center'>
-                    {/* <h6>{props.category}</h6> */}
-                    <div className='flex'>
-                        <div className='word_style'>{props.category}</div>
+                    <div className='word_style'>{props.label}</div>
+
+                    <div className='items-center justify-center'>
+                        <div className='relative rounded overflow-hidden img-hover z-idx'>
+                            <img src={props.src} alt={props.alt} className='align-top img-size' />
+                        </div>
+                        {/* <div className='relative flex flex_col items-center'>
+                        </div> */}
                     </div>
+                    
                 </div>
-            </div>
+            </li>
         )
     };
 
@@ -381,6 +429,27 @@ const Search = () => {
         )
     };
 
+    // // 페이지네이션
+    // const Pagenation = (props) => {
+    //     var next = lastNumber + 1;
+    //     var prev = firstNumber - 1;
+    //     var pages = []
+    //     for(var i=firstNumber; i<=lastNumber; i++){
+    //         pages.push(i);
+    //     }
+    //     return (
+    //         <div>
+    //             <button onClick={()=>setCurrentPage(prev)}>&#60;</button>
+    //             {pages.map((page, idx) => {
+    //                 return (
+    //                     <button onClick={()=>setCurrentPage(page)} key={idx}>{page}</button>
+    //                 )
+    //             })}
+    //             <button onClick={()=>setCurrentPage(next)}>&#62;</button>
+    //         </div>
+    //     )
+    // }
+
   if(recommendPlaces === 0){
     return (
         <div>추천 장소를 불러오는 중입니다...</div>
@@ -389,30 +458,93 @@ const Search = () => {
     return (
         <Layout>
           <Container className='container_style' style={{minHeight: "75vh"}}>
-            <div className='flex flex_col w mt-4 m-0a'>
-              <div className='flex h-60'>
-              </div>
-              <div className='mb-50'>
-                <div className='flex items-center w-auto'>
-                    {/* <div>{mainCategory}</div> */}
-                    <CategoryButton src={require('../img/all.png')} category="전체" value="all" clicked={setMainCategory}/>
-                    <CategoryButton src={require('../img/eat.png')} category="먹기" value="restaurant" clicked={setMainCategory}/>
-                    <CategoryButton src={require('../img/drink.png')} category="마시기" value="cafe" clicked={setMainCategory}/>
-                    <CategoryButton src={require('../img/game.png')} category="놀기" value="leisure" clicked={setMainCategory}/>
-                    <CategoryButton src={require('../img/running.png')} category="걷기" value="walking" clicked={setMainCategory}/>
+            <div className='h_column_center2 cat_box'>
+                <div className='h_row_center2 cat_box_size'>
+                    <div className='category category_size'>
+                        <ul className='h-44 mb-0'>
+                            <CategoryButton
+                                className="cat_start flex" label="전체"
+                                clicked={setMainCategory} value="all"
+                                // src={require('../img/all.png')}
+                                src={require('../img/eat2.png')} alt="eat_cat"
+                            />
+                            <CategoryButton
+                                className="cat_other flex" label="먹기"
+                                clicked={setMainCategory} value="restaurant"
+                                src={require('../img/eat2.png')} alt="eat_cat"
+                            />
+                            <CategoryButton
+                                className="cat_other flex" label="마시기"
+                                clicked={setMainCategory} value="cafe"
+                                src={require('../img/drink3.png')} alt="eat_cat"
+                            />
+                            <CategoryButton
+                                className="cat_other flex" label="놀기"
+                                clicked={setMainCategory} value="leisure"
+                                src={require('../img/dice.png')} alt="eat_cat"
+                            />
+                            <CategoryButton
+                                className="cat_other flex" label="걷기"
+                                clicked={setMainCategory} value="walking"
+                                src={require('../img/walk2.png')} alt="eat_cat"
+                            />
+
+                        </ul>
+                    </div>
                 </div>
-              </div>
-              
+            </div>
+            <div className='h_column_center2 cat_box'>
+                <div className='h_row_center2 cat_box_size'>
+                    <div className='category category_size'>
+                        <ul className='h-44 mb-0'>
+                            <li className='cat_start flex'>
+                                <div onClick={()=>{setsubCategory("한식"); setFilterRating(0); setFilterReview(0);}} className='word_style'>한식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div onClick={()=>{setsubCategory("양식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>양식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div onClick={()=>{setsubCategory("중식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>중식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div onClick={()=>{setsubCategory("일식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>일식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div onClick={()=>{setsubCategory("분식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>분식</div>
+                            </li>
+                            <li className='cat_other flex'>
+                                <div onClick={()=>{setsubCategory("패스트푸드"); setFilterRating(0); setFilterReview(0);}}className='word_style'>패스트푸드</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
     
             <div>
                 <div className='margin_box mb-130'>
-                            
-                <div className='flex h-60 right-sort mb-23'>
-                    {/* <button onClick={console.log(recommendPlaces)}/> */}
+
+                <div className='flex sb-bw'>
+                    <div className='flex h-60 right-sort mb-23'>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" className='bg-white btn-outline-secondary dd-style'>
+                                지역 선택 (현재 : {filterRegion})
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item onClick={()=>{setFilterRegion("강남구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>강남구</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>{setFilterRegion("구로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>구로구</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>{setFilterRegion("마포구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>마포구</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>{setFilterRegion("용산구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>용산구</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>{setFilterRegion("종로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>종로구</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                    <div className='flex'>
                     <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
                     <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
-                </div>
+                    </div>
+                </div>     
+                
                 
                 <div className='h_row'>
                     <RecommendBox
@@ -618,27 +750,40 @@ const Search = () => {
                 </div>
             </div>
     
-            {/* 이전페이지 버튼 */}
-            <button onClick={()=>{
-                if(placeIdx >= 20){
-                    setPlaceIdx(placeIdx-20);
-                    setCurrentPage(currentPage-1)
-                }
-            }}
-            >
-                &#60;&#60;&#60;
-            </button>
-            {/* 다음페이지 버튼 */}
-            <button onClick={()=>{
-                if(totalIdx > placeIdx){
-                    setPlaceIdx(placeIdx+20);
-                    setCurrentPage(currentPage+1)
-                }
-            }}>
-                &#62;&#62;&#62;
-            </button>
+            <div>
+                {/* <Pagenation></Pagenation> */}
+            </div>
+            {/* <div style={{display:"flex"}}>
+
+                <button onClick={()=>{
+                    if(placeIdx >= 20){
+                        setPlaceIdx(placeIdx-20);
+                        setCurrentPage(currentPage-1);
+                        if(currentPage > pageBtnNum+4){
+                            setPageBtnNum(currentPage+4);
+                        }
+                    }
+                }}
+                >
+                    &#60;&#60;&#60;
+                </button>
+                <div> {currentPage} / {totalPage} </div>
+                <button onClick={()=>{
+                    if(totalIdx > placeIdx){
+                        setPlaceIdx(placeIdx+20);
+                        setCurrentPage(currentPage+1);
+                        if(currentPage < pageBtnNum){
+                            setPageBtnNum(currentPage-4);
+                        }
+                    }
+                }}
+                >
+                    &#62;&#62;&#62;
+                </button>
+            </div> */}
             <div>현재 페이지 : {currentPage} / {totalPage}</div>
-            <div>현재 장소 인덱스 : {placeIdx}~{placeIdx + 19} / {totalIdx}</div>
+            {/* <div>현재 장소 인덱스 : {placeIdx}~{placeIdx + 19} / {totalIdx}</div>
+            <div>{pageBtnNum} {pageBtnNum+1} {pageBtnNum+2} {pageBtnNum+3} {pageBtnNum+4}</div> */}
             </div>
               
           </Container>
