@@ -23,6 +23,7 @@ const MainTopSearch = () => {
     // 필터링 관련 state
     const [mainCategory, setMainCategory] = useState("all"); // 대분류 필터링
     const [subCategory, setsubCategory] = useState(""); // 중분류 필터링
+    const [subCategoryList, setSubCategoryList] = useState([]);
     const [filterRating, setFilterRating] = useState(0); // 1: 높은 순 / 2: 낮은 순
     const [filterReview, setFilterReview] = useState(0);
     const [filterRegion, setFilterRegion] = useState("강남구"); // 지역구 필터링
@@ -61,12 +62,13 @@ const MainTopSearch = () => {
     
     const token = sessionStorage.getItem("token"); // 사용자 토큰
 
-    // 화면 상단 카테고리 버튼 컴포넌트
+    // -------------------------[ 컴포넌트 ]-------------------------
+    // 화면 상단 대분류 카테고리 버튼 컴포넌트
     const CategoryButton = (props) => {
         return (
             <li className={props.className}>
                 <div onClick={()=>{
-                    setsubCategory(0);
+                    setsubCategory("");
                     setFilterRating(0);
                     setFilterReview(0);
                     props.clicked(props.value);
@@ -84,6 +86,36 @@ const MainTopSearch = () => {
                 </div>
             </li>
         )
+    };
+    // 중분류 카테고리 버튼 컴포넌트
+    const SubCategoryButton = (props) => {
+        if(props.mainCate === "all"){
+            return(
+                <ul className='h-44 mb-0'>
+                    <li className='cat_start flex'>
+                        <div className='word_style'>대분류를 선택해주세요.</div>
+                    </li>
+                </ul>
+            );
+        } else{
+            return (
+                <ul className='h-44 mb-0'>
+                    {subCategoryList.map((sub, idx) => {
+                        return (
+                            <li key={idx} className='cat_start flex'>
+                                <div
+                                    style={{marginRight: "10px"}}
+                                    onClick={()=>{setsubCategory(sub); setFilterRating(0); setFilterReview(0);}}
+                                    className='word_style'
+                                >
+                                    {sub} 
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            );
+        }
     };
     // 필터링 버튼 컴포넌트
     const FilterButton = (props) => {
@@ -267,6 +299,7 @@ const MainTopSearch = () => {
         )
     }
 
+    // -------------------------[ 함수 ]-------------------------
     // 추천 요청 보낼 userform 생성 함수
     const setUserForm = () => {
         // 연령대 설정
@@ -409,7 +442,6 @@ const MainTopSearch = () => {
                 break;
         }
     };
-
     // 추천 장소 불러오는 함수
     const getRecommend = async () => {
         console.log("USERFORM SET");
@@ -459,7 +491,6 @@ const MainTopSearch = () => {
         
         setCurrentPage(1);
     };
-
     // 페이지네이션 갱신 함수
     const updatePage1 = () => {
         var current_page = currentPage;
@@ -506,8 +537,7 @@ const MainTopSearch = () => {
             "next_tmp": next_tmp,
             "page_group_list": temp
         })
-    }
-
+    };
     // 페이지네이션 정보 state들 변경된 내용으로 갱신해주는 함수
     const updatePage2 = () => {
         setPageGroup( pageInfo.page_group );
@@ -516,8 +546,31 @@ const MainTopSearch = () => {
         setPrev( pageInfo.prev_tmp );
         setNext( pageInfo.next_tmp );
         setPageGroupList( pageInfo.page_group_list );
-    }
+    };
+    // 중분류 카데고리 버튼 갱신 함수
+    const updateCategoryBar = () => {
+        var sub1 = ["한식", "양식", "중식", "일식", "패스트푸드", "분식"];
+        var sub2 = ["카페", "디저트카페", "베이커리"];
+        var sub3 = ["전시관", "공방", "팝업스토어", "극장", "서점", "복합쇼핑몰"];
+        var sub4 = ["공원", "시장", "거리"];
+        switch(mainCategory){
+            case "restaurant":
+                setSubCategoryList(sub1);
+                break;
+            case "cafe":
+                setSubCategoryList(sub2);
+                break;
+            case "leisure":
+                setSubCategoryList(sub3);
+                break;
+            case "walking":
+                setSubCategoryList(sub4);
+                break;
+        }
+        console.log(subCategory);
+    };
     
+    // ---------------------------[ useEffect 함수 ]---------------------------
     useEffect(()=>{
         setUserForm();
     }, []);
@@ -533,7 +586,12 @@ const MainTopSearch = () => {
     useEffect(()=>{
         updatePage2(); // pageInfo가 변경되면 (페이지네이션 정보가 모두 수정되면) 페이지네이션 state값들 모두 갱신해줌
     }, [pageInfo])
+    useEffect(()=>{
+        updateCategoryBar(); // 대분류, 중분류 카테고리 값 변경 시 실행
+    }, [mainCategory, subCategory])
 
+
+  // ---------------------------[ 메인(MainTopSearch) 컴포넌트 리턴 ]---------------------------
   if(recommendPlaces === 0){
     return (
         <div>추천 장소를 불러오는 중입니다...</div>
@@ -580,26 +638,7 @@ const MainTopSearch = () => {
             <div className='h_column_center2 cat_box'>
                 <div className='h_row_center2 cat_box_size'>
                     <div className='category category_size'>
-                        <ul className='h-44 mb-0'>
-                            <li className='cat_start flex'>
-                                <div onClick={()=>{setsubCategory("한식"); setFilterRating(0); setFilterReview(0);}} className='word_style'>한식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("양식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>양식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("중식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>중식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("일식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>일식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("분식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>분식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("패스트푸드"); setFilterRating(0); setFilterReview(0);}}className='word_style'>패스트푸드</div>
-                            </li>
-                        </ul>
+                        <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
                     </div>
                 </div>
             </div>
@@ -621,8 +660,7 @@ const MainTopSearch = () => {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                    {/* <div style={{color: '#FFA432'}}>{age} + {gender} + {mbti}</div>
-                    <div>인 [{nickname}] 님을 위한 추천 결과입니다.</div> */}
+                    {/* age, gender, mbti 셋 중 1개만 나옴 */}
                     <div style={{color: '#FFA432'}}>{age}{gender}{mbti}</div>
                     <div>인 사람들이 좋아하는 상위 100개 장소들입니다.</div>
                     <div className='flex'>
