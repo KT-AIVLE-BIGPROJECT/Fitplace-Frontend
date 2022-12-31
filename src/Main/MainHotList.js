@@ -24,6 +24,12 @@ const Places100List = ({places}) =>{
 
         setAlphaNum(curValue.replace(notNum,''))
     }
+    // 상세페이지 새 탭에서 열리도록 해줌
+    const handleOpenNewTab = (url) => {
+        // 부모 탭과 sesssionStorage에 있는 로그인 정보를 공유하려면 window.name이 같아야 해서 설정
+        window.name = "Tab"
+        window.open(url, `_blank ${window.name}`);
+    };
     return (
         <Swiper
             spaceBetween={10}
@@ -47,7 +53,7 @@ const Places100List = ({places}) =>{
             {places.map(place => {
                 return (
                 <SwiperSlide key = {place.id}>
-                    <div className="swiper-box">
+                    <div className="swiper-box" onClick={() => handleOpenNewTab(`/detailpage/${place.place_code}`)}>
                         <div className="hot-items">
                             <img src={place.photo} />
                         </div>
