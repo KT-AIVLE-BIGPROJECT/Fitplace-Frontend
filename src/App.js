@@ -17,6 +17,7 @@ import LikingCheck from './pages/LikingCheck';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import DetailPage from './detailpage/DetailPage';
+import MainTopSearch from './Main/MainTopSearch';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/tos" element={<TermsOfService/>}></Route>
         <Route path="/privacy" element={<PrivacyPolicy/>}></Route>
         <Route path="/detailpage/:id" element={<DetailPage/>}></Route>
+        <Route path="/maintopsearch" element={<MainTopSearch/>}></Route>
       </Routes>
     </BrowserRouter>
   );

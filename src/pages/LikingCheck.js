@@ -10,7 +10,7 @@ import './Profile.css';
 // [ 각 키워드 재사용 컴포넌트 ]
 const ClickKeyword = (props) => {
     return (
-        <div className='items-center justify-center mr-35'>
+        <div className='items-center justify-center mr-8p'>
             <div
                 // 키워드 클릭 시 state값 변경
                 onClick={(event) => {
@@ -21,7 +21,38 @@ const ClickKeyword = (props) => {
                         props.targetSetState(0);
                     }
                 }
-} className='relative rounded overflow-hidden w-60 h-60'>
+                } className='relative rounded overflow-hidden'>
+                <img
+                    // 해당하는 키워드의 state 값에 따라 표시
+                    style={props.targetState
+                        ? {
+                            border: "5px solid rgb(250, 150, 0)",
+                            borderRadius: "20%"
+                        }
+                        : {}} src={props.KeywordImage} alt={props.KeywordAlt} className='align-top'/>
+            </div>
+            <div className='relative flex flex_col items-center'>
+                <h6>{props.KeywordName}</h6>
+            </div>
+        </div>
+    );
+};
+
+// [ 각 키워드 재사용 컴포넌트 ]-mr 아닌거
+const ClickKeywordno = (props) => {
+    return (
+        <div className='items-center justify-center'>
+            <div
+                // 키워드 클릭 시 state값 변경
+                onClick={(event) => {
+                    event.preventDefault();
+                    if (props.targetState === 0) {
+                        props.targetSetState(1);
+                    } else {
+                        props.targetSetState(0);
+                    }
+                }
+                } className='relative rounded overflow-hidden'>
                 <img
                     // 해당하는 키워드의 state 값에 따라 표시
                     style={props.targetState
@@ -202,7 +233,11 @@ const LikingCheck = () => {
                                   이전 화면으로
                                   </button> */
                                         }
-                                        <span className='fontWeight-400 fontSize-12'><span style={{'font-weight':500}}>{nickname}</span>님의 취향 설정</span>
+                                        <span className='fontWeight-400 fontSize-12'>
+                                            <span
+                                                style={{
+                                                    'font-weight' : 500
+                                                }}>{nickname}</span>님의 취향 설정</span>
                                     </h3>
                                 </div>
                                 <div className='flex flex_col mt-4 m-0a'>
@@ -240,7 +275,7 @@ const LikingCheck = () => {
                                                     KeywordAlt='tteok_pic'
                                                     targetState={restaurantBunsik}
                                                     targetSetState={setRestaurantBunsik}/>
-                                                <ClickKeyword
+                                                <ClickKeywordno
                                                     KeywordName="패스트푸드"
                                                     KeywordImage={require('../img/burger.png')}
                                                     KeywordAlt='burger_pic'
@@ -248,7 +283,7 @@ const LikingCheck = () => {
                                                     targetSetState={setRestaurantFast}/>
                                             </div>
                                         </div>
-                                        <hr></hr>
+                                        <hr/>
 
                                         <div className='mb'>
                                             <h5 className='flex mb-23'>마시기</h5>
@@ -271,9 +306,24 @@ const LikingCheck = () => {
                                                     KeywordAlt='bread_pic'
                                                     targetState={cafeBakery}
                                                     targetSetState={setCafeBakery}/>
+                                                <div className='items-center justify-center mr-8p'>
+                                                    <div className='relative rounded overflow-hidden'>
+                                                    <img src={require('../img/nothing.png')} className='align-top'/>
+                                                    </div>
+                                                </div>
+                                                <div className='items-center justify-center mr-8p'>
+                                                    <div className='relative rounded overflow-hidden'>
+                                                    <img src={require('../img/nothing.png')} className='align-top'/>
+                                                    </div>
+                                                </div>
+                                                <div className='items-center justify-center'>
+                                                    <div className='relative rounded overflow-hidden'>
+                                                    <img src={require('../img/nothing.png')} className='align-top'/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <hr></hr>
+                                        <hr/>
 
                                         <div className='mb'>
                                             <h5 className='flex mb-23'>놀기</h5>
@@ -308,15 +358,16 @@ const LikingCheck = () => {
                                                     KeywordAlt='book_pic'
                                                     targetState={leisureBook}
                                                     targetSetState={setLeisureBook}/>
-                                                <ClickKeyword
+                                                <ClickKeywordno
                                                     KeywordName="쇼핑몰"
                                                     KeywordImage={require('../img/shopping.png')}
                                                     KeywordAlt='shopping_pic'
                                                     targetState={leisureDepartment}
-                                                    targetSetState={setLeisureDepartment}/>
+                                                    targetSetState={setLeisureDepartment}
+                                                    style={{'margin-right':0}}/>
                                             </div>
                                         </div>
-                                        <hr></hr>
+                                        <hr/>
 
                                         <div className='mb'>
                                             <h5 className='flex mb-23'>걷기</h5>
@@ -339,21 +390,38 @@ const LikingCheck = () => {
                                                     KeywordAlt='walk_pic'
                                                     targetState={walkingStreet}
                                                     targetSetState={setWalkingStreet}/>
+                                                <div className='items-center justify-center mr-8p'>
+                                                    <div className='relative rounded overflow-hidden'>
+                                                        <img src={require('../img/nothing.png')} className='align-top'/>
+                                                    </div>
+                                                </div>
+                                                <div className='items-center justify-center mr-8p'>
+                                                    <div className='relative rounded overflow-hidden'>
+                                                    <img src={require('../img/nothing.png')} className='align-top'/>
+                                                    </div>
+                                                </div>
+                                                <div className='items-center justify-center'>
+                                                    <div className='relative rounded overflow-hidden'>
+                                                    <img src={require('../img/nothing.png')} className='align-top'/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <hr></hr>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div className='mb-23 m-0a m-tb d-table'>
-                                <button
-                                    type="button"
-                                    className='btn btn-warning btn_view'
-                                    onClick={pressKeywordSave}>
-                                    취향 설정 완료
-                                </button>
+                            <div className='mb-130'>
+                                <div className="d-grid gap-1 align-center mb-130 width-35 m-0a">
+                                    <button
+                                        class="nextButton btn_lg width-100"
+                                        type="submit"
+                                        onClick={pressKeywordSave}
+                                        style={{"background": "rgb(250, 150, 0)"}}>
+                                        수정완료
+                                    </button>
+                                </div>
                             </div>
                         </div>
 

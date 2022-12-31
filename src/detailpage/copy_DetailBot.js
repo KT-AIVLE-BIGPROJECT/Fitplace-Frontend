@@ -1,3 +1,4 @@
+// 사용XXXXX
 import React,{ useState } from 'react'
 import { useEffect } from "react";
 import axios from 'axios';
@@ -9,25 +10,10 @@ import './DetailBot.css'
 
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-import { useLocation } from 'react-router-dom';
 
 
 
 const DetailBot = () => {
-  const location = useLocation();
-  const getPath = location.pathname.split('/')
-  const [placeCode, setPlaceCode] = useState(getPath[getPath.length-1]); // URL에서 장소코드 받아옴
-  const [review1, setReview1] = useState("");
-  const [review2, setReview2] = useState("");
-  const [review3, setReview3] = useState("");
-  const [review4, setReview4] = useState("");
-  const [review5, setReview5] = useState("");
-  const [review6, setReview6] = useState("");
-  const [review7, setReview7] = useState("");
-  const [review8, setReview8] = useState("");
-  const [review9, setReview9] = useState("");
-  const [review10, setReview10] = useState("");
-
   //5.복잡도 1주일치, 
   // const TEST = [1, 3, 3, 3, 3, 2, 2, 1, 4, 3, 1, 4, 3, 4, 4, 2, 1, 1, 4, 2, 2, 3, 3, 1]
   const TEST = {
@@ -90,38 +76,22 @@ const DetailBot = () => {
   }
   
 
-  // //6.네이버 리뷰들
-  // const reviews_visitor =[
-  //   {"review_visitor": "고기 빨리 많이 팔려는건 알겠지만 한참 한명한테 집중해서 이야기중인데 뒤에서 계속 사이에 껴들어서 쳐다보고 빨리먹으라고 눈치주고 뭐하는겁니까. 세트로 두개시키고 추가로 주문하기 전까지 6번은 빨리먹으라고 들은거같네요. 고기도 탄다고 빨리먹으라면서 다른쪽으로 빼둔거 다시 불에 올려놓고ㅋㅋㅋ"},
-  //   {"review_visitor": "구로디지털 고깃집 맛집으로 인정합니다!"},
-  // ]
+  //6.네이버 리뷰들
+  const reviews_visitor =[
+    {"review_visitor": "고기 빨리 많이 팔려는건 알겠지만 한참 한명한테 집중해서 이야기중인데 뒤에서 계속 사이에 껴들어서 쳐다보고 빨리먹으라고 눈치주고 뭐하는겁니까. 세트로 두개시키고 추가로 주문하기 전까지 6번은 빨리먹으라고 들은거같네요. 고기도 탄다고 빨리먹으라면서 다른쪽으로 빼둔거 다시 불에 올려놓고ㅋㅋㅋ"},
+    {"review_visitor": "구로디지털 고깃집 맛집으로 인정합니다!"},
+  ]
   function ShowVisitorReview(){
-    var visitors = [
-      review1,
-      review2,
-      review3,
-      review4,
-      review5,
-      review6,
-      review7,
-      review8,
-      review9,
-      review10
-    ];
-    return (
-      <ul className='list-group'>
-        {visitors.map((visitor, idx) => {
-          if(visitor != ""){
-            return (
-              <li key={idx} className="list-group-item">
-                <div>{idx+1}.</div>
-                <span>{visitor}</span>
-              </li>
-            )
-          }
-        })}
-      </ul>
-    )
+    const lis = reviews_visitor.map((review)=>{
+      return (
+        <li className="list-group-item">
+          <span>{review["review_visitor"]}</span>
+        </li>
+        // review["review_blog"]
+      )
+    })      
+    // return "방문자 리뷰 자리"
+    return <ul className="list-group">{lis}</ul>
   }
 
   const reviews_blog =[
@@ -141,22 +111,6 @@ const DetailBot = () => {
     return <ul className="list-group">{lis}</ul>
   }
 
-  useEffect(()=>{
-    axios
-      .get(`http://localhost:8000/places/?place_code=${placeCode}`)
-      .then((response)=>{
-        setReview1(response.data.results[0].review1);
-        setReview2(response.data.results[0].review2);
-        setReview3(response.data.results[0].review3);
-        setReview4(response.data.results[0].review4);
-        setReview5(response.data.results[0].review5);
-        setReview6(response.data.results[0].review6);
-        setReview7(response.data.results[0].review7);
-        setReview8(response.data.results[0].review8);
-        setReview9(response.data.results[0].review9);
-        setReview10(response.data.results[0].review10);
-      })
-  }, [])
 
   return(
     <div>

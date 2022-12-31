@@ -12,6 +12,9 @@
 .width-30{
     width:30%!important;
 }
+.width-35{
+    width:35%!important;
+}
 .width-40{
     width:40%!important;
 }
@@ -153,6 +156,7 @@ h6 {
 .goldstar {
     width: 16px; 
     height: 16px;
+    margin-left: 17px;
 }
 
 .area_cat {
@@ -166,7 +170,7 @@ h6 {
     margin: 0px;
     width: 20px;
     height: 16px;
-    margin-left: 17px;
+    /* margin-left: 17px; */
     margin-right: 0px;
     color: slategray;
 }
@@ -300,6 +304,9 @@ width: 580px;
 
 .d-table {
     display: table;
+}
+.ml-p5{
+    margin-left:5%;
 }
 
 .ml-55 {
@@ -439,6 +446,9 @@ img.hot-place-sparkle {
 .mr-13{
     margin-left: 13px;
 }
+.mr-8p{
+    margin-right: 8%;
+}
 
 .search_box {
     width: 800px;
@@ -549,4 +559,12 @@ img.hot-place-sparkle {
 
 .sb-bw {
     justify-content: space-between;
+}
+
+.unactiveBtn {
+    background: #d1d1d1;
+}
+.activeBtn {
+    background: #FFA432;
+    font-weight: bold;
 }

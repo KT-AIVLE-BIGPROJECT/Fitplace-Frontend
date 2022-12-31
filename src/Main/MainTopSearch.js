@@ -1,24 +1,24 @@
 import React, {useState, useEffect} from 'react'
 import {Container} from 'react-bootstrap'
 import Dropdown from 'react-bootstrap/Dropdown';
-import SearchPlace from './SearchPlace'
-import SearchBar from './SearchBar'
 import Layout from '../layouts/Layout'
 import axios from 'axios'
-import './SignUp.css';
-import './SearchBar.css'
+import '../pages/SignUp.css';
+import '../pages/SearchBar.css';
 import '../css/main.css'
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const Search = () => {
-    // 요청 유효성 검증 state (사용자 프로필 받아온 후 닉네임값으로 세팅 되면 추천 응답 받도록)
-    const [effectFlag, setEffectFlag] = useState(-1);
-    // 추천 근거 사용자 정보 표시용
-    const [nickname, setNickname] = useState("");
-    const [age, setAge] = useState("연령대(선택X)");
-    const [gender, setGender] = useState("성별(선택X)");
-    const [mbti, setMbti] = useState("MBTI(선택X)");
+const MainTopSearch = () => {
+    const location = useLocation();
+    const [userInfo, setUserInfo] = useState({
+        "age": location.state.age,
+        "gender": location.state.gender,
+        "mbti": location.state.mbti
+    })
+    const [age, setAge] = useState("");
+    const [gender, setGender] = useState("");
+    const [mbti, setMbti] = useState("");
 
     // 필터링 관련 state
     const [mainCategory, setMainCategory] = useState("all"); // 대분류 필터링
@@ -41,24 +41,6 @@ const Search = () => {
     const [mbtiIN, setMbtiIN] = useState(0);
     const [mbtiES, setMbtiES] = useState(0);
     const [mbtiEN, setMbtiEN] = useState(0);
-    const [resKorea, setResKorea] = useState(0);
-    const [resWest, setResWest] = useState(0);
-    const [resChina, setResChina] = useState(0);
-    const [resJapan, setResJapan] = useState(0);
-    const [resFast, setResFast] = useState(0);
-    const [resBunsik, setResBunsik] = useState(0);
-    const [cafe, setCafe] = useState(0);
-    const [dessert, setDessert] = useState(0);
-    const [bakery, setBakery] = useState(0);
-    const [leiGallery, setLeiGallery] = useState(0);
-    const [leiCraft, setLeiCraft] = useState(0);
-    const [leiPopup, setLeiPopup] = useState(0);
-    const [leiTheater, setLeiTheater] = useState(0);
-    const [leiBook, setLeiBook] = useState(0);
-    const [leiDepartment, setLeiDepartment] = useState(0);
-    const [walPark, setWalPark] = useState(0);
-    const [walMarket, setWalMarket] = useState(0);
-    const [walStreet, setWalStreet] = useState(0);
 
     // 추천받은 장소 리스트
     const [recommendPlaces, setRecommendPlaces] = useState(0);
@@ -99,8 +81,6 @@ const Search = () => {
                         <div className='relative rounded overflow-hidden img-hover z-idx'>
                             <img src={props.src} alt={props.alt} className='align-top img-size' />
                         </div>
-                        {/* <div className='relative flex flex_col items-center'>
-                        </div> */}
                     </div>
                     
                 </div>
@@ -206,7 +186,6 @@ const Search = () => {
     };
     // 추천 장소 박스 컴포넌트
     const RecommendBox = (props) => {
-        const navigate = useNavigate();
         var subCategory = "";
         var keywords = props.keywords;
         var keywords_list;
@@ -282,7 +261,6 @@ const Search = () => {
         };
 
         return (
-            // <div className='single_box' onClick={()=>{navigate(`/detailpage/${props.place_code}`,{state:{place_code:props.place_code}});}}>
             <div className='single_box' onClick={() => handleOpenNewTab(`/detailpage/${props.place_code}`)}>
                 <img className='hotimg' src={props.photo} alt="profile" />
                 <div className='namebox'>
@@ -322,21 +300,10 @@ const Search = () => {
     }
 
     // -------------------------[ 함수 ]-------------------------
-    // 사용자 프로필 정보 불러오는 함수
-    const getProfile = async () => {
-        const response = await axios.get(
-            "http://localhost:8000/users/profile/", {
-                headers: {
-                    "Authorization": `Token ${token}`
-                }
-            }
-        )
-        console.log("[Search.js] ==> Loading profile...", response);
-        setNickname(response.data.nickname);
-
-        setEffectFlag(response.data.nickname);
+    // 추천 요청 보낼 userform 생성 함수
+    const setUserForm = () => {
         // 연령대 설정
-        switch(response.data.age){
+        switch(userInfo.age){
             case "age_10":
                 setAge10(1);
                 setAge("10대");
@@ -371,7 +338,7 @@ const Search = () => {
                 break;
         }
         // 성별 설정
-        switch(response.data.gender){
+        switch(userInfo.gender){
             case 'gender_male':
                 setMale(1);
                 setGender("남성");
@@ -386,7 +353,7 @@ const Search = () => {
                 break;
         }
         // MBTI 설정
-        switch(response.data.mbti){
+        switch(userInfo.mbti){
             // IS__
             case 'mbti_istj':
                 setMbti("ISTJ");
@@ -474,26 +441,6 @@ const Search = () => {
             default:
                 break;
         }
-        // 키워드 설정
-        setResKorea(response.data.restaurant_korea);
-        setResWest(response.data.restaurant_west);
-        setResChina(response.data.restaurant_china);
-        setResJapan(response.data.restaurant_japan);
-        setResFast(response.data.restaurant_fast);
-        setResBunsik(response.data.restaurant_bunsik);
-        setCafe(response.data.cafe_cafe);
-        setDessert(response.data.cafe_dessert);
-        setBakery(response.data.cafe_bakery);
-        setLeiGallery(response.data.leisure_gallery);
-        setLeiCraft(response.data.leisure_craft);
-        setLeiPopup(response.data.leisure_popup);
-        setLeiTheater(response.data.leisure_theater);
-        setLeiBook(response.data.leisure_book);
-        setLeiDepartment(response.data.leisure_department);
-        setWalPark(response.data.walking_park);
-        setWalMarket(response.data.walking_market);
-        setWalStreet(response.data.walking_street);
-        console.log("KEYWORD SET");
     };
     // 추천 장소 불러오는 함수
     const getRecommend = async () => {
@@ -512,24 +459,12 @@ const Search = () => {
                 "mbti_in": mbtiIN,
                 "mbti_es": mbtiES,
                 "mbti_en": mbtiEN,
-                "restaurant_korea": resKorea,
-                "restaurant_west": resWest,
-                "restaurant_china": resChina,
-                "restaurant_japan": resJapan,
-                "restaurant_fast": resFast,
-                "restaurant_bunsik": resBunsik,
-                "cafe_cafe": cafe,
-                "cafe_dessert": dessert,
-                "cafe_bakery": bakery,
-                "leisure_gallery": leiGallery,
-                "leisure_craft": leiCraft,
-                "leisure_popup": leiPopup,
-                "leisure_theater": leiTheater,
-                "leisure_book": leiBook,
-                "leisure_department": leiDepartment,
-                "walking_park": walPark,
-                "walking_market": walMarket,
-                "walking_street": walStreet
+                "restaurant_korea": 0, "restaurant_west": 0, "restaurant_china": 0,
+                "restaurant_japan": 0, "restaurant_fast": 0, "restaurant_bunsik": 0,
+                "cafe_cafe": 0, "cafe_dessert": 0, "cafe_bakery": 0,
+                "leisure_gallery": 0, "leisure_craft": 0, "leisure_popup": 0,
+                "leisure_theater": 0, "leisure_book": 0, "leisure_department": 0,
+                "walking_park": 0, "walking_market": 0, "walking_street": 0
             },
 
             "filter_region": filterRegion,
@@ -538,13 +473,11 @@ const Search = () => {
             "sub_category": subCategory,
             "filter_rating": filterRating,
             "filter_review": filterReview,
-
-            "effect_flag": effectFlag,
         }
         //console.log(body);
-        console.log("[Search.js] ==> Recommended places loading...", body);
+        console.log("[MainTopSearch.js] ==> Recommended places loading...", body);
         const response = await axios.post(
-            `http://localhost:8000/recommendations/`, body, {
+            `http://localhost:8000/maintoprecommend/`, body, {
                 headers: {
                     "Authorization": `Token ${token}`
                 }
@@ -639,13 +572,14 @@ const Search = () => {
     
     // ---------------------------[ useEffect 함수 ]---------------------------
     useEffect(()=>{
-        getProfile();
+        setUserForm();
     }, []);
-    // 처음에 사용자 정보 불러올 때 닉네임 정보로 세팅해주고, 이 값이 변할때만 useEffect 실행
     useEffect(()=>{
         getRecommend();
-    }, [effectFlag, mainCategory, subCategory, filterRating, filterReview, filterRegion])
-
+    }, [age10, age20, age30, age40, age50, age60, 
+        male, female, mbtiIS, mbtiIN, mbtiES, mbtiEN,
+        mainCategory, subCategory, filterRating, filterReview, filterRegion]
+    );
     useEffect(()=>{
         updatePage1(); // 현재 페이지가 변경되면 페이지네이션 정보 수정
     }, [recommendPlaces, currentPage])
@@ -657,7 +591,7 @@ const Search = () => {
     }, [mainCategory, subCategory])
 
 
-  // ---------------------------[ 메인(Search) 컴포넌트 리턴 ]---------------------------
+  // ---------------------------[ 메인(MainTopSearch) 컴포넌트 리턴 ]---------------------------
   if(recommendPlaces === 0){
     return (
         <div>추천 장소를 불러오는 중입니다...</div>
@@ -705,26 +639,6 @@ const Search = () => {
                 <div className='h_row_center2 cat_box_size'>
                     <div className='category category_size'>
                         <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
-                        {/* <ul className='h-44 mb-0'>
-                            <li className='cat_start flex'>
-                                <div onClick={()=>{setsubCategory("한식"); setFilterRating(0); setFilterReview(0);}} className='word_style'>한식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("양식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>양식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("중식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>중식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("일식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>일식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("분식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>분식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("패스트푸드"); setFilterRating(0); setFilterReview(0);}}className='word_style'>패스트푸드</div>
-                            </li>
-                        </ul> */}
                     </div>
                 </div>
             </div>
@@ -746,8 +660,9 @@ const Search = () => {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                    <div style={{color: '#FFA432'}}>{age} + {gender} + {mbti}</div>
-                    <div>인 [{nickname}] 님을 위한 추천 결과입니다.</div>
+                    {/* age, gender, mbti 셋 중 1개만 나옴 */}
+                    <div style={{color: '#FFA432'}}>{age}{gender}{mbti}</div>
+                    <div>인 사람들이 좋아하는 상위 100개 장소들입니다.</div>
                     <div className='flex'>
                     <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
                     <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
@@ -773,4 +688,4 @@ const Search = () => {
   }
 }
 
-export default Search
+export default MainTopSearch
