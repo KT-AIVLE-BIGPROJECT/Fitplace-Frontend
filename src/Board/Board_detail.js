@@ -16,6 +16,7 @@ const Board_detail = () => {
     const [pk, setPk] = useState("");
     const [results, setResults] = useState([]);
     const [comment, setComment] = useState([]);
+    const [published_date, setPublished_date] = useState("");
 
     var link =  document.location.pathname.replace('/board/detail/','');
     var modify = '/board/edit/' + link
@@ -29,32 +30,35 @@ const Board_detail = () => {
             setPk(response.data.pk);
             setTitle(response.data.title);
             setBody(response.data.body);
+            setPublished_date(response.data.published_date);
   
           })
       },[])
 
-      const comments = {
-        title: title,
-        body: body,
-     
-      }
+      const date = published_date.split('T')
 
-      const Comment_button = async({comments}) => {
-        axios.put(`http://localhost:8000/posts/${link}/`,
-            comments,
-            //     {
-            //     headers: {
-            //         "Authorization": `Token ${token}`
-            //     },
-            //   }
-            )
-            .then((response) => {
-                if(response.status < 300) {
-                  alert("등록이 완료되었습니다!");
-                  window.location.replace(`http://localhost:8000/posts/${link}/`);
-                }
-              })
-        }
+    //   const comments = {
+    //     title: title,
+    //     body: body,
+     
+    //   }
+
+    //   const Comment_button = async({comments}) => {
+    //     axios.put(`http://localhost:8000/posts/${link}/`,
+    //         comments,
+    //         //     {
+    //         //     headers: {
+    //         //         "Authorization": `Token ${token}`
+    //         //     },
+    //         //   }
+    //         )
+    //         .then((response) => {
+    //             if(response.status < 300) {
+    //               alert("등록이 완료되었습니다!");
+    //               window.location.replace(`http://localhost:8000/posts/${link}/`);
+    //             }
+    //           })
+    //     }
 
 
     return (
@@ -80,20 +84,20 @@ const Board_detail = () => {
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>2022-02-02</dd>
+                        <dd>{date[0]}</dd>  
                     </dl>
                 </div>
                 <div class="cont">
                     {body}
                 </div>
             </div>
-            <div class="mb-3">
+            {/* <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">댓글</label>
                             <button className="board_write_button" onClick={() => Comment_button({comments})}>
                             댓글 등록
                             </button>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={comment} onChange={(event) => setComment(event.target.value)}></textarea>
-                        </div>
+                        </div> */}
             <div class="bt_wrap">
                 <a href="/board" class="on">목록</a>
                 <a href={modify}>수정</a>
