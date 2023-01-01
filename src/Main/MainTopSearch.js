@@ -3,7 +3,6 @@ import {Container} from 'react-bootstrap'
 import Dropdown from 'react-bootstrap/Dropdown';
 import Layout from '../layouts/Layout'
 import axios from 'axios'
-import '../pages/SignUp.css';
 import '../pages/SearchBar.css';
 import '../css/main.css'
 

@@ -5,9 +5,9 @@ import SearchPlace from './SearchPlace'
 import SearchBar from './SearchBar'
 import Layout from '../layouts/Layout'
 import axios from 'axios'
-import './SignUp.css';
 import './SearchBar.css'
 import '../css/main.css'
+import './Search.css'
 
 import { useNavigate } from 'react-router-dom';
 
@@ -658,119 +658,129 @@ const Search = () => {
 
 
   // ---------------------------[ 메인(Search) 컴포넌트 리턴 ]---------------------------
-  if(recommendPlaces === 0){
-    return (
-        <div>추천 장소를 불러오는 중입니다...</div>
-    )
-  } else {
-    return (
-        <Layout>
-          <Container className='container_style' style={{minHeight: "75vh"}}>
-            <div className='h_column_center2 cat_box'>
-                <div className='h_row_center2 cat_box_size'>
-                    <div className='category category_size'>
-                        <ul className='h-44 mb-0'>
-                            <CategoryButton
-                                className="cat_start flex" label="전체"
-                                clicked={setMainCategory} value="all"
-                                // src={require('../img/all.png')}
-                                src={require('../img/eat2.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="먹기"
-                                clicked={setMainCategory} value="restaurant"
-                                src={require('../img/eat2.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="마시기"
-                                clicked={setMainCategory} value="cafe"
-                                src={require('../img/drink3.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="놀기"
-                                clicked={setMainCategory} value="leisure"
-                                src={require('../img/dice.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="걷기"
-                                clicked={setMainCategory} value="walking"
-                                src={require('../img/walk2.png')} alt="eat_cat"
-                            />
-
-                        </ul>
-                    </div>
-                </div>
+  console.log('세션스토리지',sessionStorage.getItem("username")===null);
+  if(sessionStorage.getItem("username")===null){
+    alert('로그인 후 이용 부탁드립니다.');
+    window.location.href='/'
+  }else{
+    if(recommendPlaces === 0){
+        return (
+            <div className='waiting'>
+                <div class="loader"><img className ='waitingImg' src ={require('../img/fitplace_logo.png')}/></div>
+                <span className='waitingText'>추천 장소를 불러오는 중입니다</span>
             </div>
-            <div className='h_column_center2 cat_box'>
-                <div className='h_row_center2 cat_box_size'>
-                    <div className='category category_size'>
-                        <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
-                        {/* <ul className='h-44 mb-0'>
-                            <li className='cat_start flex'>
-                                <div onClick={()=>{setsubCategory("한식"); setFilterRating(0); setFilterReview(0);}} className='word_style'>한식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("양식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>양식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("중식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>중식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("일식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>일식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("분식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>분식</div>
-                            </li>
-                            <li className='cat_other flex'>
-                                <div onClick={()=>{setsubCategory("패스트푸드"); setFilterRating(0); setFilterReview(0);}}className='word_style'>패스트푸드</div>
-                            </li>
-                        </ul> */}
-                    </div>
-                </div>
-            </div>
+        )
+      } else {
+        return (
+            <Layout>
+              <Container className='container_style' style={{minHeight: "75vh"}}>
+                <div className='h_column_center2 cat_box'>
+                    <div className='h_row_center2 cat_box_size'>
+                        <div className='category category_size'>
+                            <ul className='h-44 mb-0'>
+                                <CategoryButton
+                                    className="cat_start flex" label="전체"
+                                    clicked={setMainCategory} value="all"
+                                    // src={require('../img/all.png')}
+                                    src={require('../img/eat2.png')} alt="eat_cat"
+                                />
+                                <CategoryButton
+                                    className="cat_other flex" label="먹기"
+                                    clicked={setMainCategory} value="restaurant"
+                                    src={require('../img/eat2.png')} alt="eat_cat"
+                                />
+                                <CategoryButton
+                                    className="cat_other flex" label="마시기"
+                                    clicked={setMainCategory} value="cafe"
+                                    src={require('../img/drink3.png')} alt="eat_cat"
+                                />
+                                <CategoryButton
+                                    className="cat_other flex" label="놀기"
+                                    clicked={setMainCategory} value="leisure"
+                                    src={require('../img/dice.png')} alt="eat_cat"
+                                />
+                                <CategoryButton
+                                    className="cat_other flex" label="걷기"
+                                    clicked={setMainCategory} value="walking"
+                                    src={require('../img/walk2.png')} alt="eat_cat"
+                                />
     
-            <div>
-                <div className='flex sb-bw'>
-                    <div className='flex h-60 right-sort mb-23'>
-                        <Dropdown>
-                            <Dropdown.Toggle variant="success" id="dropdown-basic" className='bg-white btn-outline-secondary dd-style'>
-                                지역 선택 (현재 : {filterRegion})
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={()=>{setFilterRegion("강남구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>강남구</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{setFilterRegion("구로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>구로구</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{setFilterRegion("마포구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>마포구</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{setFilterRegion("용산구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>용산구</Dropdown.Item>
-                                <Dropdown.Item onClick={()=>{setFilterRegion("종로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>종로구</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                    <div style={{color: '#FFA432'}}>{age} + {gender} + {mbti}</div>
-                    <div>인 [{nickname}] 님을 위한 추천 결과입니다.</div>
-                    <div className='flex'>
-                    <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
-                    <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                {/* 추천 장소 보여주기 */}
-                <RecommendRow/>
-
-                {/* 페이지네이션 버튼 */}
-                <Pagenation></Pagenation>
-                {/* <div>총 데이터 개수 : {totalCount}</div>
-                <div>현재 페이지 : {currentPage} / {totalPage}</div>
-                <div>현재 페이지 그룹 : {pageGroup}</div>
-                <div>첫번째 숫자 ({firstNumber}) / 마지막 숫자 ({lastNumber})</div>
-                <div>prev({prev}) / next({next})</div>
-                <div>버튼 그룹 {pageGroupList}</div> */}
-            </div>
-              
-          </Container>
-        </Layout>
-      )
+                <div className='h_column_center2 cat_box'>
+                    <div className='h_row_center2 cat_box_size'>
+                        <div className='category category_size'>
+                            <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
+                            {/* <ul className='h-44 mb-0'>
+                                <li className='cat_start flex'>
+                                    <div onClick={()=>{setsubCategory("한식"); setFilterRating(0); setFilterReview(0);}} className='word_style'>한식</div>
+                                </li>
+                                <li className='cat_other flex'>
+                                    <div onClick={()=>{setsubCategory("양식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>양식</div>
+                                </li>
+                                <li className='cat_other flex'>
+                                    <div onClick={()=>{setsubCategory("중식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>중식</div>
+                                </li>
+                                <li className='cat_other flex'>
+                                    <div onClick={()=>{setsubCategory("일식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>일식</div>
+                                </li>
+                                <li className='cat_other flex'>
+                                    <div onClick={()=>{setsubCategory("분식"); setFilterRating(0); setFilterReview(0);}}className='word_style'>분식</div>
+                                </li>
+                                <li className='cat_other flex'>
+                                    <div onClick={()=>{setsubCategory("패스트푸드"); setFilterRating(0); setFilterReview(0);}}className='word_style'>패스트푸드</div>
+                                </li>
+                            </ul> */}
+                        </div>
+                    </div>
+                </div>
+        
+                <div>
+                    <div className='flex sb-bw'>
+                        <div className='flex h-60 right-sort mb-23'>
+                            <Dropdown>
+                                <Dropdown.Toggle variant="success" id="dropdown-basic" className='bg-white btn-outline-secondary dd-style'>
+                                    지역 선택 (현재 : {filterRegion})
+                                </Dropdown.Toggle>
+    
+                                <Dropdown.Menu>
+                                    <Dropdown.Item onClick={()=>{setFilterRegion("강남구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>강남구</Dropdown.Item>
+                                    <Dropdown.Item onClick={()=>{setFilterRegion("구로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>구로구</Dropdown.Item>
+                                    <Dropdown.Item onClick={()=>{setFilterRegion("마포구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>마포구</Dropdown.Item>
+                                    <Dropdown.Item onClick={()=>{setFilterRegion("용산구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>용산구</Dropdown.Item>
+                                    <Dropdown.Item onClick={()=>{setFilterRegion("종로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>종로구</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                        <div style={{color: '#FFA432'}}>{age} + {gender} + {mbti}</div>
+                        <div>인 [{nickname}] 님을 위한 추천 결과입니다.</div>
+                        <div className='flex'>
+                        <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
+                        <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
+                        </div>
+                    </div>
+    
+                    {/* 추천 장소 보여주기 */}
+                    <RecommendRow/>
+    
+                    {/* 페이지네이션 버튼 */}
+                    <Pagenation></Pagenation>
+                    {/* <div>총 데이터 개수 : {totalCount}</div>
+                    <div>현재 페이지 : {currentPage} / {totalPage}</div>
+                    <div>현재 페이지 그룹 : {pageGroup}</div>
+                    <div>첫번째 숫자 ({firstNumber}) / 마지막 숫자 ({lastNumber})</div>
+                    <div>prev({prev}) / next({next})</div>
+                    <div>버튼 그룹 {pageGroupList}</div> */}
+                </div>
+                  
+              </Container>
+            </Layout>
+          )
+      }
   }
+  
 }
 
 export default Search
