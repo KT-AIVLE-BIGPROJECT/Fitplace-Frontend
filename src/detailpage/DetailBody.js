@@ -237,11 +237,17 @@ const DetailBody = () => {
       )
     } else{
       return (
-        <ul className="list-group">
-          <li className="list-group-item">
-            <span>네이버 블로그 리뷰를 불러오는 중입니다...</span>
-          </li>
-        </ul>
+        // <ul className="list-group">
+        //   <li className="list-group-item">
+        //     <span>네이버 블로그 리뷰를 불러오는 중입니다...</span>
+        //   </li>
+        // </ul>
+
+        // <div className='waiting'>
+        <div>
+            <div class="loader"><img className ='waitingImg' src ={require('../img/fitplace_logo.png')}/></div>
+            <span style={{color: "#FFA432", fontWeight: "bold", fontSize: "x-large"}} className='waitingText'>블로그 리뷰를 불러오는 중입니다</span>
+        </div>
       )
     }
   };
