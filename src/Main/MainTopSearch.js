@@ -593,7 +593,10 @@ const MainTopSearch = () => {
   // ---------------------------[ 메인(MainTopSearch) 컴포넌트 리턴 ]---------------------------
   if(recommendPlaces === 0){
     return (
-        <div>추천 장소를 불러오는 중입니다...</div>
+        <div className='waiting'>
+            <div class="loader"><img className ='waitingImg' src ={require('../img/fitplace_logo.png')}/></div>
+            <span className='waitingText'>추천 장소를 불러오는 중입니다</span>
+        </div>
     )
   } else {
     return (
