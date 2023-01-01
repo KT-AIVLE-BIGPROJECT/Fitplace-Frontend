@@ -85,7 +85,7 @@ const Header = () => {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav class="navbar-nav me-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bold" href="/search">장소검색<img className="location-img" src ={require("../img/find-location.png")} /></a>
+                                    <a class="nav-link fw-bold" href="/search">장소추천<img className="location-img" src ={require("../img/find-location.png")} /></a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link fw-bold" href="/board">FAQs</a>
