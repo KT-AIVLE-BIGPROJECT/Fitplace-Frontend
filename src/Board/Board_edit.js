@@ -4,17 +4,28 @@ import Layout from '../layouts/Layout'
 import axios from 'axios';
 
 
+var link =  document.location.pathname.replace('/board/edit/','');
+var modify = '/board/detail/' + link
+
 const token = sessionStorage.getItem("token");
 function Board_edit(){
     const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
     const [user, setUser] = useState("");
     const [body, setBody] = useState("");
+    const [image, setImage] = useState("");
 
     const results = {
         title: title,
-        body: body
+        body: body,
       }
+    
+    const results_re = {
+        title: title,
+        body: body,
+        image: image[0]
+      }
+
 
     var link =  document.location.pathname.replace('/board/edit/','');
 
@@ -24,6 +35,7 @@ function Board_edit(){
         results,
     {
         headers: {
+            "content-type": "multipart/form-data",
             "Authorization": `Token ${token}`
         },
     }
@@ -34,20 +46,25 @@ function Board_edit(){
     })
     }, [])
 
-    const HandleQuestionSubmit = async({results}) => {
+    const HandleQuestionSubmit = async({results_re}) => {
         axios.put(`http://localhost:8000/posts/${link}/`,
-              results,
+            results_re,
               {
                 headers: {
+                    "content-type": "multipart/form-data",
                     "Authorization": `Token ${token}`
                 },
               }
             )
             .then((response) => {
                 if(response.status < 300) {
-                  alert("등록이 완료되었습니다!");
-                  window.location.replace('http://localhost:3000/board/');
+                  alert("수정이 완료되었습니다!");
+                  window.location.replace(modify);
                 }
+                else{
+                    alert("수정이 실패했습니다!");
+                }
+
               })
         }
 
@@ -58,7 +75,7 @@ function Board_edit(){
     <div class="board_wrap">
         <div class="board_title">
             <strong class = "FAQ">FAQs</strong>
-            <p>질문을 남겨주세요.</p>
+            <p>질문을 수정해주세요.</p>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
@@ -77,15 +94,15 @@ function Board_edit(){
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">파일 첨부</label>
-                            <input class="form-control" type="file" id="formFile"/>
+                            <input class="form-control" type="file" id="formFile" onChange={(event) => setImage(event.target.files)}/>
                         </div>
                         </Form.Group>  
                     <div class="bt_wrap">
-                        <button className="board_write_button" onClick={() => HandleQuestionSubmit({results})}>
+                        <button className="board_write_button" onClick={() => HandleQuestionSubmit({results_re})}>
                             수정
                         </button>
         
-                        <button class="board_cancel_button" type="submit" onClick= "cancel_Board(); return false;">취소</button>
+                        <a class="board_cancel_button" href = {modify}>취소</a>
                     </div>
                     </Form>
                 </div>

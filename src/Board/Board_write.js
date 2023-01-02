@@ -4,38 +4,52 @@ import Layout from '../layouts/Layout'
 import axios from 'axios';
 import Board from '../pages/Board'
 
+
 const cancel_Board = <Board />
 
 const token = sessionStorage.getItem("token"); // 사용자 토큰
 
 function Board_write(){
-    const [author, setAuthor] = useState("");
     const [title, setTitle] = useState("");
-    const [user, setUser] = useState("");
     const [body, setBody] = useState("");
+    const [image, setImage] = useState("");
+
 
     const results = {
         title: title,
-        body: body
-      }
+        body: body,
+        image: image[0],
+    }
 
 
     const HandleQuestionSubmit = async({results}) => {
-    axios.post('http://localhost:8000/posts/',
-          results,
-          {
-            headers: {
-                "Authorization": `Token ${token}`
-            },
-          }
-        )
-        .then((response) => {
-            if(response.status < 300) {
-              alert("등록이 완료되었습니다!");
-              window.location.replace('http://localhost:3000/board/');
+
+
+        console.log(results);
+        axios.post('http://localhost:8000/posts/',
+            results,
+            {
+                headers: {
+                    "content-type": "multipart/form-data",
+                    "Authorization": `Token ${token}`
+                },
             }
-          })
+            )
+            .then((response) => {
+                if(response.status < 300) {
+                alert("등록이 완료되었습니다!");
+                window.location.replace('http://localhost:3000/board/');
+                }
+                else{
+                    alert("등록이 실패했습니다!");
+                }
+            })
+        
+
     }
+
+
+
 
     return (
     <Layout>
@@ -60,8 +74,9 @@ function Board_write(){
                         </div>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">파일 첨부</label>
-                            <input class="form-control" type="file" id="formFile"/>
+                            <input class="form-control" type="file" id="formFile" onChange={(event) => setImage(event.target.files)}/>
                         </div>
+                    
                         </Form.Group>                    
                     <Form.Group>
                         <div class="bt_wrap">
@@ -69,8 +84,8 @@ function Board_write(){
                                 등록
                             </button>
         
-                            <button class="board_cancel_button" type="submit" onClick= "cancel_Board(); return false;">취소</button>
-                
+                            <a class="board_cancel_button" href = "/board">취소</a>
+                            
                         </div>
                     </Form.Group>
                 </Form>

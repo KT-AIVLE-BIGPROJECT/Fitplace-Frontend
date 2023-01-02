@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Footer from '../layouts/Footer';
 
 // const token = sessionStorage.getItem("token");
 
@@ -17,6 +18,7 @@ const Board_detail = () => {
     const [results, setResults] = useState([]);
     const [comment, setComment] = useState([]);
     const [published_date, setPublished_date] = useState("");
+    const [image, setImage] = useState("");
 
     var link =  document.location.pathname.replace('/board/detail/','');
     var modify = '/board/edit/' + link
@@ -31,6 +33,7 @@ const Board_detail = () => {
             setTitle(response.data.title);
             setBody(response.data.body);
             setPublished_date(response.data.published_date);
+            setImage(response.data.image);
   
           })
       },[])
@@ -91,6 +94,9 @@ const Board_detail = () => {
                     {body}
                 </div>
             </div>
+            <div>
+                <a href = {image} target="_blank"> 첨부파일 확인</a>
+            </div>
             {/* <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">댓글</label>
                             <button className="board_write_button" onClick={() => Comment_button({comments})}>
@@ -100,7 +106,7 @@ const Board_detail = () => {
                         </div> */}
             <div class="bt_wrap">
                 <a href="/board" class="on">목록</a>
-                <a href={modify}>수정</a>
+                <a class = "board_cancel_button" href={modify}>수정</a>
             </div>
         </div>
     </div>

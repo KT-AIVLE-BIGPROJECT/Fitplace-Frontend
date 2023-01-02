@@ -27,20 +27,6 @@ function Board_main(){
         })
     },[])
 
-    // function Board_Read(){
-    //   const list = []
-    //   for(let i=0;i < 10;i++){
-    //     list.push(
-    //       <div>
-    //         <div className="num">{results[i].pk}</div>
-    //         <div className="title"><a href="/board/detail/">{results[i].title}</a></div>
-    //         <div className="writer">익명</div>
-    //         <div className="date">{results[i].published_date}</div>
-    //       </div>
-    //     )
-    //   }
-    //   return list
-    // }
 
     const Board_Read = () => {
       return (
@@ -61,18 +47,7 @@ function Board_main(){
       )
     }
       
-      //   return (
-      //     <div>
-      //     {results.map((pk, title, published_date) => {
-      //       <div>
-      //         <div className="num">{pk}</div>
-      //         <div className="title"><a href="/board/detail/">{title}</a></div>
-      //         <div className="writer">익명</div>
-      //         <div className="date">{published_date}</div>
-      //       </div>
-          
-      // })}
-      // </div>)}
+     
 
     
 
@@ -112,22 +87,6 @@ function Board_main(){
                 
                 <Board_Read />
                 
-    
-                
-                {/* <div><div>
-                    <div class="num">{results[0].pk}</div>
-                    <div class="title"><a href="/board/detail">{results[0].title}</a></div>
-                    <div class="writer">익명</div>
-                    <div class="date">{results[0].published_date}</div>
-                </div></div> */}
-
-                <div>
-                    {/* <div class="num">{results[1].pk}</div> */}
-                    {/* <div class="title"><a href="/board/detail">{results[1].title}</a></div>
-                    <div class="writer">익명</div>
-                    <div class="date">{results[1].published_date}</div> */}
-                </div>
-                
             </div>
             <footer>
                 <Board_pagination
@@ -137,17 +96,7 @@ function Board_main(){
                 setPage={setPage}
                 />
             </footer>
-            {/* <div class="board_page">
-                <a href="#" class="bt first">&lt;&lt;</a>
-                <a href="#" class="bt prev">&lt;</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
-                <a href="#" class="bt next">&gt;</a>
-                <a href="#" class="bt last">&gt;&gt;</a>
-            </div> */}
+            
             <div class="bt_wrap">
                 <a href="/board/write" class="on">글쓰기</a>
             </div>
