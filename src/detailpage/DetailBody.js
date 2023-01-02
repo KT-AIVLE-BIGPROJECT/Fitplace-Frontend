@@ -494,6 +494,7 @@ const DetailBody = () => {
             <span className='review_title'>혼잡도 예측</span>
             <div class="review_box">
               <ul className='list-group'>
+                <li className='list-group-item'>현재: {congestMessage}</li>
                 <li className='list-group-item'>1시간 뒤에는: {message_h01}</li>
                 <li className='list-group-item'>2시간 뒤에는: {message_h02}</li>
               </ul>
