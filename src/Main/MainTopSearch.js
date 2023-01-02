@@ -281,6 +281,7 @@ const MainTopSearch = () => {
     const Pagenation = () => {
         return (
             <div>
+                <button className='btn btn-default' onClick={()=>setCurrentPage(1)}>&#60;&#60;</button>
                 <button className='btn btn-default' onClick={()=>setCurrentPage(prev)}>&#60;</button>
                 {pageGroupList.map((page, idx) => {
                     if(page === currentPage){
@@ -294,6 +295,7 @@ const MainTopSearch = () => {
                     }
                 })}
                 <button className='btn btn-default' onClick={()=>setCurrentPage(next)}>&#62;</button>
+                <button className='btn btn-default' onClick={()=>setCurrentPage(totalPage)}>&#62;&#62;</button>
             </div>
         )
     }
