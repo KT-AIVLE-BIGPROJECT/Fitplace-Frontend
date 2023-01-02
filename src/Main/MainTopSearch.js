@@ -612,27 +612,27 @@ const MainTopSearch = () => {
                                 className="cat_start flex" label="전체"
                                 clicked={setMainCategory} value="all"
                                 // src={require('../img/all.png')}
-                                src={require('../img/eat2.png')} alt="eat_cat"
+                                src={require('../img/all.png')} alt="eat_cat"
                             />
                             <CategoryButton
                                 className="cat_other flex" label="먹기"
                                 clicked={setMainCategory} value="restaurant"
-                                src={require('../img/eat2.png')} alt="eat_cat"
+                                src={require('../img/eat.png')} alt="eat_cat"
                             />
                             <CategoryButton
                                 className="cat_other flex" label="마시기"
                                 clicked={setMainCategory} value="cafe"
-                                src={require('../img/drink3.png')} alt="eat_cat"
+                                src={require('../img/drink.png')} alt="eat_cat"
                             />
                             <CategoryButton
                                 className="cat_other flex" label="놀기"
                                 clicked={setMainCategory} value="leisure"
-                                src={require('../img/dice.png')} alt="eat_cat"
+                                src={require('../img/game.png')} alt="eat_cat"
                             />
                             <CategoryButton
                                 className="cat_other flex" label="걷기"
                                 clicked={setMainCategory} value="walking"
-                                src={require('../img/walk2.png')} alt="eat_cat"
+                                src={require('../img/sneaker.png')} alt="eat_cat"
                             />
 
                         </ul>

@@ -293,6 +293,9 @@ width: 580px;
 .mt-4 {
     margin-top: 1rem;
 }
+.mt-30 {
+    margin-top: 30px;
+}
 
 .m-0a {
     margin: 0 auto;
@@ -597,6 +600,9 @@ img.hot-place-sparkle {
 .mt-5 {
     margin-top: 5px;
 }
+.mt-1r{
+    margin-top: 1rem;
+}
 
 .sort-box:hover {
     background-color: lightgray;
@@ -634,4 +640,18 @@ img.hot-place-sparkle {
 .activeBtn {
     background: #FFA432;
     font-weight: bold;
+}
+
+ul{
+    padding-inline-start: 0px!important;
+}
+
+.pd-top0{
+    padding-top: 0px!important;
+}
+.mr-1r{
+    margin-right: 1rem;
+}
+.mr-2r{
+    margin-right: 2rem;
 }
