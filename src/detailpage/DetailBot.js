@@ -157,8 +157,21 @@ const DetailBot = () => {
       })
   }, [])
 
+  function Test(){
+    axios
+      .get("http://localhost:8000/test/")
+      .then((response)=>{
+        console.log(response.data.y_test_1hour);
+        console.log(response.data.y_test_2hour);
+        console.log(response.data.y_test_3hour);
+      })
+  }
+
   return(
     <div>
+      <div class="review_box">
+        <Test></Test>
+      </div>
       <div class="review_box">
         <span className='review_title'>혼잡도 예측</span>
         <div className='review_content'>
