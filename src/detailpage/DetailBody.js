@@ -54,18 +54,19 @@ const DetailBody = () => {
   //const [congestLvl, setConjestLvl] = useState("");
   const [congestIcon, setConjestIcon] = useState("");
   const [congestMessage, setCongestMessage] = useState("혼잡도 파악 중...");
+  // const [test, setTest] = useState("TEST");
 
   // 혼잡도 과거 데이터, 
-  const before = {
-    'H-23': 1,
-    'H-22': 3,
-    'H-21': 3,
-    'H-20': 3,
-    'H-19': 3,
-    'H-18': 2,
-    'H-17': 2,
-    'H-16': 1,
-    'H-15': 4,
+  const [before, setBefore] = useState({
+    'H-23': 0,
+    'H-22': 0,
+    'H-21': 0,
+    'H-20': 0,
+    'H-19': 0,
+    'H-18': 0,
+    'H-17': 0,
+    'H-16': 0,
+    'H-15': 0,
     'H-14': 3,
     'H-13': 1,
     'H-12': 4,
@@ -80,32 +81,19 @@ const DetailBody = () => {
     'H-3': 2,
     'H-2': 3,
     'H-1': 3,
-    'H-0': 1
-  }
+    'H-0': 1,
+  });
   // 혼잡도 예측 결과
-  const predict = {
-    "H-0": 3,
-    "H+1": 4,
-    "H+2": 5,
-  }
-  const data = {
-    datasets:[
-      {
-        type:'line',
-        label:'지난 24시간의 인구 혼잡도',
-        backgroundColor:"rgba(255,0,0,1)",
-        data: before,
-        borderColor: 'red',
-      },
-      {
-        type:'line',
-        label:"예측",
-        data: predict,
-        backgroundColor:"rgba(0,0,255,1)",
-        borderColor: 'blue',
-      }
-    ]
-  }
+  const [predict, setPredict] = useState({
+    "H-0": 0,
+    "H+1": 0,
+    "H+2": 0,
+  });
+  // 혼잡도 예측 메시지
+  const [message_h01, setMessage_h01] = useState("");
+  const [message_h02, setMessage_h02] = useState("");
+
+  
 
   // ---------------------------- [ 컴포넌트 ] ----------------------------
   // 장소 요약 키워드 태그 컴포넌트
@@ -170,6 +158,24 @@ const DetailBody = () => {
   };
   // 혼잡도 그래프 컴포넌트
   function ShowCongestion(){
+    const data = {
+      datasets:[
+        {
+          type:'line',
+          label:'지난 24시간의 인구수',
+          backgroundColor:"rgba(255,0,0,1)",
+          data: before,
+          borderColor: 'red',
+        },
+        {
+          type:'line',
+          label:"예측된 인구수",
+          data: predict,
+          backgroundColor:"rgba(0,0,255,1)",
+          borderColor: 'blue',
+        }
+      ]
+    }
     return (
     	<div>
         	<Line type="line" data={data} />
@@ -198,6 +204,12 @@ const DetailBody = () => {
               <li key={idx} className="list-group-item">
                 <div>{idx+1}.</div>
                 <span>{visitor}</span>
+              </li>
+            )
+          }else if(idx==0 & visitor==""){
+            return(
+              <li key={idx} className="list-group-item">
+                <span>"이 장소에 대한 방문자 리뷰가 없어요..."</span>
               </li>
             )
           }
@@ -251,6 +263,8 @@ const DetailBody = () => {
       )
     }
   };
+
+
 
   // ---------------------------- [ 함수 ] ----------------------------
   // 서울시 실시간 혼잡도 API 호출
@@ -311,6 +325,49 @@ const DetailBody = () => {
     console.log(loopIdx);
   };
 
+  const getAPIConjestion = () =>{
+    console.log("지난24시간 데이터 받는중...")
+    axios
+      .get(`http://localhost:8000/test/`)
+      .then((response)=>{
+        console.log(response.data.last_24)
+        setBefore({
+          "H-23": response.data.last_24[23],
+          "H-22": response.data.last_24[22],
+          "H-21": response.data.last_24[21],
+          "H-20": response.data.last_24[20],
+          "H-19": response.data.last_24[19],
+          "H-18": response.data.last_24[18],
+          "H-17": response.data.last_24[17],
+          "H-16": response.data.last_24[16],
+          "H-15": response.data.last_24[15],
+          "H-14": response.data.last_24[14],
+          "H-13": response.data.last_24[13],
+          "H-12": response.data.last_24[12],
+          "H-11": response.data.last_24[11],
+          "H-10": response.data.last_24[10],
+          "H-9": response.data.last_24[9],
+          "H-8": response.data.last_24[8],
+          "H-7": response.data.last_24[7],
+          "H-6": response.data.last_24[6],
+          "H-5": response.data.last_24[5],
+          "H-4": response.data.last_24[4],
+          "H-3": response.data.last_24[3],
+          "H-2": response.data.last_24[2],
+          "H-1": response.data.last_24[1],
+          "H-0": response.data.last_24[0],
+        })
+        setPredict({
+          "H-0": response.data.last_24[0],
+          "H+1": response.data.y_test_1hour,
+          "H+2": response.data.y_test_2hour,
+        })
+        setMessage_h01(response.data.h_01);
+        setMessage_h02(response.data.h_02);
+      })
+  }
+
+
   // ------------------------ [ useEffect ] ------------------------
   useEffect(()=>{
     axios
@@ -358,36 +415,10 @@ const DetailBody = () => {
   useEffect(()=>{
     setBlogReviews();
   }, [blogReviewCnt])
-
-
-
-
-
-  const [h_01, setH_01] = useState();
-  const [h_02, setH_02] = useState();
-  const [h_01_int, setH_01_int] = useState();
-  const [h_02_int, setH_02_int] = useState();
-
-  function Test(){
-    axios
-      .get("http://localhost:8000/test/")
-      .then((response)=>{
-        setH_01(response.data.h_01);
-        setH_02(response.data.h_02);
-        setH_01_int(response.data.y_test_1hour);
-        setH_02_int(response.data.y_test_2hour);
-      })
-      console.log(h_01);
-      console.log(h_02);
-      console.log(h_01_int);
-      console.log(h_02_int);
-      return (
-        <div>
-          <span>{h_01}</span>
-          <span>{h_02}</span>
-        </div>
-      )
-  }
+  useEffect(()=>{
+    getAPIConjestion();
+  },[])
+  
 
   return (
     <Container className='container_style' style={{minHeight: "75wh"}}>
@@ -460,12 +491,15 @@ const DetailBody = () => {
 
         <div>
         <div class="review_box">
-          <Test></Test>
-        </div>
-        <div class="review_box">
             <span className='review_title'>혼잡도 예측</span>
+            <div class="review_box">
+              <ul className='list-group'>
+                <li className='list-group-item'>1시간 뒤에는: {message_h01}</li>
+                <li className='list-group-item'>2시간 뒤에는: {message_h02}</li>
+              </ul>
+            </div>
             <div className='review_content'>
-            <ShowCongestion></ShowCongestion>
+              <ShowCongestion></ShowCongestion>
             </div>
         </div>
         <hr></hr>
