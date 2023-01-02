@@ -16,6 +16,7 @@ import 'swiper/css/effect-fade';
 SwiperCore.use([Navigation, Pagination, Autoplay]) // Swiper
   
 const MainSns = () => {
+    const [randomRegion, setRandomRegion] = useState("");
     const [tweets, setTweets] = useState([]);
     const [tweetUserInfo, setTweetUserInfo] = useState([]);
     const [tweetmediaInfo, setTweetMediaInfo] = useState([]);
@@ -42,7 +43,7 @@ const MainSns = () => {
                     breakpoints={{
                         720: { slidesPerView: 1.5, spaceBetween: 20 },
                         1024: { slidesPerView: 2.5, spaceBetween: 20 },
-                        1400: { slidesPerView: 4.0, spaceBetween: 10 }
+                        1400: { slidesPerView: 3.5, spaceBetween: 10 }
                     }}
                 >
                     {loopIdx.map((i, idx) => {
@@ -109,6 +110,7 @@ const MainSns = () => {
 
         var region = ['강남', '구로', '마포', '용산', '종로']
         var random_region = region[Math.floor(Math.random() * region.length)];
+        setRandomRegion(random_region);
         var query = random_region + '%23승연아_우즈야_여기야 OR %23신동_넌이미먹었겠지 \
         OR %23박지성_단1g도안줌 OR %23제노의_맛그당어 OR %23런쥔이_밥무거쒀 \
         OR %23확신해찬맛집 OR %23몬베베가_몬베베에게_추천하는_맛집 \
@@ -247,6 +249,7 @@ const MainSns = () => {
                 <h4>
                     # SNS 둘러보기
                     <img className='twitter-logo' src="https://blog.kakaocdn.net/dn/AcIGI/btqxtp2xkg2/EGABG3i2NAMq3kRu1VaGzk/img.jpg" alt="twitter_logo" />
+                    #{randomRegion}구
                 </h4>
             </div>
     

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+// import dotenv from "dotenv";
 
 import Layout from '../layouts/Layout'
 import '../css/main.css'
@@ -229,19 +230,16 @@ const DetailBody = () => {
         <ul className="list-group">
           {loopIdx.map((i, idx) => {
             return (
-              <div>
-                <img src={blogReview.photo_url[i]} alt="블로그 썸네일"></img>
-                <ul onClick={()=>{handleOpenNewTab(blogReview.url[i])}}>
-                  <li key={idx} className="list-group-item">
-                    <a href="#">{blogReview.title[i]}</a>
-                  </li>
-                  <li className="list-group-item">
-                    <span>{blogReview.body[i]}</span>
-                  </li>
-                  <li className="list-group-item">
-                    <span>{blogReview.url[i]}</span>
-                  </li>
-                </ul>
+              <div className='blog-review-box' key={idx}>
+                <div className='blog-image'>
+                  <img src={blogReview.photo_url[i]} alt="블로그 썸네일"></img>
+                </div>
+                <div className='blog-body'>
+                  <div className='blog-title'>
+                  <a onClick={()=>{handleOpenNewTab(blogReview.url[i])}} href="#">{blogReview.title[i]}</a>
+                  </div>
+                  <div className='blog-text'>{blogReview.body[i]}</div>
+                </div>
               </div>
             );
           })}
@@ -249,16 +247,9 @@ const DetailBody = () => {
       )
     } else{
       return (
-        // <ul className="list-group">
-        //   <li className="list-group-item">
-        //     <span>네이버 블로그 리뷰를 불러오는 중입니다...</span>
-        //   </li>
-        // </ul>
-
-        // <div className='waiting'>
         <div>
             <div class="loader"><img className ='waitingImg' src ={require('../img/fitplace_logo.png')}/></div>
-            <span style={{color: "#FFA432", fontWeight: "bold", fontSize: "x-large"}} className='waitingText'>블로그 리뷰를 불러오는 중입니다</span>
+            <span style={{color: "#FFA432", fontWeight: "bold", fontSize: "x-large"}} className='waitingText'>네이버 블로그 리뷰를 불러오는 중입니다</span>
         </div>
       )
     }
@@ -269,7 +260,9 @@ const DetailBody = () => {
   // ---------------------------- [ 함수 ] ----------------------------
   // 서울시 실시간 혼잡도 API 호출
   const getCongestion = () => {
-    var KEY = "63466d4c516c7373313758755a6d45";
+    console.log("[ DetailBody.js ] calling congestion api...");
+    // API KEY는 .env 파일에
+    const KEY = process.env.REACT_APP_CONGESTION_API_KEY;
 
     axios.get(
       `http://openapi.seoul.go.kr:8088/${KEY}/XML/citydata/1/5/${nearestHot}`
