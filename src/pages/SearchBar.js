@@ -11,19 +11,19 @@ const SearchBar = () => {
                 <ul className='h-44 mb-0 ml-55'>
                     <li className='cat_start flex'>
                         <div className='word_style'>먹기</div>
-                        <img src={require('../img/eat2.png')} alt='eat_cat' className='img-size' />
+                        <img src={require('../img/eat.png')} alt='eat_cat' className='img-size' />
                     </li>
                     <li className='cat_other flex'>
                         <div className='word_style'>마시기</div>
-                        <img src={require('../img/drink3.png')} alt='drink_cat' className='img-size' />
+                        <img src={require('../img/drink.png')} alt='drink_cat' className='img-size' />
                     </li>
                     <li className='cat_other flex'>
                         <div className='word_style'>놀기</div>
-                        <img src={require('../img/dice.png')} alt='play_cat' className='img-size' />
+                        <img src={require('../img/game.png')} alt='play_cat' className='img-size' />
                     </li>
                     <li className='cat_other flex'>
                         <div className='word_style'>걷기</div>
-                        <img src={require('../img/walk2.png')} alt='walk_cat' className='img-size' />
+                        <img src={require('../img/sneaker.png')} alt='walk_cat' className='img-size' />
                     </li>
                 </ul>
             </div>
