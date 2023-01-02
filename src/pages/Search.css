@@ -179,3 +179,37 @@ li {
 .subcategory_clicked{
   background-color: rgb(237 237 237);
 }
+@media ( max-width: 992px ) {
+  .justify-content{
+    flex-direction: column!important;
+  }
+  .profile_info{
+    margin-top: 1rem;
+  }
+}
+
+.justify-content{
+  justify-content: space-between;
+}
+.profileUserImg{
+  width: 15px;
+  height: 15px;
+  margin-top: -4px;
+}
+.sort_box{
+  height: 40px;
+  border-radius: 4px;
+  border: solid 1px #cad0d8;
+  font-size:15px;
+  padding: 7px 9px;
+  color: #1B1D1F;
+}
+.profile_box{
+  color: #FFA432;
+  border: solid 1px #FFA432;
+  padding: 7px 13px;
+}
+.arrowSize{
+  width: 15px;
+  z-index: 1;
+}
