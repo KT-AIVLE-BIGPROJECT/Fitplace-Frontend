@@ -157,20 +157,30 @@ const DetailBot = () => {
       })
   }, [])
 
-  function Test(){
-    axios
-      .get("http://localhost:8000/test/")
-      .then((response)=>{
-        console.log(response.data.y_test_1hour);
-        console.log(response.data.y_test_2hour);
-        console.log(response.data.y_test_3hour);
-      })
-  }
+  // const [y_test_1hour, setY_test_1hour] = useState();
+  // const [y_test_2hour, setY_test_2hour] = useState();
+
+  // function Test(){
+  //   axios
+  //     .get("http://localhost:8000/test/")
+  //     .then((response)=>{
+  //       setY_test_1hour(response.data.y_test_1hour);
+  //       setY_test_2hour(response.data.y_test_2hour);
+  //     })
+  //     console.log(response.data.y_test_1hour);
+  //     console.log(response.data.y_test_2hour);
+  //     return (
+  //       <div>
+  //         <span>{y_test_1hour}</span>
+  //         <span>{y_test_2hour}</span>
+  //       </div>
+  //     )
+  // }
 
   return(
     <div>
       <div class="review_box">
-        <Test></Test>
+        {/* <Test></Test> */}
       </div>
       <div class="review_box">
         <span className='review_title'>혼잡도 예측</span>

@@ -360,6 +360,35 @@ const DetailBody = () => {
   }, [blogReviewCnt])
 
 
+
+
+
+  const [h_01, setH_01] = useState();
+  const [h_02, setH_02] = useState();
+  const [h_01_int, setH_01_int] = useState();
+  const [h_02_int, setH_02_int] = useState();
+
+  function Test(){
+    axios
+      .get("http://localhost:8000/test/")
+      .then((response)=>{
+        setH_01(response.data.h_01);
+        setH_02(response.data.h_02);
+        setH_01_int(response.data.y_test_1hour);
+        setH_02_int(response.data.y_test_2hour);
+      })
+      console.log(h_01);
+      console.log(h_02);
+      console.log(h_01_int);
+      console.log(h_02_int);
+      return (
+        <div>
+          <span>{h_01}</span>
+          <span>{h_02}</span>
+        </div>
+      )
+  }
+
   return (
     <Container className='container_style' style={{minHeight: "75wh"}}>
         <div>
@@ -430,6 +459,9 @@ const DetailBody = () => {
         </div>
 
         <div>
+        <div class="review_box">
+          <Test></Test>
+        </div>
         <div class="review_box">
             <span className='review_title'>혼잡도 예측</span>
             <div className='review_content'>
