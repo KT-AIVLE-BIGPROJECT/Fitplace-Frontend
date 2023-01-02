@@ -44,6 +44,10 @@ const DetailBody = () => {
   const [review8, setReview8] = useState("");
   const [review9, setReview9] = useState("");
   const [review10, setReview10] = useState("");
+  // 네이버 블로그 리뷰 데이터
+  const [blogReview, setBlogReview] = useState({});
+  const [blogReviewCnt, setBlogReviewCnt] = useState(0);
+  const [loopIdx, setLoopIdx] = useState([0]);
 
   // 혼잡도 관련
   const [nearestHot, setNearestHot] = useState("");
@@ -109,7 +113,7 @@ const DetailBody = () => {
     var keywords2 = props.keywords;
     var is_keywords = true;
     var keywords_list;
-    console.log(keywords2)
+    // console.log(keywords2)
 
     if(keywords2 != "no result"){
       keywords2 = keywords2.replace('[', '');
@@ -202,19 +206,50 @@ const DetailBody = () => {
     )
   };
   // 블로그 리뷰 컴포넌트
-  const reviews_blog =[
-    {"review_blog": "보류"},
-    {"review_blog": "보류"},
-  ]
   function ShowBlogReview(){
-    const lis = reviews_blog.map((review)=>{
+    // 블로그 리뷰 새 탭에서 열기
+    const handleOpenNewTab = (url) => {
+      window.open(url);
+    };
+
+    if((loopIdx != [0]) && (blogReviewCnt != 0)){
       return (
-        <li className="list-group-item">
-          <span>{review["review_blog"]}</span>
-        </li>
+        <ul className="list-group">
+          {loopIdx.map((i, idx) => {
+            return (
+              <div>
+                <img src={blogReview.photo_url[i]} alt="블로그 썸네일"></img>
+                <ul onClick={()=>{handleOpenNewTab(blogReview.url[i])}}>
+                  <li key={idx} className="list-group-item">
+                    <a href="#">{blogReview.title[i]}</a>
+                  </li>
+                  <li className="list-group-item">
+                    <span>{blogReview.body[i]}</span>
+                  </li>
+                  <li className="list-group-item">
+                    <span>{blogReview.url[i]}</span>
+                  </li>
+                </ul>
+              </div>
+            );
+          })}
+        </ul>
       )
-    })      
-    return <ul className="list-group">{lis}</ul>
+    } else{
+      return (
+        // <ul className="list-group">
+        //   <li className="list-group-item">
+        //     <span>네이버 블로그 리뷰를 불러오는 중입니다...</span>
+        //   </li>
+        // </ul>
+
+        // <div className='waiting'>
+        <div>
+            <div class="loader"><img className ='waitingImg' src ={require('../img/fitplace_logo.png')}/></div>
+            <span style={{color: "#FFA432", fontWeight: "bold", fontSize: "x-large"}} className='waitingText'>블로그 리뷰를 불러오는 중입니다</span>
+        </div>
+      )
+    }
   };
 
   // ---------------------------- [ 함수 ] ----------------------------
@@ -229,7 +264,7 @@ const DetailBody = () => {
       let xml = new DOMParser().parseFromString(response.data, "text/xml");
       setCongestMessage(xml.getElementsByTagName("AREA_CONGEST_LVL")[0].childNodes[0].nodeValue);
       //console.log(xml.getElementsByTagName("AREA_CONGEST_LVL")[0].childNodes[0].nodeValue);
-      console.log(congestMessage);
+      // console.log(congestMessage);
     })
     switch(congestMessage){
       case "여유":
@@ -248,7 +283,32 @@ const DetailBody = () => {
       default:
         break;
     }
+  };
+  // 네이버 블로그 리뷰 API 호출 함수
+  const getBlogReviews = async () => {
+    console.log("[DetailBody.js] loading naver blog reviews...");
+    var body = {
+      "place_code": placeCode
+    };
 
+    const response = await axios.post(`http://localhost:8000/blogreviews/`, body);
+    setBlogReview(response.data);
+    setBlogReviewCnt(response.data.title.length);
+    console.log(blogReview);
+    console.log(blogReviewCnt);
+  };
+  const setBlogReviews = () => {
+    console.log("[DetailBody.js] setting naver blog reviews...");
+    var loop_idx = [];
+    if(blogReviewCnt != 0){
+      for(var i=0; i<blogReviewCnt; i++){
+        loop_idx.push(i);
+      }
+    } else{
+      loop_idx = [0];
+    }
+    setLoopIdx(loop_idx);
+    console.log(loopIdx);
   };
 
   // ------------------------ [ useEffect ] ------------------------
@@ -287,10 +347,17 @@ const DetailBody = () => {
         setReview10(response.data.results[0].review10);
       });
   }, [])
-
+  // 실시간 혼잡도 불러오기
   useEffect(()=>{
     getCongestion();
   }, [name, congestMessage]);
+  //  네이버 블로그 리뷰 불러오기
+  useEffect(()=>{
+    getBlogReviews();
+  }, [])
+  useEffect(()=>{
+    setBlogReviews();
+  }, [blogReviewCnt])
 
 
   return (
@@ -385,6 +452,9 @@ const DetailBody = () => {
             <span className='review_title'>블로그 리뷰</span>
             <div className='review_content'>
             <ShowBlogReview></ShowBlogReview>
+            {/* <div>{blogReview.title[0]}</div>
+            <div>{blogReview.body[0]}</div>
+            <div>{blogReview.url[0]}</div> */}
             </div>
         </div>
         </div>
