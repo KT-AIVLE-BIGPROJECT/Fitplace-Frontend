@@ -325,6 +325,15 @@ width: 580px;
 .ml-10 {
     margin-left: 3px;
 }
+.ml-3p{
+    margin-left:3px;
+}
+.ml-1r{
+    margin-left: 1rem;
+}
+.ml-05r{
+    margin-left: 0.5rem;
+}
 
 /*MAIN화면*/
 .backdrop {

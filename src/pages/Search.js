@@ -16,9 +16,9 @@ const Search = () => {
     const [effectFlag, setEffectFlag] = useState(-1);
     // 추천 근거 사용자 정보 표시용
     const [nickname, setNickname] = useState("");
-    const [age, setAge] = useState("연령대(선택X)");
-    const [gender, setGender] = useState("성별(선택X)");
-    const [mbti, setMbti] = useState("MBTI(선택X)");
+    const [age, setAge] = useState("");
+    const [gender, setGender] = useState("");
+    const [mbti, setMbti] = useState("");
 
     // 필터링 관련 state
     const [mainCategory, setMainCategory] = useState("all"); // 대분류 필터링
@@ -95,7 +95,7 @@ const Search = () => {
                     className='flex'>
                     <div className='word_style'>{props.label}</div>
 
-                    <div className='items-center justify-center'>
+                    <div className='items-center justify-center items-center'>
                         <div className='relative rounded overflow-hidden z-idx'>
                             <img src={props.src} alt={props.alt} className='align-top img-size'/>
                         </div>
@@ -110,12 +110,13 @@ const Search = () => {
     };
     // 중분류 카테고리 버튼 컴포넌트
     const SubCategoryButton = (props) => {
-        if (props.mainCate === "all") {
-            
-        } else {
+        if (props.mainCate === "all") {} else {
             return (
                 <ul className='mb-0'>
-                    <li className={subCategory==''?'cat_start pointer mr-1r subcategory_clicked':'cat_start pointer mr-1r'}>
+                    <li
+                        className={subCategory == ''
+                            ? 'cat_start pointer mr-1r subcategory_clicked'
+                            : 'cat_start pointer mr-1r'}>
                         <div
                             onClick={() => {
                                 setsubCategory("");
@@ -129,7 +130,11 @@ const Search = () => {
                     {
                         subCategoryList.map((sub, idx) => {
                             return (
-                                <li key={idx} className={subCategory==sub?'cat_start pointer mr-1r subcategory_clicked':'cat_start pointer mr-1r'}>
+                                <li
+                                    key={idx}
+                                    className={subCategory == sub
+                                        ? 'cat_start pointer mr-1r subcategory_clicked'
+                                        : 'cat_start pointer mr-1r'}>
                                     <div
                                         onClick={() => {
                                             setsubCategory(sub);
@@ -149,10 +154,16 @@ const Search = () => {
     };
     // 필터링 버튼 컴포넌트
     const FilterButton = (props) => {
+        console.log(props)
         return (
-            <div className='h_row_center2'>
+            <div className='h_row_center2 pointer sort_box mr-1r' style={props.targetState!=0?{'background':'rgba(255, 197, 124, 0.62)'}:{}}>
                 <div
                     onClick={() => {
+                        if(props.name=='filterRating'){
+                            setFilterReview(0);
+                        }else{
+                            setFilterRating(0);
+                        }
                         if (props.targetState === 1) {
                             props.targetSetState(2); // 2: 낮은 순
                         } else if (props.targetState === 2) {
@@ -161,12 +172,13 @@ const Search = () => {
                             props.targetSetState(1); // 1: 높은 순
                         }
                     }}
-                    className='flex mr-60 sort-box z-idx'>
-                    <h6 className='sort-text'>{props.how}</h6>
+                    className='flex'
+                    >
+                    <div className=''>{props.how}</div>
                     <img
-                        src="https://s3.hourplace.co.kr/web/images/icon/sort.svg"
+                        src={props.src}
                         alt='arrow_pic'
-                        className='arrow-size sort-img'/>
+                        className='arrowSize sort-img'/>
                 </div>
             </div>
         )
@@ -715,6 +727,7 @@ const Search = () => {
 
     // ---------------------------[ 메인(Search) 컴포넌트 리턴 ]---------------------------
     console.log('세션스토리지', sessionStorage.getItem("username") === null);
+    console.log(filterRating,filterReview);
     if (sessionStorage.getItem("username") === null) {
         alert('로그인 후 이용 부탁드립니다.');
         window.location.href = '/'
@@ -735,38 +748,56 @@ const Search = () => {
                                 <div className='h_row_center2 mt-1r'>
                                     <div className='category category_size'>
                                         <ul className='h-44 mb-0'>
-                                            <CategoryButton 
-                                                className={mainCategory=='all'? "cat_start pointer mr-2r clicked":"cat_start mr-2r pointer"}
-                                                label="전체" clicked={setMainCategory} value="all"
+                                            <CategoryButton className={mainCategory == 'all'
+                                                    ? "cat_start pointer mr-2r clicked"
+                                                    : "cat_start mr-2r pointer"} label="전체" clicked={setMainCategory} value="all"
                                                 // src={require('../img/all.png')}
-                                                src={mainCategory=='all'? require('../img/all2.png'):require('../img/all.png')} alt="eat_cat"/>
+                                                src={mainCategory == 'all'
+                                                    ? require('../img/all2.png')
+                                                    : require('../img/all.png')} alt="eat_cat"/>
                                             <CategoryButton
-                                                className={mainCategory=='restaurant'? "cat_other pointer mr-2r clicked":"cat_other mr-2r pointer"}
+                                                className={mainCategory == 'restaurant'
+                                                    ? "cat_other pointer mr-2r clicked"
+                                                    : "cat_other mr-2r pointer"}
                                                 label="먹기"
                                                 clicked={setMainCategory}
                                                 value="restaurant"
-                                                src={mainCategory=='restaurant'? require('../img/eat2.png'):require('../img/eat.png')}
+                                                src={mainCategory == 'restaurant'
+                                                    ? require('../img/eat2.png')
+                                                    : require('../img/eat.png')}
                                                 alt="eat_cat"/>
                                             <CategoryButton
-                                                className={mainCategory=='cafe'? "cat_other pointer mr-2r clicked":"cat_other mr-2r pointer"}
+                                                className={mainCategory == 'cafe'
+                                                    ? "cat_other pointer mr-2r clicked"
+                                                    : "cat_other mr-2r pointer"}
                                                 label="마시기"
                                                 clicked={setMainCategory}
                                                 value="cafe"
-                                                src={mainCategory=='cafe'? require('../img/drink2.png'):require('../img/drink.png')}
+                                                src={mainCategory == 'cafe'
+                                                    ? require('../img/drink2.png')
+                                                    : require('../img/drink.png')}
                                                 alt="eat_cat"/>
                                             <CategoryButton
-                                                className={mainCategory=='leisure'? "cat_other pointer mr-2r clicked":"cat_other mr-2r pointer"}
+                                                className={mainCategory == 'leisure'
+                                                    ? "cat_other pointer mr-2r clicked"
+                                                    : "cat_other mr-2r pointer"}
                                                 label="놀기"
                                                 clicked={setMainCategory}
                                                 value="leisure"
-                                                src={mainCategory=='leisure'? require('../img/game2.png'):require('../img/game.png')}
+                                                src={mainCategory == 'leisure'
+                                                    ? require('../img/game2.png')
+                                                    : require('../img/game.png')}
                                                 alt="eat_cat"/>
                                             <CategoryButton
-                                                className={mainCategory=='walking'? "cat_other pointer mr-2r clicked":"cat_other mr-2r pointer"}
+                                                className={mainCategory == 'walking'
+                                                    ? "cat_other pointer mr-2r clicked"
+                                                    : "cat_other mr-2r pointer"}
                                                 label="걷기"
                                                 clicked={setMainCategory}
                                                 value="walking"
-                                                src={mainCategory=='walking'? require('../img/sneaker2.png'):require('../img/sneaker.png')}
+                                                src={mainCategory == 'walking'
+                                                    ? require('../img/sneaker2.png')
+                                                    : require('../img/sneaker.png')}
                                                 alt="eat_cat"/>
 
                                         </ul>
@@ -775,10 +806,22 @@ const Search = () => {
                             </div>
                         </Container>
                     </div>
-                    <div className="container_style pd-top0 bd-1" style={mainCategory=='all'?{'display':'none'}:{'display':'block'}}>
+                    <div
+                        className="container_style pd-top0 bd-1"
+                        style={mainCategory == 'all'
+                            ? {
+                                'display': 'none'
+                            }
+                            : {
+                                'display': 'block'
+                            }}>
                         <Container>
                             <div className='h_column_center2'>
-                                <div className='h_row_center2 height58' style={{"margin-left": "-3px"}}>
+                                <div
+                                    className='h_row_center2 height58'
+                                    style={{
+                                        "margin-left" : "-3px"
+                                    }}>
                                     <div className='category category_size'>
                                         <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
                                     </div>
@@ -788,76 +831,89 @@ const Search = () => {
                     </div>
                     <div className='container_style pd-top0 mt-30'>
                         <Container>
-                            <div className='flex sb-bw'>
-                                <div className='flex h-60 right-sort mb-23'>
-                                    <Dropdown>
-                                        <Dropdown.Toggle
-                                            variant="success"
-                                            id="dropdown-basic"
-                                            className='bg-white btn-outline-secondary dd-style'>
-                                            지역 선택 (현재 : {filterRegion})
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    setFilterRegion("강남구");
-                                                    setMainCategory("all");
-                                                    setsubCategory("");
-                                                    setFilterRating(0);
-                                                    setFilterReview(0);
-                                                }}>강남구</Dropdown.Item>
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    setFilterRegion("구로구");
-                                                    setMainCategory("all");
-                                                    setsubCategory("");
-                                                    setFilterRating(0);
-                                                    setFilterReview(0);
-                                                }}>구로구</Dropdown.Item>
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    setFilterRegion("마포구");
-                                                    setMainCategory("all");
-                                                    setsubCategory("");
-                                                    setFilterRating(0);
-                                                    setFilterReview(0);
-                                                }}>마포구</Dropdown.Item>
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    setFilterRegion("용산구");
-                                                    setMainCategory("all");
-                                                    setsubCategory("");
-                                                    setFilterRating(0);
-                                                    setFilterReview(0);
-                                                }}>용산구</Dropdown.Item>
-                                            <Dropdown.Item
-                                                onClick={() => {
-                                                    setFilterRegion("종로구");
-                                                    setMainCategory("all");
-                                                    setsubCategory("");
-                                                    setFilterRating(0);
-                                                    setFilterReview(0);
-                                                }}>종로구</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
-                                <div
-                                    style={{
-                                        color: '#FFA432'
-                                    }}>{age}
-                                    + {gender}
-                                    + {mbti}</div>
-                                <div>인 [{nickname}] 님을 위한 추천 결과입니다.</div>
+                            <div className='d-flex justify-content'>
                                 <div className='flex'>
-                                    <FilterButton
-                                        how="평점순"
-                                        targetState={filterRating}
-                                        targetSetState={setFilterRating}/>
-                                    <FilterButton
-                                        how="리뷰순"
-                                        targetState={filterReview}
-                                        targetSetState={setFilterReview}/>
+                                    <div className='flex'>
+                                        <Dropdown>
+                                            <Dropdown.Toggle
+                                                variant="success"
+                                                id="dropdown-basic"
+                                                className='bg-white btn-outline-secondary sort_box mr-1r
+                                                '>
+                                                지역 선택 ( 현재 : {filterRegion}
+                                                )
+                                            </Dropdown.Toggle>
+
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        setFilterRegion("강남구");
+                                                        setMainCategory("all");
+                                                        setsubCategory("");
+                                                        setFilterRating(0);
+                                                        setFilterReview(0);
+                                                    }}>강남구</Dropdown.Item>
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        setFilterRegion("구로구");
+                                                        setMainCategory("all");
+                                                        setsubCategory("");
+                                                        setFilterRating(0);
+                                                        setFilterReview(0);
+                                                    }}>구로구</Dropdown.Item>
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        setFilterRegion("마포구");
+                                                        setMainCategory("all");
+                                                        setsubCategory("");
+                                                        setFilterRating(0);
+                                                        setFilterReview(0);
+                                                    }}>마포구</Dropdown.Item>
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        setFilterRegion("용산구");
+                                                        setMainCategory("all");
+                                                        setsubCategory("");
+                                                        setFilterRating(0);
+                                                        setFilterReview(0);
+                                                    }}>용산구</Dropdown.Item>
+                                                <Dropdown.Item
+                                                    onClick={() => {
+                                                        setFilterRegion("종로구");
+                                                        setMainCategory("all");
+                                                        setsubCategory("");
+                                                        setFilterRating(0);
+                                                        setFilterReview(0);
+                                                    }}>종로구</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
+                                    <div className='flex'>
+                                        <div className='h_row_center2 pointer sort_box mr-1r' 
+                                        onClick={()=>{setFilterRating(0);setFilterReview(0);}}
+                                        style={filterRating==0 &&filterReview==0?{"background": "#ffc57c9e"}:{}}
+                                        >추천순</div>
+                                        <FilterButton
+                                            how="평점순"
+                                            name='filterRating'
+                                            targetState={filterRating}
+                                            targetSetState={setFilterRating}
+                                            src={filterRating==2?require('../img/down-arrow.png'):require('../img/up-arrow.png')}
+                                            />
+                                        <FilterButton
+                                            how="리뷰순"
+                                            name='filterReview'
+                                            targetState={filterReview}
+                                            targetSetState={setFilterReview}
+                                            src={filterReview==2?require('../img/down-arrow.png'):require('../img/up-arrow.png')}
+                                            />
+                                    </div>
+                                </div>
+                                <div className='profile_info flex' style={age=='' && gender=='' && mbti==''?{"display":"none"}:{"display":"flex"}}>
+                                    <div className='' style={{"padding":"7px 9px"}}>{nickname} 프로필<img src={require('../img/user.png')} className='profileUserImg ml-3p'/> :</div>
+                                    <div className='sort_box profile_box ml-05r' style={age==''?{"display":"none"}:{"display":"block"}}>{age}</div>
+                                    <div className='sort_box profile_box ml-05r' style={gender==''?{"display":"none"}:{"display":"block"}}>{gender}</div>
+                                    <div className='sort_box profile_box ml-05r' style={mbti==''?{"display":"none"}:{"display":"block"}}>{mbti}</div>
                                 </div>
                             </div>
                         </Container>
@@ -870,7 +926,7 @@ const Search = () => {
                                 minHeight: "75vh"
                             }}>
                             <div>
-                                <RecommendRow/> 
+                                <RecommendRow/>
                                 <Pagenation></Pagenation>
                             </div>
 
