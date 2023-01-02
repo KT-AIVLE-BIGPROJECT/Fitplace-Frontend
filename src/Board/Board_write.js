@@ -78,17 +78,17 @@ function Board_write(){
                         </div>
                     
                         </Form.Group>                    
-                    <Form.Group>
-                        <div class="bt_wrap">
-                            <button className="board_write_button" onClick={() => HandleQuestionSubmit({results})}>
-                                등록
-                            </button>
-        
-                            <a class="board_cancel_button" href = "/board">취소</a>
-                            
-                        </div>
-                    </Form.Group>
-                </Form>
+                        <Form.Group>
+                            <div class="bt_wrap">
+                                <button className="board_write_button" onClick={() => HandleQuestionSubmit({results})}>
+                                    등록
+                                </button>
+            
+                                <a class="board_cancel_button" href = "/board">취소</a>
+                                
+                            </div>
+                        </Form.Group>
+                    </Form>
                 </div>
             </div>
         </div>
