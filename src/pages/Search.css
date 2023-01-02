@@ -213,3 +213,113 @@ li {
   width: 15px;
   z-index: 1;
 }
+.class-0,.class-2,.class-4,.class-6,.class-8,.class-10,.class-12,.class-14,.class-16,.class-18,.class-20,.class-22{
+  flex: 0 1 calc((100% - 36px) / 2);
+  margin-left: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.class-1,.class-3,.class-5,.class-7,.class-9,.class-11,.class-13,.class-15,.class-17,.class-19,.class-21,.class-23{
+  flex: 0 1 calc((100% - 12px) / 2);
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.class-2,.class-3,.class-4,.class-8,.class-12,.class-16,.class-20,.class-5,.class-9,.class-13,.class-17,.class-21,.class-6,.class-10,.class-14,.class-18,.class-22,.class-7,.class-11,.class-15,.class-19,.class-23{
+  margin-top: 25px;
+}
+@media screen and (min-width: 992px){
+  .class-0,.class-3,.class-6,.class-9,.class-12,.class-15,.class-18,.class-21 {
+    flex: 0 1 calc((100% - 36px) / 3);
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-1,.class-4,.class-7,.class-10,.class-13,.class-16,.class-19,.class-22 {
+    flex: 0 1 calc((100% - 36px) / 3);
+    margin-left: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-2,.class-5,.class-8,.class-11,.class-14,.class-17,.class-20,.class-23 {
+    flex: 0 1 calc((100% - 36px) / 3);
+    margin-left: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-3,.class-4,.class-8,.class-12,.class-16,.class-20,.class-5,.class-9,.class-13,.class-17,.class-21,.class-6,.class-10,.class-14,.class-18,.class-22,.class-7,.class-11,.class-15,.class-19,.class-23{
+    margin-top: 30px;
+  }
+  .class-2{
+    margin-top: 0px;
+  }
+}
+@media screen and (min-width: 1400px){
+  .class-0,.class-4,.class-8,.class-12,.class-16,.class-20 {
+    flex: 0 1 calc((100% - 84px) / 4);
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-1,.class-5,.class-9,.class-13,.class-17,.class-21 {
+    flex: 0 1 calc((100% - 84px) / 4);
+    margin-left: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-2,.class-6,.class-10,.class-14,.class-18,.class-22 {
+    flex: 0 1 calc((100% - 84px) / 4);
+    margin-left: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-3,.class-7,.class-11,.class-15,.class-19,.class-23 {
+    flex: 0 1 calc((100% - 84px) / 4);
+    margin-left: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+  .class-4,.class-8,.class-12,.class-16,.class-20,.class-5,.class-9,.class-13,.class-17,.class-21,.class-6,.class-10,.class-14,.class-18,.class-22,.class-7,.class-11,.class-15,.class-19,.class-23{
+    margin-top: 40px;
+  }
+  .class-3{
+    margin-top:0px;
+  }
+}
+
+
+.placeImg {
+  position: relative; 
+  width: 100%; 
+  height: 275px;
+  border-radius: 5px; 
+  overflow: hidden; 
+  cursor: pointer;
+  display: inline-block;
+}
+.place-category {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #72787F;
+}
+.place-img{
+  width:18px;
+  height: 18px;
+}
+.place-name{
+  margin-top: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 14px;
+  color: rgb(27, 29, 31);
+}
+.place-text{
+  margin-left: 2px;
+}
+.place_address {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: slategray;
+}

@@ -15,8 +15,8 @@ const Footer = () => {
         <Container>
             <div>
                 <p>
-                    <a onClick={moveTo1}>개인정보 처리방침 </a>
-                    <a onClick={moveTo2}>이용약관</a>
+                    <a onClick={moveTo1} className="mr-1r pointer">개인정보처리방침 </a>
+                    <a onClick={moveTo2} className="mr-1r pointer">이용약관</a>
                 </p>
                 <p class="copyright">© 2022 KT Corp. All rights reserved.</p>
             </div>

@@ -75,7 +75,7 @@ const Search = () => {
     const [pageGroupList, setPageGroupList] = useState([]); // 페이지네이션 버튼 그룹
 
     const [pageCount, setPageCount] = useState(5); // 화면에 나타날 페이지 개수(5개)
-    const [limit, setLimit] = useState(20); // 한 페이지 당 나타낼 데이터 개수
+    const [limit, setLimit] = useState(24); // 한 페이지 당 나타낼 데이터 개수
     const [pageInfo, setPageInfo] = useState({}); // 페이지 갱신 작업용
 
     const token = sessionStorage.getItem("token"); // 사용자 토큰
@@ -156,12 +156,18 @@ const Search = () => {
     const FilterButton = (props) => {
         console.log(props)
         return (
-            <div className='h_row_center2 pointer sort_box mr-1r' style={props.targetState!=0?{'background':'rgba(255, 197, 124, 0.62)'}:{}}>
+            <div
+                className='h_row_center2 pointer sort_box mr-1r'
+                style={props.targetState != 0
+                    ? {
+                        'background': 'rgba(255, 197, 124, 0.62)'
+                    }
+                    : {}}>
                 <div
                     onClick={() => {
-                        if(props.name=='filterRating'){
+                        if (props.name == 'filterRating') {
                             setFilterReview(0);
-                        }else{
+                        } else {
                             setFilterRating(0);
                         }
                         if (props.targetState === 1) {
@@ -172,33 +178,51 @@ const Search = () => {
                             props.targetSetState(1); // 1: 높은 순
                         }
                     }}
-                    className='flex'
-                    >
+                    className='flex'>
                     <div className=''>{props.how}</div>
-                    <img
-                        src={props.src}
-                        alt='arrow_pic'
-                        className='arrowSize sort-img'/>
+                    <img src={props.src} alt='arrow_pic' className='arrowSize sort-img'/>
                 </div>
             </div>
         )
     };
     // 현재 페이지에 대해 20개(limit으로 지정) 만큼의 장소를 보여줌
     const RecommendRow = () => {
-        var rows = [] // 현재 페이지의 장소들의 인덱스를 담아준다.
-        var i = (currentPage - 1) * limit;
+        let rows = [] // 현재 페이지의 장소들의 인덱스를 담아준다.
+        let i = (currentPage - 1) * limit;
+        let rowss = []
         while (i < currentPage * limit) {
             var temp = [];
             for (var j = 0; j <= 3; j++) {
                 temp.push(i + j);
+                rowss.push(i + j);
             }
             rows.push(temp);
             i = i + 4;
         }
-
+        console.log(rowss);
         return (
-            <div>
+            <div className='flex flex-wrap'>
                 {
+                    rowss.map((r, idx1) => {
+                        if (r < totalCount) {
+                            return (
+                                <RecommendBox
+                                key={idx1}
+                                photo={recommendPlaces.photo[r]}
+                                search_category={recommendPlaces.search_category[r]}
+                                name={recommendPlaces.name[r]}
+                                rating={recommendPlaces.rating[r]}
+                                address={recommendPlaces.address[r]}
+                                keywords={recommendPlaces.review_keywords[r]}
+                                place_code={recommendPlaces.place_code[r]}
+                                className={'class-' + idx1 + ' pointer'}/>
+                            );
+                        } else {
+                            
+                        }
+                    })
+                }
+                {/* {
                     rows.map((row, idx1) => {
                         return (
                             <div key={idx1} className='margin_box mb-130'>
@@ -226,10 +250,12 @@ const Search = () => {
                             </div>
                         )
                     })
+                } */
                 }
             </div>
         )
     };
+    console.log(recommendPlaces);
     // 추천 장소 박스 컴포넌트
     const RecommendBox = (props) => {
         const navigate = useNavigate();
@@ -283,8 +309,8 @@ const Search = () => {
                         style={{
                             display: "flex"
                         }}>
-                        <div className='mr-15 keyword-box'>
-                            <h6 className='keyword-font'>리뷰X</h6>
+                        <div className='mr-1r'>
+                            <h6 className='keyword-font'>리뷰가 없습니다</h6>
                         </div>
                     </div>
 
@@ -295,8 +321,8 @@ const Search = () => {
                         {
                             keywords_list.map((kwd, idx) => {
                                 return (
-                                    <div key={idx} className='mr-15 keyword-box'>
-                                        <h6 key={idx} className='keyword-font'>#{kwd}</h6>
+                                    <div key={idx} className='mr-1r'>
+                                        <h6 key={idx} className='keyword-font' style={{'color':'rgb(230 157 65)'}}># {kwd}</h6>
                                     </div>
                                 );
                             })
@@ -317,32 +343,37 @@ const Search = () => {
             // <div className='single_box'
             // onClick={()=>{navigate(`/detailpage/${props.place_code}`,{state:{place_code:props.place_code}});}}>
             <div
-                className='single_box'
+                className={props.className}
                 onClick={() => handleOpenNewTab(`/detailpage/${props.place_code}`)}>
-                <img className='hotimg' src={props.photo} alt="profile"/>
-                <div className='namebox'>
-                    <h6 className='area_cat'>{subCategory}
-                        / {props.search_category}</h6>
-                    <div className='flex_row'>
-                        <h6>{props.name}</h6>
-                        <div className='flex'>
-                            <img
-                                className='goldstar'
-                                src="https://s3.hourplace.co.kr/web/images/icon/gold_star.svg"
-                                alt="profile"/>
-                            <h6 className='star_rank'>{props.rating}</h6>
+                <img className='placeImg' src={props.photo} alt="profile"/>
+                <div>
+                    <div>
+                        <div className="fw-bold h-row-center justify-content-between place-category">
+                            <div>{subCategory} / {props.search_category}</div>
+                            <div class="hot-rating">
+                                <img src = {require("../img/star.png")} className="hot-rating-img"/>
+                                <span className='mr-05r'>{props.rating}</span>
+                            </div>
                         </div>
+                        <div className="flex place-name items-center">
+                            <img className="place-img" src ={require("../img/fitplace_logo.png")} />
+                            <span className='place-text'>{props.name}</span>
+                        </div>
+                        <h6 className='place_address'>{props.address}</h6>
                     </div>
-                    <h6 className='area_cat'>{props.address}</h6>
-                    <KeywordBox is_keywords={is_keywords}/>
+                    <hr className='width-100 m-tb'/>
+                    <div className=''>
+                        <KeywordBox is_keywords={is_keywords}/>
+                    </div>
                 </div>
+
             </div>
         )
     }
     // 페이지네이션
     const Pagenation = () => {
         return (
-            <div>
+            <div className='text-center m-tb80'>
                 <button className='btn btn-default' onClick={() => setCurrentPage(1)}>&#60;&#60;</button>
                 <button className='btn btn-default' onClick={() => setCurrentPage(prev)}>&#60;</button>
                 {
@@ -351,14 +382,14 @@ const Search = () => {
                             return (
                                 <button
                                     className='btn btn-default activeBtn'
-                                    onClick={() => setCurrentPage(page)}
+                                    onClick={() => {setCurrentPage(page);window.scrollTo(0,0);}}
                                     key={idx}>{page}</button>
                             );
                         } else {
                             return (
                                 <button
-                                    className='btn btn-default unactiveBtn'
-                                    onClick={() => setCurrentPage(page)}
+                                    className='btn btn-default'
+                                    onClick={() => {setCurrentPage(page);window.scrollTo(0,0);}}
                                     key={idx}>{page}</button>
                             );
                         }
@@ -727,7 +758,7 @@ const Search = () => {
 
     // ---------------------------[ 메인(Search) 컴포넌트 리턴 ]---------------------------
     console.log('세션스토리지', sessionStorage.getItem("username") === null);
-    console.log(filterRating,filterReview);
+    console.log(filterRating, filterReview);
     if (sessionStorage.getItem("username") === null) {
         alert('로그인 후 이용 부탁드립니다.');
         window.location.href = '/'
@@ -889,31 +920,78 @@ const Search = () => {
                                         </Dropdown>
                                     </div>
                                     <div className='flex'>
-                                        <div className='h_row_center2 pointer sort_box mr-1r' 
-                                        onClick={()=>{setFilterRating(0);setFilterReview(0);}}
-                                        style={filterRating==0 &&filterReview==0?{"background": "#ffc57c9e"}:{}}
-                                        >추천순</div>
+                                        <div
+                                            className='h_row_center2 pointer sort_box mr-1r'
+                                            onClick={() => {
+                                                setFilterRating(0);
+                                                setFilterReview(0);
+                                            }}
+                                            style={filterRating == 0 && filterReview == 0
+                                                ? {
+                                                    "background": "#ffc57c9e"
+                                                }
+                                                : {}}>추천순</div>
                                         <FilterButton
                                             how="평점순"
                                             name='filterRating'
                                             targetState={filterRating}
                                             targetSetState={setFilterRating}
-                                            src={filterRating==2?require('../img/down-arrow.png'):require('../img/up-arrow.png')}
-                                            />
+                                            src={filterRating == 2
+                                                ? require('../img/down-arrow.png')
+                                                : require('../img/up-arrow.png')}/>
                                         <FilterButton
                                             how="리뷰순"
                                             name='filterReview'
                                             targetState={filterReview}
                                             targetSetState={setFilterReview}
-                                            src={filterReview==2?require('../img/down-arrow.png'):require('../img/up-arrow.png')}
-                                            />
+                                            src={filterReview == 2
+                                                ? require('../img/down-arrow.png')
+                                                : require('../img/up-arrow.png')}/>
                                     </div>
                                 </div>
-                                <div className='profile_info flex' style={age=='' && gender=='' && mbti==''?{"display":"none"}:{"display":"flex"}}>
-                                    <div className='' style={{"padding":"7px 9px"}}>{nickname} 프로필<img src={require('../img/user.png')} className='profileUserImg ml-3p'/> :</div>
-                                    <div className='sort_box profile_box ml-05r' style={age==''?{"display":"none"}:{"display":"block"}}>{age}</div>
-                                    <div className='sort_box profile_box ml-05r' style={gender==''?{"display":"none"}:{"display":"block"}}>{gender}</div>
-                                    <div className='sort_box profile_box ml-05r' style={mbti==''?{"display":"none"}:{"display":"block"}}>{mbti}</div>
+                                <div
+                                    className='profile_info flex'
+                                    style={age == '' && gender == '' && mbti == ''
+                                        ? {
+                                            "display": "none"
+                                        }
+                                        : {
+                                            "display": "flex"
+                                        }}>
+                                    <div
+                                        className=''
+                                        style={{
+                                            "padding" : "7px 9px"
+                                        }}>{nickname}
+                                        프로필<img src={require('../img/user.png')} className='profileUserImg ml-3p'/>
+                                        :</div>
+                                    <div
+                                        className='sort_box profile_box ml-05r'
+                                        style={age == ''
+                                            ? {
+                                                "display": "none"
+                                            }
+                                            : {
+                                                "display": "block"
+                                            }}>{age}</div>
+                                    <div
+                                        className='sort_box profile_box ml-05r'
+                                        style={gender == ''
+                                            ? {
+                                                "display": "none"
+                                            }
+                                            : {
+                                                "display": "block"
+                                            }}>{gender}</div>
+                                    <div
+                                        className='sort_box profile_box ml-05r'
+                                        style={mbti == ''
+                                            ? {
+                                                "display": "none"
+                                            }
+                                            : {
+                                                "display": "block"
+                                            }}>{mbti}</div>
                                 </div>
                             </div>
                         </Container>
@@ -925,7 +1003,7 @@ const Search = () => {
                             style={{
                                 minHeight: "75vh"
                             }}>
-                            <div>
+                            <div className='mt-50'>
                                 <RecommendRow/>
                                 <Pagenation></Pagenation>
                             </div>

@@ -296,6 +296,9 @@ width: 580px;
 .mt-30 {
     margin-top: 30px;
 }
+.mt-50 {
+    margin-top: 50px;
+}
 
 .m-0a {
     margin: 0 auto;
@@ -304,6 +307,14 @@ width: 580px;
 .m-tb {
     margin-top: 40px;
     margin-bottom: 40px;
+}
+.m-tb80 {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+hr.m-tb {
+    margin-top: 0.8rem;
+    margin-bottom: 0.2rem;
 }
 
 .d-table {
@@ -597,4 +608,7 @@ ul{
 }
 .mr-2r{
     margin-right: 2rem;
+}
+.mr-05r{
+    margin-right:0.5rem;
 }
