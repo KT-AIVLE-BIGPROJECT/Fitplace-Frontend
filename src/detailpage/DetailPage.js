@@ -4,21 +4,15 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Layout from '../layouts/Layout'
 import './DetailPage.css';
-import DetailTop from './DetailTop';
-import DetailBot from './DetailBot';
 import DetailBody from './DetailBody';
 
 
 const DetailPage = () => {
   const {id} = useParams();
-  return (        
-    <Layout>
-      {/* <Container className='container_style' style={{minHeight: "75wh"}}>
-        <DetailTop></DetailTop>
-        <DetailBot></DetailBot>
-      </Container> */}
-      <DetailBody></DetailBody>
-    </Layout>
+  return (
+    <div className='root'>
+      <DetailBody></DetailBody> 
+    </div>   
   )
 }
 
