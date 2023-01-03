@@ -550,8 +550,7 @@ const DetailBody = () => {
                                     d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path>
                             </svg>
                             <span>{rating}</span>
-                            <span>/5
-                            </span>
+                            <span>/5</span>
                             <a href="#방문자 리뷰">
                                 <span class='_blue'>방문자 리뷰
                                 </span>
@@ -567,56 +566,25 @@ const DetailBody = () => {
                             <br></br>
                             <ShowTags keywords={keywords}/>
                         </div>
+                    <hr></hr>
+                    <div class = "left_margin_box">
+                    <div>
+                        <span class='_blue'>전화번호 </span>
+                        <span>{tel}</span>
                     </div>
-
-                    {/* <div class='main'> */}
-
-        <div class='main'>
-            <div class = "title_box">
-            <div>
-                <span class='_conjest'>
-                <div>{congestMessage} {congestIcon}</div>
-                {/* <div>혼잡 😫</div> */}
-                </span>
-            </div>
-            <div>
-                <span class="title">{name} </span>
-                <span class="category">{category}</span>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" class="_star"><path d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path></svg>
-            <span>{rating}</span>
-            <span>/5 </span>
-            <a href="#방문자 리뷰">
-                <span class='_blue'>방문자 리뷰 </span>
-                <span>{visitorCnt}, </span>
-            </a>     
-            <a href="#블로그 리뷰">
-                <span class='_blue'>블로그 리뷰 </span>
-                <span>{blogCnt} </span>
-            </a>          
-            <br></br>
-            <ShowTags keywords={keywords}/>
-            </div>
-            <hr></hr>
-            <div class = "left_margin_box">
-            <div>
-                <span class='_blue'>전화번호 </span>
-                <span>{tel}</span>
-            </div>
-            <div>
-                <span class='_blue'>주소 </span>
-                <span>{address}</span>
-            </div>
-            <div>
-                <span class="_blue">네이버 지도에서 보기 </span>
-                <a href={detailURL} target="_blank" role="button" class="naver_map_link">
-                {/* <i class="naver_logo"></i> */}
-                네이버 지도
-                </a>
-            </div>
-            </div>  
-            <hr></hr>
-
+                    <div>
+                        <span class='_blue'>주소 </span>
+                        <span>{address}</span>
+                    </div>
+                    <div>
+                        <span class="_blue">네이버 지도에서 보기 </span>
+                        <a href={detailURL} target="_blank" role="button" class="naver_map_link">
+                        {/* <i class="naver_logo"></i> */}
+                        네이버 지도
+                        </a>
+                    </div>
+                    </div>  
+                    <hr></hr>
                         <div class="place_section">
                             <div class="place_section_title">
                                 <span>"방문하신 분들이 뽑은 장점"</span>
