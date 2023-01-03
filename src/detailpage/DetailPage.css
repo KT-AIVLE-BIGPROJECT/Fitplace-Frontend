@@ -12,7 +12,7 @@
 }
   div.image_box{
     position: relative;
-    height: 20%;
+    height: 450px;
     margin : auto;
     margin-top: 16px;
     z-index: 1;
@@ -23,10 +23,6 @@
     height: 100%; 
   }
   
-  div.main{
-    text-align: center;
-    justify-content : center;
-  }
   ._star{
     width: 12px;
     height: 12px;
@@ -223,4 +219,14 @@
   
   .blog-text{
     padding: 10px 10px;
+  }
+  .main{
+    position: relative;
+    margin-top: -11px;
+    padding: 0 1rem;
+  }
+  .main-topic{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 7px;
   }

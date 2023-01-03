@@ -83,7 +83,7 @@ const DetailBody = () => {
         'H-3': 0,
         'H-2': 0,
         'H-1': 0,
-        'H-0': ppltnMin,
+        'H-0': ppltnMin
     });
     // 혼잡도 예측 결과
     const [predict, setPredict] = useState({"H-0": 0, "H+1": 0, "H+2": 0});
@@ -111,14 +111,14 @@ const DetailBody = () => {
         }
 
         if (is_keywords === false) {
-            return (<div>리뷰 요약 키워드 없음</div>)
+
         } else {
             return (
                 <div>
                     {
                         keywords_list.map((kwd, idx) => {
                             return (
-                                <span className='test' key={idx}>#{kwd}
+                                <span className='test mr-05r' style={{"color": "rgb(230, 157, 65)}"}} key={idx}>#{kwd}
                                 </span>
                             )
                         })
@@ -295,7 +295,9 @@ const DetailBody = () => {
                 setCongestMessage(
                     xml.getElementsByTagName("AREA_CONGEST_LVL")[0].childNodes[0].nodeValue
                 );
-                setPpltnMin(xml.getElementsByTagName("AREA_PPLTN_MIN")[0].childNodes[0].nodeValue);
+                setPpltnMin(
+                    xml.getElementsByTagName("AREA_PPLTN_MIN")[0].childNodes[0].nodeValue
+                );
                 // console.log(xml.getElementsByTagName("AREA_CONGEST_LVL")[0].childNodes[0].n
                 // odeValue); console.log(congestMessage);
             })
@@ -315,8 +317,8 @@ const DetailBody = () => {
                 break;
             default:
                 break;
-          }
-          setBefore({
+        }
+        setBefore({
             'H-23': 0,
             'H-22': 0,
             'H-21': 0,
@@ -340,8 +342,8 @@ const DetailBody = () => {
             'H-3': 2,
             'H-2': 3,
             'H-1': 3,
-            'H-0': ppltnMin,
-          });
+            'H-0': ppltnMin
+        });
 
     };
     // 네이버 블로그 리뷰 API 호출 함수
@@ -518,129 +520,138 @@ const DetailBody = () => {
     }, [blogReviewCnt])
     useEffect(() => {
         getAPIConjestion();
-      },[nearestHot, gu])
+    }, [nearestHot, gu])
 
     return (
-        <Container
-            className='container_style detailPage'
-            style={{
-                minHeight: "75wh"
-            }}>
-            <div className=''>
-                <div>
-                    <div class='image_box'>
-                        <img class='_storejpg' src={photo}></img>
-                    </div>
-                    <div className='text-center'>
-                        <div class="m-0a title_box">
-                            <div>
-                                <span class='_conjest'>
-                                    <div>{congestMessage}
-                                        {congestIcon}</div>
-                                    {/* <div>혼잡 😫</div> */}
-                                </span>
-                            </div>
-                            <div>
-                                <span class="title">{name}
-                                </span>
-                                <span class="category">{category}</span>
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" class="_star">
-                                <path
-                                    d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path>
-                            </svg>
-                            <span>{rating}</span>
-                            <span>/5</span>
-                            <a href="#방문자 리뷰">
-                                <span class='_blue'>방문자 리뷰
-                                </span>
-                                <span>{visitorCnt}
-                                </span>
-                            </a>
-                            <a href="#블로그 리뷰">
-                                <span class='_blue'>블로그 리뷰
-                                </span>
-                                <span>{blogCnt}
-                                </span>
-                            </a>
-                            <br></br>
-                            <ShowTags keywords={keywords}/>
+        <div>
+            <Container
+                className='container_style detailPage'
+                style={{
+                    minHeight: "75wh"
+                }}>
+                <div className=''>
+                    <div>
+                        <div class='image_box'>
+                            <img class='_storejpg' src={photo}></img>
                         </div>
-                    <hr></hr>
-                    <div class = "left_margin_box">
-                    <div>
-                        <span class='_blue'>전화번호 </span>
-                        <span>{tel}</span>
-                    </div>
-                    <div>
-                        <span class='_blue'>주소 </span>
-                        <span>{address}</span>
-                    </div>
-                    <div>
-                        <span class="_blue">네이버 지도에서 보기 </span>
-                        <a href={detailURL} target="_blank" role="button" class="naver_map_link">
-                        {/* <i class="naver_logo"></i> */}
-                        네이버 지도
-                        </a>
-                    </div>
-                    </div>  
-                    <hr></hr>
-                        <div class="place_section">
-                            <div class="place_section_title">
-                                <span>"방문하신 분들이 뽑은 장점"</span>
-                            </div>
-                            <div class="place_section_content">
-                                <div class="bar_chart">
-                                    <ul>
-                                        <ShowReviewSummary></ShowReviewSummary>
-                                    </ul>
+                        <div className='text-center'>
+                            <div class="m-0a title_box">
+                                <div>
+                                    <span class='_conjest'>
+                                        <div>{congestMessage}
+                                            {congestIcon}</div>
+                                        {/* <div>혼잡 😫</div> */}
+                                    </span>
                                 </div>
+                                <div>
+                                    <span class="title mr-05r">{name}
+                                    </span>
+                                    <span class="category">{category}</span>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" class="_star">
+                                    <path
+                                        d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path>
+                                </svg>
+                                <span className=''>{rating}</span>
+                                <span className='mr-05r'>/5</span>
+                                <a href="#방문자 리뷰" className='mr-05r'>
+                                    <span class='_blue'>방문자리뷰
+                                    </span>
+                                    <span>{visitorCnt}
+                                    </span>
+                                </a>
+                                <a href="#블로그 리뷰">
+                                    <span class='_blue'>블로그리뷰
+                                    </span>
+                                    <span>{blogCnt}
+                                    </span>
+                                </a>
+                                <br></br>
+                                <ShowTags keywords={keywords}/>
+                            </div>
+                        </div>
+                        <div class='main'>
+                          <div className='main-topic'>상세정보</div>
+                            <div class="left_margin_box">
+                                <div>
+                                    <span class='_blue'>전화번호
+                                    </span>
+                                    <span>{tel}</span>
+                                </div>
+                                <div>
+                                    <span class='_blue'>주소
+                                    </span>
+                                    <span>{address}</span>
+                                </div>
+                                <div>
+                                    <span class="_blue">네이버 지도에서 보기
+                                    </span>
+                                    <a href={detailURL} target="_blank" role="button" class="naver_map_link">
+                                        {/* <i class="naver_logo"></i> */}
+                                        네이버 지도
+                                    </a>
+                                </div>
+                            </div>
+                            <hr></hr>
+
+                            <div class="place_section">
+                                <div class="place_section_title">
+                                    <span>"방문하신 분들이 뽑은 장점"</span>
+                                </div>
+                                <div class="place_section_content">
+                                    <div class="bar_chart">
+                                        <ul>
+                                            <ShowReviewSummary></ShowReviewSummary>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr></hr>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="review_box">
+                            <span className='review_title'>혼잡도 예측</span>
+                            <div class="review_box">
+                                <ul className='list-group'>
+                                    <li className='list-group-item'>현재: {congestMessage}</li>
+                                    <li className='list-group-item'>현재 실시간 인구지표 최소값: ({ppltnMin})</li>
+                                    <li className='list-group-item'>1시간 뒤에는: {message_h01}</li>
+                                    <li className='list-group-item'>2시간 뒤에는: {message_h02}</li>
+                                </ul>
+                            </div>
+                            <div className='review_content'>
+                                <ShowCongestion></ShowCongestion>
                             </div>
                         </div>
                         <hr></hr>
-                    </div>
-                </div>
 
-                <div>
-                    <div class="review_box">
-                        <span className='review_title'>혼잡도 예측</span>
                         <div class="review_box">
-                            <ul className='list-group'>
-                                <li className='list-group-item'>현재: {congestMessage}</li>
-                                <li className='list-group-item'>현재 실시간 인구지표 최소값: ({ppltnMin})</li>
-                                <li className='list-group-item'>1시간 뒤에는: {message_h01}</li>
-                                <li className='list-group-item'>2시간 뒤에는: {message_h02}</li>
-                            </ul>
+                            <a name="방문자 리뷰"></a>
+                            <span className='review_title'>방문자 리뷰</span>
+                            <div className='review_content'>
+                                <ShowVisitorReview></ShowVisitorReview>
+                            </div>
                         </div>
-                        <div className='review_content'>
-                            <ShowCongestion></ShowCongestion>
-                        </div>
-                    </div>
-                    <hr></hr>
+                        <hr></hr>
 
-                    <div class="review_box">
-                        <a name="방문자 리뷰"></a>
-                        <span className='review_title'>방문자 리뷰</span>
-                        <div className='review_content'>
-                            <ShowVisitorReview></ShowVisitorReview>
-                        </div>
-                    </div>
-                    <hr></hr>
-
-                    <div className='review_box'>
-                        <a name="블로그 리뷰"></a>
-                        <span className='review_title'>블로그 리뷰</span>
-                        <div className='review_content'>
-                            <ShowBlogReview></ShowBlogReview>
-                            {/* <div>{blogReview.title[0]}</div>
+                        <div className='review_box'>
+                            <a name="블로그 리뷰"></a>
+                            <span className='review_title'>블로그 리뷰</span>
+                            <div className='review_content'>
+                                <ShowBlogReview></ShowBlogReview>
+                                {/* <div>{blogReview.title[0]}</div>
                             <div>{blogReview.body[0]}</div>
                             <div>{blogReview.url[0]}</div> */
-                            }
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
+
     )
 }
 
