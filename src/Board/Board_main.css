@@ -1,7 +1,8 @@
 .board_container {
-    margin-top: 60px; 
-    width: 1000px;
-    justify-content: space-around; 
+  margin-top: 60px;
+  /* justify-content: space-around;  */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .table-fill {
@@ -124,6 +125,7 @@ table.dataTable td {
 
 .Board_Reader{
   display: flex !important;
+  border-bottom: 1px solid #e2e2e287;
 }
 
 
@@ -308,3 +310,41 @@ table.dataTable td {
     padding: 1em !important;
   }
 } */
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.top_box {
+  padding: 100px 0 40px;
+}
+
+.font-20 {
+  font-size: 22px;
+  color: dimgray;
+  font-weight: 500;
+}
+
+.align-r {
+  text-align: end;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.bo_w_select {
+  border-radius: 8px;
+  border-color: lightgray;
+  padding: 5px;
+}
+
+.w-btn {
+  width: 92px;
+  height: 45px;
+  border-radius: 15px;
+}
+
+.board_list .title {
+  color: inherit;
+}

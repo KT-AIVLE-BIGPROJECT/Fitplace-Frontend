@@ -16,11 +16,12 @@ function Pagination({ total, limit, page, setPage }) {
               key={i + 1}
               onClick={() => setPage(i + 1)}
               aria-current={page === i + 1 ? "page" : null}
+              className={page==i+1?"btn btn-default activeBtn":"btn btn-default"}
             >
               {i + 1}
             </Button>
           ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages}>
+        <Button onClick={() => setPage(page + 1)} disabled={page === numPages} className="btn btn-default">
           &gt;
         </Button>
       </Nav>
@@ -41,24 +42,24 @@ const Button = styled.button`
   border-radius: 8px;
   padding: 8px;
   margin: 0;
-  background: orange;
+  // background: orange;
   color: white;
   font-size: 1rem;
 
   &:hover {
-    background: tomato;
+    // background: tomato;
     cursor: pointer;
     transform: translateY(-2px);
   }
 
   &[disabled] {
-    background: grey;
+    // background: grey;
     cursor: revert;
     transform: revert;
   }
 
   &[aria-current] {
-    background: deeppink;
+    // background: deeppink;
     font-weight: bold;
     cursor: revert;
     transform: revert;

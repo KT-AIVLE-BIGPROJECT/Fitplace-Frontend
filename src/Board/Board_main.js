@@ -42,8 +42,10 @@ function Board_main(){
             return (
               <div class = "Board_Reader">
                 <div className="num">{result.pk}</div>
-                <div className="title"><Link to={`/board/detail/${result.pk}`}>{ result.title }</Link>
-                </div>
+               
+                  <Link to={`/board/detail/${result.pk}`} className="title">{ result.title }
+                  </Link>
+                
                 <div className="writer">{nameMasking(result.profile.nickname)}</div>
                 <div className="date">{date[0]}</div>
               </div>
@@ -62,15 +64,30 @@ function Board_main(){
 
     return (
     <div class="board_container">
+      <div className='linemap area'>
+          <div>
+              <a href="/"><img className="homeImg" src={require("../img/home.png")}/></a>
+          </div>
+          <div className='subtitle'>
+              &gt;
+              <span>FAQs</span>
+          </div>
+      </div>
+      <br/>
+      <div>
+        <div className='top_box'>
         <h1 class = "FAQ">FAQs</h1>
-        <p>질문을 남겨주세요.</p>
-
+        <p className='font-20'>자주 하는 질문</p>
+        </div>
+      </div>
+      <div className='align-r font-16'>
         <label>
         페이지 당 표시할 게시물 수:&nbsp;
             <select
             type="number"
             value={limit}
             onChange={({ target: { value } }) => setLimit(Number(value))}
+            className="bo_w_select"
             >
             <option value="5">5</option>
             <option value="10">10</option>
@@ -79,10 +96,10 @@ function Board_main(){
             <option value="100">100</option>
             </select>
         </label>
-      
+      </div>
 
       <body>
-        <div class="board_list_wrap">
+        <div class="board_list_wrap mt-20">
             <div class="board_list">
                 <div class="top">
                     <div class="num">번호</div>
@@ -94,18 +111,23 @@ function Board_main(){
                 <Board_Read />
                 
             </div>
-            <footer>
+
+            <div class="bt_wrap">
+                <a href="/board/write" class="on">글쓰기</a>
+            </div>
+
+            <div>
                 <Board_pagination
                 total={count}
                 limit={limit}
                 page={page}
                 setPage={setPage}
                 />
-            </footer>
-            
-            <div class="bt_wrap">
-                <a href="/board/write" class="on">글쓰기</a>
             </div>
+            
+            {/* <div class="bt_wrap">
+                <a href="/board/write" class="on">글쓰기</a>
+            </div> */}
         </div>
         </body>
     </div>

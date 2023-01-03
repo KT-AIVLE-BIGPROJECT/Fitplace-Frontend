@@ -1,0 +1,226 @@
+.root{
+    background-color: #bfbfbf3d;
+  }
+.detailPage{
+    width:40%;
+    background-color: white;
+}
+@media ( max-width: 992px ) {
+    .detailPage {
+        width: 100%!important;;
+    }
+}
+  div.image_box{
+    position: relative;
+    height: 20%;
+    margin : auto;
+    margin-top: 16px;
+    z-index: 1;
+  }
+  ._storejpg {
+    position: relative;
+    width: 100%; 
+    height: 100%; 
+  }
+  
+  div.main{
+    text-align: center;
+    justify-content : center;
+  }
+  ._star{
+    width: 12px;
+    height: 12px;
+    fill: red;
+  }
+  span._blue{
+    font-size: 1.1rem;
+    font-weight: 900;
+    color : rgb(0,104,195);
+  }
+  
+  div.title_box{
+    position: relative;
+    top: -52px;
+    z-index: 2;
+    background: white;
+    width: 80%;
+    margin: auto;
+    padding: 22px 18px;
+    box-shadow: 4px 4px 5px 0 #cbc9c9;
+    border: 1px solid #f8efef;
+  }
+  span.title{
+    font-size: 1.4rem;
+    font-weight: 900;
+  }
+  span.category{
+    color: grey;
+  }
+  
+  div.left_margin_box{
+    text-align: left;
+    justify-content : left;
+  }
+  
+  hr{
+    margin-left :auto;
+    margin-right:auto;
+  }
+  
+  
+  
+  /* test2 */
+  .naver_map_link{
+    display: inline-block;
+    background: white;
+    color: rgb(4,207,92);
+    padding: 1px 15px;
+    border: 1px solid rgb(4,207,92);
+    border-radius: 18px;
+    font-weight: bold;
+  }
+  /* .naver_logo{
+    display: inline-block;
+    float:left;
+    overflow: hidden;
+    color: transparent;
+    white-space: nowrap;
+    vertical-align: top;
+    background: url(https://ssl.pstatic.net/sstatic/search/pc/img/sp_common2_12db1541.png) 0 0 no-repeat;
+    background-size: 367px 347px;
+    background-position: -286px -196px;
+    width: 22px;
+    height: 22px; 
+    vertical-align: top;
+  } */
+  
+  .test{
+    color:rgba(255,164,50,.8);
+    font-weight: bold;
+  }
+  
+  
+  /* test */
+  .place_section{
+    display: block;
+  }
+  .place_section_title{
+    text-align: left;
+    font-weight: bold;
+    /* color:rgba(255,164,50,.8); */
+  }
+  .place_section_content{
+    padding: 0 18px;
+  }
+  .bar_chart{
+    position: relative;
+  }
+  ul{
+    list-style: none;
+    /* display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px; 
+    padding-inline-start: 40px;  */
+  }
+  .bar_background{
+    position: relative;
+    height: 44px;
+    border-radius: 5px;
+    background: #f4f7f8;
+    line-height: 3rem;
+    margin: 10px;
+    padding: 0;
+  }
+  .bar{
+    display: flex;
+    background:rgba(255,164,50,.8);
+    /* background:rgba(0,180,155,.35); */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0 13px;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  .bar_contents{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 18px 0 13px;
+    font-weight: bold;
+    color: #242424;
+  }
+  .review_summary{
+    flex: 1 1 auto;
+    display: flex;
+    /* vertical-align: middle; */
+    /* align-items: center; */
+    color: #242424;
+  }
+  .review_summary_cnt{
+    color:rgba(255,164,50,.8);
+    /* font-size: 1.3rem; */
+    /* flex: none;
+    margin-left: 7px;
+    font-weight: 600;
+    color: #07b495;
+    letter-spacing: -0.2px; */
+  }
+  
+  a{
+    text-decoration-line: none;
+  }
+  
+  
+  
+  
+  .review_title{
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10%;
+  }
+  
+  .review_box{
+    display: block;
+  }
+  
+  .review_content{
+    padding-inline-start: 40px;
+  }
+  
+  .blog-review-box{
+    border: solid 1px #cfcfcf;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+  }
+  
+  .blog-image{
+    border-bottom: solid 1px #cfcfcf;
+    border-radius: 12px;
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
+    object-fit: cover;
+  }
+  
+  .blog-body{
+    
+  }
+  
+  .blog-title{
+    font-weight: bold;
+    font-size: 20px;
+    padding-top:5px;
+    padding-left: 10px;
+  }
+  
+  .blog-text{
+    padding: 10px 10px;
+  }
