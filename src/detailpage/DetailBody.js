@@ -56,6 +56,8 @@ const DetailBody = () => {
     //const [congestLvl, setConjestLvl] = useState("");
     const [congestIcon, setConjestIcon] = useState("");
     const [congestMessage, setCongestMessage] = useState("혼잡도 파악 중...");
+    const [ppltnMin, setPpltnMin] = useState(0); // 실시간 인구지표 최소값
+
     // const [test, setTest] = useState("TEST"); 혼잡도 과거 데이터,
     const [before, setBefore] = useState({
         'H-23': 0,
@@ -81,7 +83,7 @@ const DetailBody = () => {
         'H-3': 0,
         'H-2': 0,
         'H-1': 0,
-        'H-0': 0
+        'H-0': ppltnMin,
     });
     // 혼잡도 예측 결과
     const [predict, setPredict] = useState({"H-0": 0, "H+1": 0, "H+2": 0});
@@ -91,7 +93,7 @@ const DetailBody = () => {
     const [gu, setGu] = useState("강남구");
 
     // ---------------------------- [ 컴포넌트 ] ---------------------------- 장소 요약 키워드
-    // 태그 컴포넌트
+    // 장소 요약 키워드 태그 컴포넌트
     const ShowTags = (props) => {
         var keywords2 = props.keywords;
         var is_keywords = true;
@@ -293,6 +295,7 @@ const DetailBody = () => {
                 setCongestMessage(
                     xml.getElementsByTagName("AREA_CONGEST_LVL")[0].childNodes[0].nodeValue
                 );
+                setPpltnMin(xml.getElementsByTagName("AREA_PPLTN_MIN")[0].childNodes[0].nodeValue);
                 // console.log(xml.getElementsByTagName("AREA_CONGEST_LVL")[0].childNodes[0].n
                 // odeValue); console.log(congestMessage);
             })
@@ -312,7 +315,34 @@ const DetailBody = () => {
                 break;
             default:
                 break;
-        }
+          }
+          setBefore({
+            'H-23': 0,
+            'H-22': 0,
+            'H-21': 0,
+            'H-20': 0,
+            'H-19': 0,
+            'H-18': 0,
+            'H-17': 0,
+            'H-16': 0,
+            'H-15': 0,
+            'H-14': 3,
+            'H-13': 1,
+            'H-12': 4,
+            'H-11': 3,
+            'H-10': 4,
+            'H-9': 4,
+            'H-8': 2,
+            'H-7': 1,
+            'H-6': 1,
+            'H-5': 4,
+            'H-4': 2,
+            'H-3': 2,
+            'H-2': 3,
+            'H-1': 3,
+            'H-0': ppltnMin,
+          });
+
     };
     // 네이버 블로그 리뷰 API 호출 함수
     const getBlogReviews = async () => {
@@ -586,6 +616,7 @@ const DetailBody = () => {
                         <div class="review_box">
                             <ul className='list-group'>
                                 <li className='list-group-item'>현재: {congestMessage}</li>
+                                <li className='list-group-item'>현재 실시간 인구지표 최소값: ({ppltnMin})</li>
                                 <li className='list-group-item'>1시간 뒤에는: {message_h01}</li>
                                 <li className='list-group-item'>2시간 뒤에는: {message_h02}</li>
                             </ul>
