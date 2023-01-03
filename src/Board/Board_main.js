@@ -11,11 +11,12 @@ import nameMasking from '../functions/functions';
 
 function Board_main(){
     const [posts, setPosts] = useState([]);
+    const [postsWithIdx, setPostsWithIdx] = useState(0);
+    const [count, setCount] = useState("");
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
-    const [count, setCount] = useState("");
-    const [results, setResults] = useState([]);
+    // const [results, setResults] = useState([]);
 
     // ------------------------- [ 함수 ] -------------------------
 
@@ -27,32 +28,51 @@ function Board_main(){
         })
         .then((response)=>{
           setCount(response.data.count);
-          setResults(response.data.results);
-          // console.log(results);
+          setPosts(response.data.results);
+          console.log(count);
+          console.log(posts);
         })
     },[])
+    useEffect(()=>{
+      if(posts != []){
+        var post_index = posts;
+        for(var i=0; i<count; i++){
+          post_index[i]["post_num"] = i+1;
+        }
+        console.log(post_index);
+        setPostsWithIdx(post_index);
+      }
+    }, [count, posts]);
 
 
     // ------------------------- [ 컴포넌트 ] -------------------------
     const Board_Read = () => {
-      return (
-        <div>
-          {results.slice(offset, offset + limit).map((result, idx) => {
-            const date = result.published_date.split('T')
-            return (
-              <div class = "Board_Reader">
-                <div className="num">{result.pk}</div>
-               
-                  <Link to={`/board/detail/${result.pk}`} className="title">{ result.title }
-                  </Link>
-                
-                <div className="writer">{nameMasking(result.profile.nickname)}</div>
-                <div className="date">{date[0]}</div>
-              </div>
-            )
-          })}
-          </div>
-      )
+      if(postsWithIdx != 0){
+        return (
+          <div>
+            {/* {results.slice(offset, offset + limit).map((result, idx) => { */}
+            {postsWithIdx.slice(offset, offset + limit).map((post, idx) => {
+              const date = post.published_date.split('T');
+              return (
+                <div class = "Board_Reader">
+                  <div className="num">{count-post.post_num+1}</div>
+                 
+                    <Link to={`/board/detail/${post.pk}`} className="title">{ post.title }
+                    </Link>
+                  
+                  <div className="writer">{nameMasking(post.profile.nickname)}</div>
+                  <div className="date">{date[0]}</div>
+                </div>
+              )
+            })}
+            </div>
+        )
+      }else{
+        return(
+          <div>불러오는 중...</div>
+        )
+      }
+
     }
       
      

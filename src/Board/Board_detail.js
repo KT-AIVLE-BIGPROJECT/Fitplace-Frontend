@@ -16,6 +16,7 @@ const Board_detail = () => {
     const location = useLocation();
     const getPath = location.pathname.split('/')
 
+    const [profile, setProfile] = useState({}) // 게시글 작성자 프로필
     const [nickname, setNickname] = useState("");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
@@ -45,10 +46,10 @@ const Board_detail = () => {
                         return (
                             <li key={idx} style={{marginBottom: "5px"}}>
                                 <div>
-                                    작성자 : {nameMasking(comment.profile.nickname)}
+                                    {nameMasking(comment.profile.nickname)} {comment.published_date.substr(0,10) + " " + comment.published_date.substr(12,7)}
                                 </div>
                                 <div>
-                                    내용 : {comment.text}
+                                    {comment.text}
                                 </div>
                             </li>
                         )
@@ -94,6 +95,61 @@ const Board_detail = () => {
         setThisCommentList(new_arr);
         console.log(thisCommentList);
     };
+    // 게시글 수정 버튼 사용자 승인 함수
+    const goPostEdit = () => {
+        axios
+            .get(`http://localhost:8000/users/profile/`, {
+                headers: {
+                    "Authorization": `Token ${token}`
+                }
+            })
+            .then((response) => {
+                var my = Object.entries(response.data).toString();
+                var author = Object.entries(profile).toString();
+                // console.log("사용자 프로필", response.data);
+                // console.log("작성자 프로필", profile);
+                if(my == author){
+                    navigate(`/board/edit/${pk}`);
+                }else{
+                    alert("해당 글에 대한 수정 권한이 없습니다.");
+                    // window.location.replace(`/board/detail/${pk}`);
+                }
+            })
+    }
+    // 게시글 삭제 버튼 클릭 함수
+    const pressDelete = () => {
+        axios
+            .get(`http://localhost:8000/users/profile/`, {
+                headers: {
+                    "Authorization": `Token ${token}`
+                }
+            })
+            .then((response) => {
+                var my = Object.entries(response.data).toString();
+                var author = Object.entries(profile).toString();
+                if(my == author){
+                    if (!window.confirm("정말 삭제하시겠습니까?")) {
+                        // 취소(아니오) 버튼 클릭 시 이벤트
+
+                    } else {
+                        // 확인(예) 버튼 클릭 시 이벤트
+                        axios
+                        .delete(`http://localhost:8000/posts/${pk}/`, {
+                            headers: {
+                                "Authorization": `Token ${token}`
+                            }
+                        })
+                        .then(()=>{
+                            alert("게시글이 삭제되었습니다.");
+                            navigate(`/board/`);
+                        })
+                    }
+                }else{
+                    alert("해당 글에 대한 삭제 권한이 없습니다.");
+                    // window.location.replace(`/board/detail/${pk}`);
+                }
+            })
+    };
 
     // ------------------- [ useEffect ] -------------------
     useEffect(()=>{
@@ -102,6 +158,7 @@ const Board_detail = () => {
           .get(`http://localhost:8000/posts/${pk}/`, {
           })
           .then((response)=>{
+            setProfile(response.data.profile);
             setNickname(response.data.profile.nickname);
             setPk(response.data.pk);
             setTitle(response.data.title);
@@ -170,7 +227,8 @@ const Board_detail = () => {
             </div>
             <div class="bt_wrap">
                 <a href="/board" class="on">목록</a>
-                <a class = "board_cancel_button" href={modify}>수정</a>
+                <a onClick={goPostEdit} class = "board_cancel_button" >수정</a>
+                <a onClick={pressDelete} class = "board_cancel_button" >삭제</a>
             </div>
         </div>
     </div>
