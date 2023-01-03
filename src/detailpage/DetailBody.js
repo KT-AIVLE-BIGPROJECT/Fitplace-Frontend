@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 // import dotenv from "dotenv";
 
@@ -58,6 +58,7 @@ const DetailBody = () => {
   const [ppltnMin, setPpltnMin] = useState(0); // 실시간 인구지표 최소값
   // const [test, setTest] = useState("TEST");
 
+
   // 혼잡도 과거 데이터, 
   const [before, setBefore] = useState({
     'H-23': 0,
@@ -94,7 +95,7 @@ const DetailBody = () => {
   // 혼잡도 예측 메시지
   const [message_h01, setMessage_h01] = useState("");
   const [message_h02, setMessage_h02] = useState("");
-
+  const [gu, setGu] = useState("강남구");
   
 
   // ---------------------------- [ 컴포넌트 ] ----------------------------
@@ -347,11 +348,14 @@ const DetailBody = () => {
   };
 
   const getAPIConjestion = () =>{
-    console.log("지난24시간 데이터 받는중...")
+    // console.log("지난24시간 데이터 받는중...")
+    console.log("혼잡도 API...");
+    console.log(nearestHot);
+    console.log(gu);
     axios
-      .get(`http://localhost:8000/test/`)
+      .get(`http://localhost:8000/conjest/?nearestHot=${nearestHot}&gu=${gu}`)
       .then((response)=>{
-        console.log(response.data.last_24)
+        // console.log(response.data.last_24)
         setBefore({
           "H-23": response.data.last_24[23],
           "H-22": response.data.last_24[22],
@@ -423,6 +427,9 @@ const DetailBody = () => {
         setReview8(response.data.results[0].review8);
         setReview9(response.data.results[0].review9);
         setReview10(response.data.results[0].review10);
+
+        // 혼잡도 데이터 위해서 추가함
+        setGu(response.data.results[0].search_region);
       });
   }, [])
   // 실시간 혼잡도 불러오기
@@ -437,8 +444,8 @@ const DetailBody = () => {
     setBlogReviews();
   }, [blogReviewCnt])
   useEffect(()=>{
-    getAPIConjestion();
-  },[])
+      getAPIConjestion();
+  },[nearestHot, gu])
   
 
   return (
