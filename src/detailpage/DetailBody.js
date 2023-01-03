@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 // import dotenv from "dotenv";
 
@@ -55,7 +55,6 @@ const DetailBody = () => {
   //const [congestLvl, setConjestLvl] = useState("");
   const [congestIcon, setConjestIcon] = useState("");
   const [congestMessage, setCongestMessage] = useState("혼잡도 파악 중...");
-  // const [test, setTest] = useState("TEST");
 
   // 혼잡도 과거 데이터, 
   const [before, setBefore] = useState({
@@ -68,21 +67,21 @@ const DetailBody = () => {
     'H-17': 0,
     'H-16': 0,
     'H-15': 0,
-    'H-14': 3,
-    'H-13': 1,
-    'H-12': 4,
-    'H-11': 3,
-    'H-10': 4,
-    'H-9': 4,
-    'H-8': 2,
-    'H-7': 1,
-    'H-6': 1,
-    'H-5': 4,
-    'H-4': 2,
-    'H-3': 2,
-    'H-2': 3,
-    'H-1': 3,
-    'H-0': 1,
+    'H-14': 0,
+    'H-13': 0,
+    'H-12': 0,
+    'H-11': 0,
+    'H-10': 0,
+    'H-9': 0,
+    'H-8': 0,
+    'H-7': 0,
+    'H-6': 0,
+    'H-5': 0,
+    'H-4': 0,
+    'H-3': 0,
+    'H-2': 0,
+    'H-1': 0,
+    'H-0': 0,
   });
   // 혼잡도 예측 결과
   const [predict, setPredict] = useState({
@@ -93,7 +92,7 @@ const DetailBody = () => {
   // 혼잡도 예측 메시지
   const [message_h01, setMessage_h01] = useState("");
   const [message_h02, setMessage_h02] = useState("");
-
+  const [gu, setGu] = useState("강남구");
   
 
   // ---------------------------- [ 컴포넌트 ] ----------------------------
@@ -319,11 +318,14 @@ const DetailBody = () => {
   };
 
   const getAPIConjestion = () =>{
-    console.log("지난24시간 데이터 받는중...")
+    // console.log("지난24시간 데이터 받는중...")
+    console.log("혼잡도 API...");
+    console.log(nearestHot);
+    console.log(gu);
     axios
-      .get(`http://localhost:8000/test/`)
+      .get(`http://localhost:8000/conjest/?nearestHot=${nearestHot}&gu=${gu}`)
       .then((response)=>{
-        console.log(response.data.last_24)
+        // console.log(response.data.last_24)
         setBefore({
           "H-23": response.data.last_24[23],
           "H-22": response.data.last_24[22],
@@ -395,6 +397,9 @@ const DetailBody = () => {
         setReview8(response.data.results[0].review8);
         setReview9(response.data.results[0].review9);
         setReview10(response.data.results[0].review10);
+
+        // 혼잡도 데이터 위해서 추가함
+        setGu(response.data.results[0].search_region);
       });
   }, [])
   // 실시간 혼잡도 불러오기
@@ -409,8 +414,8 @@ const DetailBody = () => {
     setBlogReviews();
   }, [blogReviewCnt])
   useEffect(()=>{
-    getAPIConjestion();
-  },[])
+      getAPIConjestion();
+  },[nearestHot, gu])
   
 
   return (
