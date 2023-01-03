@@ -763,7 +763,7 @@ const Search = () => {
     console.log(filterRating, filterReview);
     if (sessionStorage.getItem("username") === null) {
         alert('로그인 후 이용 부탁드립니다.');
-        window.location.href = '/'
+        window.location.href = '/';
     } else {
         if (recommendPlaces === 0) {
             return (

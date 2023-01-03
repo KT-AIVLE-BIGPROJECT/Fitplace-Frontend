@@ -49,6 +49,7 @@ const SignInModal = ({ show, onHide }) => {
         setLoginRight(false);
       })
   }
+
   return (
     <Modal
       show={show}

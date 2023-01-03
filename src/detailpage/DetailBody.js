@@ -472,7 +472,7 @@ const DetailBody = () => {
             <span>/5 </span>
             <a href="#방문자 리뷰">
                 <span class='_blue'>방문자 리뷰 </span>
-                <span>{visitorCnt} </span>
+                <span>{visitorCnt}, </span>
             </a>     
             <a href="#블로그 리뷰">
                 <span class='_blue'>블로그 리뷰 </span>

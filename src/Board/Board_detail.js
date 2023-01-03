@@ -8,9 +8,11 @@ import { useParams } from 'react-router-dom';
 import Footer from '../layouts/Footer';
 import { addComment } from '@babel/types';
 import nameMasking from '../functions/functions';
+import { useNavigate } from 'react-router-dom';
 
 const Board_detail = () => {
     const [ data, setData ] = useState({});
+    const navigate = useNavigate();
     const location = useLocation();
     const getPath = location.pathname.split('/')
 
@@ -72,7 +74,7 @@ const Board_detail = () => {
         .then((response) => {
             if(response.status < 300){
                 alert("댓글이 등록되었습니다.");
-                window.location.replace(`http://localhost:3000/board/detail/${pk}/`);
+                window.location.replace(`http://localhost:3000/board/detail/${pk}`);
             }
         })
         .catch((err) => {

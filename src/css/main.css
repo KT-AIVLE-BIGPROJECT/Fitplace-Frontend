@@ -60,7 +60,7 @@ p {
     width: 274px; 
     height: 140px; 
     border-radius: 8px; 
-    overflow: hidden; 
+    /* overflow: hidden;  */
     cursor: pointer;
     display: inline-block;
     margin-left: 80px;

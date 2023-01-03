@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import nameMasking from '../functions/functions';
 import SignInModal from '../modals/SignInModal';
@@ -59,13 +60,28 @@ const Header = () => {
     const [welcomeMent, setWelcomeMent] = useState("")
 
     // ----------------------------- [ 함수 ] -----------------------------
-
+    const getProfile = (token) => {
+        axios
+        .get("http://localhost:8000/users/profile/", {
+          headers: {
+            "Authorization": `Token ${token}`
+          }
+        })
+        .then((response) => {
+          console.log(response);
+          sessionStorage.setItem("nickname", response.data.nickname);
+        })
+        .then(()=>{
+            setWelcomeMent(`${nameMasking(sessionStorage.getItem("nickname"))}님 환영합니다.`);
+        })
+    };
 
     // ----------------------------- [ useEffect ] -----------------------------
     useEffect(()=>{
       if (sessionStorage.getItem("token")){
         setIsLogin(true);
-        setWelcomeMent(`${nameMasking(sessionStorage.getItem("username"))}님 환영합니다.`)
+        getProfile(sessionStorage.getItem("token"));
+        // setWelcomeMent(`${nameMasking(sessionStorage.getItem("username"))}님 환영합니다.`);
       } else {
         setIsLogin(false);
         setWelcomeMent("");
