@@ -8,6 +8,7 @@ import axios from 'axios'
 import './SearchBar.css'
 import '../css/main.css'
 import './Search.css'
+import nameMasking from '../functions/functions';
 
 import {useNavigate} from 'react-router-dom';
 
@@ -80,8 +81,8 @@ const Search = () => {
 
     const token = sessionStorage.getItem("token"); // 사용자 토큰
 
-    // -------------------------[ 컴포넌트 ]------------------------- 화면 상단 대분류 카테고리 버튼
-    // 컴포넌트
+    // -------------------------[ 컴포넌트 ]-------------------------
+    // 화면 상단 대분류 카테고리 버튼 컴포넌트
     const CategoryButton = (props) => {
         return (
             <li className={props.className}>
@@ -401,7 +402,8 @@ const Search = () => {
         )
     }
 
-    // -------------------------[ 함수 ]------------------------- 사용자 프로필 정보 불러오는 함수
+    // -------------------------[ 함수 ]-------------------------
+    // 사용자 프로필 정보 불러오는 함수
     const getProfile = async () => {
         const response = await axios.get("http://localhost:8000/users/profile/", {
             headers: {
@@ -962,7 +964,7 @@ const Search = () => {
                                         className=''
                                         style={{
                                             "padding" : "7px 9px"
-                                        }}>{nickname}
+                                        }}>{nameMasking(nickname)}
                                         프로필<img src={require('../img/user.png')} className='profileUserImg ml-3p'/>
                                         :</div>
                                     <div

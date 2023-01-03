@@ -303,3 +303,12 @@ BORDER:#999 1px solid; COLOR: #666;
 .FAQ{
     color: rgb(250, 150, 0);
 }
+
+
+/* Board_detail.js */
+.comment-box {
+    border: solid 1px #cfcfcf;;
+    border-radius: 12px;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+}

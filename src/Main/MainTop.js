@@ -7,6 +7,10 @@ import axios from 'axios';
 const MainTop = () => {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
+//   var random_age_list = ['age_10', 'age_20', 'age_30', 'age_40', 'age_50', 'age_60']
+//   var random_age = random_age_list[Math.floor(Math.random() * random_age_list.length)];
+//   var random_gender_list = ['age_10', 'age_20', 'age_30', 'age_40', 'age_50', 'age_60']
+//   var random_gender = random_age_list[Math.floor(Math.random() * random_age_list.length)];
 
   // 사용자 연령대, 성별, MBTI 정보
   const [age, setAge] = useState("age_none");

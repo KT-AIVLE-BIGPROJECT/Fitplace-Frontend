@@ -3,6 +3,7 @@ import {Container} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
+import nameMasking from '../functions/functions';
 import Layout from '../layouts/Layout'
 import '../css/main.css';
 import './Profile.css';
@@ -237,7 +238,7 @@ const LikingCheck = () => {
                                             <span
                                                 style={{
                                                     'font-weight' : 500
-                                                }}>{nickname}</span>님의 취향 설정</span>
+                                                }}>{nameMasking(nickname)}</span>님의 취향 설정</span>
                                     </h3>
                                 </div>
                                 <div className='flex flex_col mt-4 m-0a'>

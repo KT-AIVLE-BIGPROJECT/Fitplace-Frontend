@@ -6,6 +6,8 @@ import Board_pagination from "./Board_pagination";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import nameMasking from '../functions/functions';
+
 
 function Board_main(){
     const [posts, setPosts] = useState([]);
@@ -15,7 +17,10 @@ function Board_main(){
     const [count, setCount] = useState("");
     const [results, setResults] = useState([]);
 
+    // ------------------------- [ 함수 ] -------------------------
+
   
+    // ------------------------- [ useEffect ] -------------------------
     useEffect(()=>{
       axios
         .get("http://localhost:8000/posts/", {
@@ -23,11 +28,12 @@ function Board_main(){
         .then((response)=>{
           setCount(response.data.count);
           setResults(response.data.results);
-
+          // console.log(results);
         })
     },[])
 
 
+    // ------------------------- [ 컴포넌트 ] -------------------------
     const Board_Read = () => {
       return (
         <div>
@@ -38,7 +44,7 @@ function Board_main(){
                 <div className="num">{result.pk}</div>
                 <div className="title"><Link to={`/board/detail/${result.pk}`}>{ result.title }</Link>
                 </div>
-                <div className="writer">익명</div>
+                <div className="writer">{nameMasking(result.profile.nickname)}</div>
                 <div className="date">{date[0]}</div>
               </div>
             )

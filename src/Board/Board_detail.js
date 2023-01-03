@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Footer from '../layouts/Footer';
 import { addComment } from '@babel/types';
+import nameMasking from '../functions/functions';
 
 const Board_detail = () => {
     const [ data, setData ] = useState({});
@@ -16,11 +17,11 @@ const Board_detail = () => {
     const [nickname, setNickname] = useState("");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const [pk, setPk] = useState(getPath[getPath.length-2]); // URL에서 게시글 id 받아옴
+    const [pk, setPk] = useState(getPath[getPath.length-1]); // URL에서 게시글 id 받아옴
     const [results, setResults] = useState([]);
     const [comment, setComment] = useState(""); // 작성하는 댓글
     const [commentList, setCommentList] = useState([]); // 불러오는 댓글
-    const [thisCommentList, setThisCommentList] = useState([]);
+    const [thisCommentList, setThisCommentList] = useState([]); // 이 게시글의 댓글
     const [published_date, setPublished_date] = useState("");
     const [image, setImage] = useState("");
 
@@ -34,18 +35,20 @@ const Board_detail = () => {
     const LoadComments = () => {
         if(commentList != []){
             return (
-                <div>
-                    댓글 목록
+                <div className='comment-box'>
+                    <h5>
+                        댓글 {thisCommentList.length}개
+                    </h5>
                     {thisCommentList.map((comment, idx) => {
                         return (
-                            <div key={idx}>
+                            <li key={idx} style={{marginBottom: "5px"}}>
                                 <div>
-                                    작성자 : {comment.profile.nickname}
+                                    작성자 : {nameMasking(comment.profile.nickname)}
                                 </div>
                                 <div>
                                     내용 : {comment.text}
                                 </div>
-                            </div>
+                            </li>
                         )
                     })}
                 </div>
@@ -54,6 +57,7 @@ const Board_detail = () => {
     }
 
     // ------------------- [ 함수 ] -------------------
+    // 댓글 등록 버튼 함수
     const addComment = (event) => {
         event.preventDefault();
         let commentForm = {
@@ -138,11 +142,11 @@ const Board_detail = () => {
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
-                        <dd>{nickname}</dd>
+                        <dd>{nameMasking(nickname)}</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>{published_date.substr(0,10)}</dd>  
+                        <dd>{published_date.substr(0,10) + " " + published_date.substr(12,7)}</dd>  
                     </dl>
                 </div>
                 <div class="cont">
@@ -150,11 +154,11 @@ const Board_detail = () => {
                 </div>
             </div>
             <div>
-                <a href = {image} target="_blank"> 첨부파일 확인</a>
-            </div>
+                <a href={image} target="_blank"> 첨부파일 확인</a>
+            </div><br/>
             <LoadComments></LoadComments>
             <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">댓글 작성</label>
+                <h4 for="exampleFormControlTextarea1" class="form-label">댓글 작성</h4>
                 <div>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={comment} onChange={(event) => setComment(event.target.value)}></textarea>
                     <button onClick={addComment} className="board_write_button">

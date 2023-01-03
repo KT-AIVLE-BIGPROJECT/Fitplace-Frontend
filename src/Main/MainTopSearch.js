@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout'
 import axios from 'axios'
 import '../pages/SearchBar.css';
 import '../css/main.css'
+import nameMasking from '../functions/functions';
 
 import { useLocation } from 'react-router-dom';
 
@@ -72,12 +73,12 @@ const MainTopSearch = () => {
                     setFilterReview(0);
                     props.clicked(props.value);
                     }}
-                    className='flex img-hover'
+                    className='flex'
                 >
                     <div className='word_style'>{props.label}</div>
 
-                    <div className='items-center justify-center'>
-                        <div className='relative rounded overflow-hidden img-hover z-idx'>
+                    <div className='items-center justify-center items-center'>
+                        <div className='relative rounded overflow-hidden z-idx'>
                             <img src={props.src} alt={props.alt} className='align-top img-size' />
                         </div>
                     </div>
@@ -88,79 +89,104 @@ const MainTopSearch = () => {
     };
     // 중분류 카테고리 버튼 컴포넌트
     const SubCategoryButton = (props) => {
-        if(props.mainCate === "all"){
-            return(
-                <ul className='h-44 mb-0'>
-                    <li className='cat_start flex'>
-                        <div className='word_style'>대분류를 선택해주세요.</div>
-                    </li>
-                </ul>
-            );
-        } else{
+        if (props.mainCate === "all") {} else {
             return (
-                <ul className='h-44 mb-0'>
-                    {subCategoryList.map((sub, idx) => {
-                        return (
-                            <li key={idx} className='cat_start flex'>
-                                <div
-                                    style={{marginRight: "10px"}}
-                                    onClick={()=>{setsubCategory(sub); setFilterRating(0); setFilterReview(0);}}
-                                    className='word_style'
-                                >
-                                    {sub} 
-                                </div>
-                            </li>
-                        )
-                    })}
+                <ul className='mb-0'>
+                    <li
+                        className={subCategory == ''
+                            ? 'cat_start pointer mr-1r subcategory_clicked'
+                            : 'cat_start pointer mr-1r'}>
+                        <div
+                            onClick={() => {
+                                setsubCategory("");
+                                setFilterRating(0);
+                                setFilterReview(0);
+                            }}
+                            className='subcategory_text'>
+                            전체
+                        </div>
+                    </li>
+                    {
+                        subCategoryList.map((sub, idx) => {
+                            return (
+                                <li
+                                    key={idx}
+                                    className={subCategory == sub
+                                        ? 'cat_start pointer mr-1r subcategory_clicked'
+                                        : 'cat_start pointer mr-1r'}>
+                                    <div
+                                        onClick={() => {
+                                            setsubCategory(sub);
+                                            setFilterRating(0);
+                                            setFilterReview(0);
+                                        }}
+                                        className='subcategory_text'>
+                                        {sub}
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
             );
         }
     };
     // 필터링 버튼 컴포넌트
     const FilterButton = (props) => {
+        console.log(props)
         return (
-            <div className='h_row_center2'>
+            <div
+                className='h_row_center2 pointer sort_box mr-1r'
+                style={props.targetState != 0
+                    ? {
+                        'background': 'rgba(255, 197, 124, 0.62)'
+                    }
+                    : {}}>
                 <div
-                    onClick={()=>{
-                        if(props.targetState === 1){
+                    onClick={() => {
+                        if (props.name == 'filterRating') {
+                            setFilterReview(0);
+                        } else {
+                            setFilterRating(0);
+                        }
+                        if (props.targetState === 1) {
                             props.targetSetState(2); // 2: 낮은 순
-                        } else if(props.targetState === 2){
+                        } else if (props.targetState === 2) {
                             props.targetSetState(1); // 1: 높은 순
-                        } else{ // 0일 때 (초기 상태)
+                        } else { // 0일 때 (초기 상태)
                             props.targetSetState(1); // 1: 높은 순
                         }
                     }}
-                    className='flex mr-60 sort-box z-idx'
-                >
-                    <h6 className='sort-text'>{props.how}</h6>
-                    <img src="https://s3.hourplace.co.kr/web/images/icon/sort.svg" alt='arrow_pic' className='arrow-size sort-img' />
+                    className='flex'>
+                    <div className=''>{props.how}</div>
+                    <img src={props.src} alt='arrow_pic' className='arrowSize sort-img'/>
                 </div>
             </div>
         )
     };
     // 현재 페이지에 대해 20개(limit으로 지정) 만큼의 장소를 보여줌
     const RecommendRow = () => {
-        var rows = [] // 현재 페이지의 장소들의 인덱스를 담아준다.
-        var i = (currentPage-1)*limit;
-        while(i < currentPage*limit){
-          var temp = [];
-          for(var j=0; j<=3; j++){
-            temp.push(i+j);
-          }
-          rows.push(temp);
-          i = i + 4;
+        let rows = [] // 현재 페이지의 장소들의 인덱스를 담아준다.
+        let i = (currentPage - 1) * limit;
+        let rowss = []
+        while (i < currentPage * limit) {
+            var temp = [];
+            for (var j = 0; j <= 3; j++) {
+                temp.push(i + j);
+                rowss.push(i + j);
+            }
+            rows.push(temp);
+            i = i + 4;
         }
-      
+        console.log(rowss);
         return (
-          <div>
-            {rows.map((row, idx1) => {
-              return (
-                <div key={idx1} className='margin_box mb-130'>
-                  <div className='h_row'>
-                    {row.map((r, idx2) => {
-                        if(r < totalCount){
+            <div className='flex flex-wrap'>
+                {
+                    rowss.map((r, idx1) => {
+                        if (r < totalCount) {
                             return (
-                                <RecommendBox key={idx2}
+                                <RecommendBox
+                                key={idx1}
                                 photo={recommendPlaces.photo[r]}
                                 search_category={recommendPlaces.search_category[r]}
                                 name={recommendPlaces.name[r]}
@@ -168,19 +194,44 @@ const MainTopSearch = () => {
                                 address={recommendPlaces.address[r]}
                                 keywords={recommendPlaces.review_keywords[r]}
                                 place_code={recommendPlaces.place_code[r]}
-                                />
+                                className={'class-' + idx1 + ' pointer'}/>
                             );
-                        } else{
-                            return (
-                                <div>더 이상 결과가 없습니다.</div>
-                            );
+                        } else {
+                            
                         }
-                    })}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+                    })
+                }
+                {/* {
+                    rows.map((row, idx1) => {
+                        return (
+                            <div key={idx1} className='margin_box mb-130'>
+                                <div className='h_row'>
+                                    {
+                                        row.map((r, idx2) => {
+                                            if (r < totalCount) {
+                                                return (
+                                                    <RecommendBox
+                                                        key={idx2}
+                                                        photo={recommendPlaces.photo[r]}
+                                                        search_category={recommendPlaces.search_category[r]}
+                                                        name={recommendPlaces.name[r]}
+                                                        rating={recommendPlaces.rating[r]}
+                                                        address={recommendPlaces.address[r]}
+                                                        keywords={recommendPlaces.review_keywords[r]}
+                                                        place_code={recommendPlaces.place_code[r]}/>
+                                                );
+                                            } else {
+                                                return (<div>더 이상 결과가 없습니다.</div>);
+                                            }
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                    })
+                } */
+                }
+            </div>
         )
     };
     // 추천 장소 박스 컴포넌트
@@ -228,11 +279,15 @@ const MainTopSearch = () => {
         }
 
         const KeywordBox = (props) => {
-            if(props.is_keywords === false){ // 리뷰 요약 키워드가 없으면
+            if (props.is_keywords === false) { // 리뷰 요약 키워드가 없으면
                 return (
-                    <div className='flex-row' style={{display: "flex"}}>
-                        <div className='mr-15 keyword-box'>
-                            <h6 className='keyword-font'>리뷰X</h6>    
+                    <div
+                        className='flex-row'
+                        style={{
+                            display: "flex"
+                        }}>
+                        <div className='mr-1r'>
+                            <h6 className='keyword-font'>리뷰가 없습니다</h6>
                         </div>
                     </div>
 
@@ -240,13 +295,15 @@ const MainTopSearch = () => {
             } else { // 리뷰 요약 키워드가 있으면
                 return (
                     <div className='flex-row'>
-                        {keywords_list.map((kwd, idx) => {
-                            return (
-                                <div key={idx} className='mr-15 keyword-box'>
-                                    <h6 key={idx} className='keyword-font'>#{kwd}</h6>
-                                </div>
-                            );
-                        })}
+                        {
+                            keywords_list.map((kwd, idx) => {
+                                return (
+                                    <div key={idx} className='mr-1r'>
+                                        <h6 key={idx} className='keyword-font' style={{'color':'rgb(230 157 65)'}}># {kwd}</h6>
+                                    </div>
+                                );
+                            })
+                        }
                     </div>
                 )
             }
@@ -260,37 +317,56 @@ const MainTopSearch = () => {
         };
 
         return (
-            <div className='single_box' onClick={() => handleOpenNewTab(`/detailpage/${props.place_code}`)}>
-                <img className='hotimg' src={props.photo} alt="profile" />
-                <div className='namebox'>
-                    <h6 className='area_cat'>{subCategory} / {props.search_category}</h6>
-                    <div className='flex_row'>
-                        <h6>{props.name}</h6>
-                        <div className='flex'>
-                            <img className='goldstar' src="https://s3.hourplace.co.kr/web/images/icon/gold_star.svg" alt="profile" />
-                            <h6 className='star_rank'>{props.rating}</h6>
+            // <div className='single_box'
+            // onClick={()=>{navigate(`/detailpage/${props.place_code}`,{state:{place_code:props.place_code}});}}>
+            <div
+                className={props.className}
+                onClick={() => handleOpenNewTab(`/detailpage/${props.place_code}`)}>
+                <img className='placeImg' src={props.photo} alt="profile"/>
+                <div>
+                    <div>
+                        <div className="fw-bold h-row-center justify-content-between place-category">
+                            <div>{subCategory} / {props.search_category}</div>
+                            <div class="hot-rating">
+                                <img src = {require("../img/star.png")} className="hot-rating-img"/>
+                                <span className='mr-05r'>{props.rating}</span>
+                            </div>
                         </div>
+                        <div className="flex place-name items-center">
+                            <img className="place-img" src ={require("../img/fitplace_logo.png")} />
+                            <span className='place-text'>{props.name}</span>
+                        </div>
+                        <h6 className='place_address'>{props.address}</h6>
                     </div>
-                    <h6 className='area_cat'>{props.address}</h6>
-                    <KeywordBox is_keywords={is_keywords}/>
+                    <hr className='width-100 m-tb'/>
+                    <div className=''>
+                        <KeywordBox is_keywords={is_keywords}/>
+                    </div>
                 </div>
+
             </div>
         )
     }
     // 페이지네이션
     const Pagenation = () => {
         return (
-            <div>
+            <div className='text-center m-tb80'>
                 <button className='btn btn-default' onClick={()=>setCurrentPage(1)}>&#60;&#60;</button>
                 <button className='btn btn-default' onClick={()=>setCurrentPage(prev)}>&#60;</button>
                 {pageGroupList.map((page, idx) => {
                     if(page === currentPage){
                         return (
-                            <button className='btn btn-default activeBtn' onClick={()=>setCurrentPage(page)} key={idx}>{page}</button>
+                            <button
+                            className='btn btn-default activeBtn'
+                            onClick={() => {setCurrentPage(page);window.scrollTo(0,0);}}
+                            key={idx}>{page}</button>
                         );
                     } else{
                         return (
-                            <button className='btn btn-default unactiveBtn'onClick={()=>setCurrentPage(page)} key={idx}>{page}</button>
+                            <button
+                            className='btn btn-default'
+                            onClick={() => {setCurrentPage(page);window.scrollTo(0,0);}}
+                            key={idx}>{page}</button>
                         );
                     }
                 })}
@@ -603,51 +679,254 @@ const MainTopSearch = () => {
   } else {
     return (
         <Layout>
-          <Container className='container_style' style={{minHeight: "75vh"}}>
-            <div className='h_column_center2 cat_box'>
-                <div className='h_row_center2 cat_box_size'>
-                    <div className='category category_size'>
-                        <ul className='h-44 mb-0'>
-                            <CategoryButton
-                                className="cat_start flex" label="전체"
-                                clicked={setMainCategory} value="all"
-                                // src={require('../img/all.png')}
-                                src={require('../img/all.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="먹기"
-                                clicked={setMainCategory} value="restaurant"
-                                src={require('../img/eat.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="마시기"
-                                clicked={setMainCategory} value="cafe"
-                                src={require('../img/drink.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="놀기"
-                                clicked={setMainCategory} value="leisure"
-                                src={require('../img/game.png')} alt="eat_cat"
-                            />
-                            <CategoryButton
-                                className="cat_other flex" label="걷기"
-                                clicked={setMainCategory} value="walking"
-                                src={require('../img/sneaker.png')} alt="eat_cat"
-                            />
+            <div className='container_style bd-1'>
+                <Container>
+                    <div className='h_column_center2'>
+                        <div className='h_row_center2 mt-1r'>
+                            <div className='category category_size'>
+                                <ul className='h-44 mb-0'>
+                                <CategoryButton className={mainCategory == 'all'
+                                        ? "cat_start pointer mr-2r clicked"
+                                        : "cat_start mr-2r pointer"} label="전체" clicked={setMainCategory} value="all"
+                                    // src={require('../img/all.png')}
+                                    src={mainCategory == 'all'
+                                        ? require('../img/all2.png')
+                                        : require('../img/all.png')} alt="eat_cat"/>
+                                <CategoryButton
+                                    className={mainCategory == 'restaurant'
+                                        ? "cat_other pointer mr-2r clicked"
+                                        : "cat_other mr-2r pointer"}
+                                    label="먹기"
+                                    clicked={setMainCategory}
+                                    value="restaurant"
+                                    src={mainCategory == 'restaurant'
+                                        ? require('../img/eat2.png')
+                                        : require('../img/eat.png')}
+                                    alt="eat_cat"/>
+                                <CategoryButton
+                                    className={mainCategory == 'cafe'
+                                        ? "cat_other pointer mr-2r clicked"
+                                        : "cat_other mr-2r pointer"}
+                                    label="마시기"
+                                    clicked={setMainCategory}
+                                    value="cafe"
+                                    src={mainCategory == 'cafe'
+                                        ? require('../img/drink2.png')
+                                        : require('../img/drink.png')}
+                                    alt="eat_cat"/>
+                                <CategoryButton
+                                    className={mainCategory == 'leisure'
+                                        ? "cat_other pointer mr-2r clicked"
+                                        : "cat_other mr-2r pointer"}
+                                    label="놀기"
+                                    clicked={setMainCategory}
+                                    value="leisure"
+                                    src={mainCategory == 'leisure'
+                                        ? require('../img/game2.png')
+                                        : require('../img/game.png')}
+                                    alt="eat_cat"/>
+                                <CategoryButton
+                                    className={mainCategory == 'walking'
+                                        ? "cat_other pointer mr-2r clicked"
+                                        : "cat_other mr-2r pointer"}
+                                    label="걷기"
+                                    clicked={setMainCategory}
+                                    value="walking"
+                                    src={mainCategory == 'walking'
+                                        ? require('../img/sneaker2.png')
+                                        : require('../img/sneaker.png')}
+                                    alt="eat_cat"/>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </Container>
+            </div>
 
-                        </ul>
+            <div
+                className="container_style pd-top0 bd-1"
+                style={mainCategory == 'all'
+                    ? {
+                        'display': 'none'
+                    }
+                    : {
+                        'display': 'block'
+                    }}>
+                <Container>
+                    <div className='h_column_center2'>
+                        <div
+                            className='h_row_center2 height58'
+                            style={{
+                                "margin-left" : "-3px"
+                            }}>
+                            <div className='category category_size'>
+                                <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </Container>
             </div>
-            <div className='h_column_center2 cat_box'>
-                <div className='h_row_center2 cat_box_size'>
-                    <div className='category category_size'>
-                        <SubCategoryButton mainCate={mainCategory}></SubCategoryButton>
+
+            <div className='container_style pd-top0 mt-30'>
+                <Container>
+                    <div className='d-flex justify-content'>
+                        <div className='flex'>
+                            <div className='flex'>
+                                <Dropdown>
+                                    <Dropdown.Toggle
+                                        variant="success"
+                                        id="dropdown-basic"
+                                        className='bg-white btn-outline-secondary sort_box mr-1r
+                                        '>
+                                        지역 선택 ( 현재 : {filterRegion}
+                                        )
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setFilterRegion("강남구");
+                                                setMainCategory("all");
+                                                setsubCategory("");
+                                                setFilterRating(0);
+                                                setFilterReview(0);
+                                            }}>강남구</Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setFilterRegion("구로구");
+                                                setMainCategory("all");
+                                                setsubCategory("");
+                                                setFilterRating(0);
+                                                setFilterReview(0);
+                                            }}>구로구</Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setFilterRegion("마포구");
+                                                setMainCategory("all");
+                                                setsubCategory("");
+                                                setFilterRating(0);
+                                                setFilterReview(0);
+                                            }}>마포구</Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setFilterRegion("용산구");
+                                                setMainCategory("all");
+                                                setsubCategory("");
+                                                setFilterRating(0);
+                                                setFilterReview(0);
+                                            }}>용산구</Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setFilterRegion("종로구");
+                                                setMainCategory("all");
+                                                setsubCategory("");
+                                                setFilterRating(0);
+                                                setFilterReview(0);
+                                            }}>종로구</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
+                            <div className='flex'>
+                                <div
+                                    className='h_row_center2 pointer sort_box mr-1r'
+                                    onClick={() => {
+                                        setFilterRating(0);
+                                        setFilterReview(0);
+                                    }}
+                                    style={filterRating == 0 && filterReview == 0
+                                        ? {
+                                            "background": "#ffc57c9e"
+                                        }
+                                        : {}}>추천순</div>
+                                <FilterButton
+                                    how="평점순"
+                                    name='filterRating'
+                                    targetState={filterRating}
+                                    targetSetState={setFilterRating}
+                                    src={filterRating == 2
+                                        ? require('../img/down-arrow.png')
+                                        : require('../img/up-arrow.png')}/>
+                                <FilterButton
+                                    how="리뷰순"
+                                    name='filterReview'
+                                    targetState={filterReview}
+                                    targetSetState={setFilterReview}
+                                    src={filterReview == 2
+                                        ? require('../img/down-arrow.png')
+                                        : require('../img/up-arrow.png')}/>
+                            </div>
+                        </div>
+                        <div
+                            className='profile_info flex'
+                            style={age == '' && gender == '' && mbti == ''
+                                ? {
+                                    "display": "none"
+                                }
+                                : {
+                                    "display": "flex"
+                                }}>
+                            {/* <div
+                                className=''
+                                style={{
+                                    "padding" : "7px 9px"
+                                }}>{nameMasking(nickname)}
+                                프로필<img src={require('../img/user.png')} className='profileUserImg ml-3p'/>
+                                :</div> */}
+                            {/* age, gender, mbti 셋 중 1개만 나옴 */}
+                            {/* <div style={{color: '#FFA432'}}>{age}{gender}{mbti}</div>
+                            <div>인 사람들이 좋아하는 상위 100개 장소들입니다.</div>
+                            <div className='flex'>
+                            <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
+                            <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
+                            </div> */}
+                            <div
+                                className='sort_box profile_box ml-05r'
+                                style={age == ''
+                                    ? {
+                                        "display": "none"
+                                    }
+                                    : {
+                                        "display": "block"
+                                    }}><span style={{fontWeight: "bold"}}>'{age}'</span><span>가 좋아하는 장소</span>
+                            </div>
+                            <div
+                                className='sort_box profile_box ml-05r'
+                                style={gender == ''
+                                    ? {
+                                        "display": "none"
+                                    }
+                                    : {
+                                        "display": "block"
+                                    }}><span style={{fontWeight: "bold"}}>'{gender}'</span><span>이 좋아하는 장소</span></div>
+                            <div
+                                className='sort_box profile_box ml-05r'
+                                style={mbti == ''
+                                    ? {
+                                        "display": "none"
+                                    }
+                                    : {
+                                        "display": "block"
+                                    }}><span style={{fontWeight: "bold"}}>'{mbti}'</span><span>이(가) 좋아하는 장소</span></div>
+                        </div>
                     </div>
-                </div>
+                </Container>
+
             </div>
-    
             <div>
+                <Container
+                    className='container_style pd-top0'
+                    style={{
+                        minHeight: "75vh"
+                    }}>
+                    <div className='mt-50'>
+                        <RecommendRow/>
+                        <Pagenation></Pagenation>
+                    </div>
+
+                </Container>
+            </div>    
+            {/* <div>
                 <div className='flex sb-bw'>
                     <div className='flex h-60 right-sort mb-23'>
                         <Dropdown>
@@ -663,30 +942,29 @@ const MainTopSearch = () => {
                                 <Dropdown.Item onClick={()=>{setFilterRegion("종로구"); setMainCategory("all"); setsubCategory(""); setFilterRating(0); setFilterReview(0);}}>종로구</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                    </div>
+                    </div> */}
                     {/* age, gender, mbti 셋 중 1개만 나옴 */}
-                    <div style={{color: '#FFA432'}}>{age}{gender}{mbti}</div>
+                    {/* <div style={{color: '#FFA432'}}>{age}{gender}{mbti}</div>
                     <div>인 사람들이 좋아하는 상위 100개 장소들입니다.</div>
                     <div className='flex'>
                     <FilterButton how="평점순" targetState={filterRating} targetSetState={setFilterRating} />
                     <FilterButton how="리뷰순" targetState={filterReview} targetSetState={setFilterReview} />
                     </div>
-                </div>
+                </div> */}
 
                 {/* 추천 장소 보여주기 */}
-                <RecommendRow/>
+                {/* <RecommendRow/> */}
 
                 {/* 페이지네이션 버튼 */}
-                <Pagenation></Pagenation>
+                {/* <Pagenation></Pagenation> */}
                 {/* <div>총 데이터 개수 : {totalCount}</div>
                 <div>현재 페이지 : {currentPage} / {totalPage}</div>
                 <div>현재 페이지 그룹 : {pageGroup}</div>
                 <div>첫번째 숫자 ({firstNumber}) / 마지막 숫자 ({lastNumber})</div>
                 <div>prev({prev}) / next({next})</div>
                 <div>버튼 그룹 {pageGroupList}</div> */}
-            </div>
+            {/* </div> */}
               
-          </Container>
         </Layout>
       )
   }

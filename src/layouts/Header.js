@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Navbar, Nav, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
+import nameMasking from '../functions/functions';
 import SignInModal from '../modals/SignInModal';
 import '../css/main.css'
 
@@ -9,6 +10,7 @@ const HeaderRight = (props) => {
     const navigate = useNavigate();
     const [SignInModalOn, SetSignInModalOn] = useState(false); // 로그인 모달
 
+    // 로그아웃 클릭 함수
     const logout = () => {
         //localStorage.clear(); // 로그아웃 시 로컬 스토리지에 저장된 사용자 정보 모두 지워준다.
         sessionStorage.clear();
@@ -56,10 +58,14 @@ const Header = () => {
     const [isLogin, setIsLogin] = useState(false);
     const [welcomeMent, setWelcomeMent] = useState("")
 
+    // ----------------------------- [ 함수 ] -----------------------------
+
+
+    // ----------------------------- [ useEffect ] -----------------------------
     useEffect(()=>{
       if (sessionStorage.getItem("token")){
         setIsLogin(true);
-        setWelcomeMent(`${sessionStorage.getItem("username")}님 환영합니다.`)
+        setWelcomeMent(`${nameMasking(sessionStorage.getItem("username"))}님 환영합니다.`)
       } else {
         setIsLogin(false);
         setWelcomeMent("");
