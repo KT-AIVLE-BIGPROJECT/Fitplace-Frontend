@@ -54,7 +54,7 @@ const DetailBody = () => {
     // 혼잡도 관련
     const [nearestHot, setNearestHot] = useState("");
     //const [congestLvl, setConjestLvl] = useState("");
-    const [congestIcon, setConjestIcon] = useState("");
+    const [congestIcon, setCongestIcon] = useState("");
     const [congestMessage, setCongestMessage] = useState("혼잡도 파악 중...");
     const [ppltnMin, setPpltnMin] = useState(0); // 실시간 인구지표 최소값
 
@@ -157,8 +157,8 @@ const DetailBody = () => {
                                         class="bar"
                                         style={{
                                             width: review['percent'] + "%"
-                                        }}></div>
-                                    <div class="bar_contents">
+                                        }}><img src = {require('../img/3dplace.png')} className="heartImg"/></div>
+                                    <div class="bar_contents ml-27">
                                         <span class="review_summary">{review['text']}</span>
                                         <span class="review_summary_cnt">{review['cnt']}</span>
                                     </div>
@@ -177,15 +177,15 @@ const DetailBody = () => {
                 {
                     type: 'line',
                     label: '지난 24시간의 인구수',
-                    backgroundColor: "rgba(255,0,0,1)",
+                    backgroundColor: "#FFA432",
                     data: before,
-                    borderColor: 'red'
+                    borderColor: '#FFA432'
                 }, {
                     type: 'line',
-                    label: "예측된 인구수",
+                    label: "예측 인구수",
                     data: predict,
-                    backgroundColor: "rgba(0,0,255,1)",
-                    borderColor: 'blue'
+                    backgroundColor: "rgb(138 184 255)",
+                    borderColor: 'rgb(138 184 255)'
                 }
             ]
         }
@@ -214,14 +214,13 @@ const DetailBody = () => {
                         if (visitor != "") {
                             return (
                                 <li key={idx} className="list-group-item">
-                                    <div>{idx + 1}.</div>
                                     <span>{visitor}</span>
                                 </li>
                             )
                         } else if (idx == 0 & visitor == "") {
                             return (
                                 <li key={idx} className="list-group-item">
-                                    <span>"이 장소에 대한 방문자 리뷰가 없어요..."</span>
+                                    <span>"방문자 리뷰가 없습니다."</span>
                                 </li>
                             )
                         }
@@ -236,44 +235,51 @@ const DetailBody = () => {
         const handleOpenNewTab = (url) => {
             window.open(url);
         };
-
+        console.log("blogReviewCnt",blogReviewCnt)
         if ((loopIdx != [0]) && (blogReviewCnt != 0)) {
             return (
                 <ul className="list-group">
                     {
                         loopIdx.map((i, idx) => {
                             return (
-                                <div className='blog-review-box' key={idx}>
-                                    <div className='blog-image'>
-                                        <img src={blogReview.photo_url[i]} alt="블로그 썸네일"></img>
-                                    </div>
-                                    <div className='blog-body'>
-                                        <div className='blog-title'>
-                                            <a
-                                                onClick={() => {
-                                                    handleOpenNewTab(blogReview.url[i])
-                                                }}
-                                                href="#">{blogReview.title[i]}</a>
+                                <div>
+                                <a onClick={() => {
+                                    handleOpenNewTab(blogReview.url[i])
+                                }} className="pointer"  style={{"height":"183px"}}>
+                                    <div key={idx}>
+                                        <div className='flex items-center' >
+                                            <div className='blog-image'>
+                                                <div>
+                                                    <img src={blogReview.photo_url[i]} alt="블로그 썸네일" style={{"height":"146px"}}></img>
+                                                </div>
+                                            </div>
+                                            <div className='blog-body'>
+                                                <div className='blog-title'>
+                                                    {blogReview.title[i]}
+                                                </div>
+                                                <div className='blog-text'>{blogReview.body[i]}</div>
+                                            </div>
                                         </div>
-                                        <div className='blog-text'>{blogReview.body[i]}</div>
                                     </div>
+                                </a>
+                                <hr/>
                                 </div>
                             );
                         })
                     }
                 </ul>
             )
-        } else {
+        } 
+        else if((loopIdx == [0]) && (blogReviewCnt== 0)){
+            return(
+            <li className="list-group list-group-item">
+                <span>"블로그 리뷰가 없습니다."</span>
+            </li>
+            )
+        }else {
             return (
-                <div>
-                    <div class="loader"><img className='waitingImg' src={require('../img/fitplace_logo.png')}/></div>
-                    <span
-                        style={{
-                            color: "#FFA432",
-                            fontWeight: "bold",
-                            fontSize: "x-large"
-                        }}
-                        className='waitingText'>네이버 블로그 리뷰를 불러오는 중입니다</span>
+                <div >
+                    <div class="loader" style={{minHeight: "75wh"}}><img className='waitingImg' src={require('../img/fitplace_logo.png')}/></div>
                 </div>
             )
         }
@@ -303,17 +309,17 @@ const DetailBody = () => {
             })
         switch (congestMessage) {
             case "여유":
-                setConjestIcon('😀');
+                setCongestIcon(<img src={require('../img/smile.png')} className="faceImg"/>);
                 break;
             case "보통":
-                setConjestIcon('🙂');
+                setCongestIcon(<img src={require('../img/meh.png')} className="faceImg"/>);
                 break;
             case "붐빔":
             case "약간 붐빔":
-                setConjestIcon('😫');
+                setCongestIcon(<img src={require('../img/meh.png')} className="faceImg"/>);
                 break;
             case "매우 붐빔":
-                setConjestIcon("😡");
+                setCongestIcon(<img src={require('../img/angry.png')} className="faceImg"/>);
                 break;
             default:
                 break;
@@ -373,7 +379,7 @@ const DetailBody = () => {
         console.log(loopIdx);
     };
 
-    const getAPIConjestion = () => {
+    const getAPICongestion = () => {
         // console.log("지난24시간 데이터 받는중...")
         console.log("혼잡도 API...");
         console.log(nearestHot);
@@ -519,85 +525,129 @@ const DetailBody = () => {
         setBlogReviews();
     }, [blogReviewCnt])
     useEffect(() => {
-        getAPIConjestion();
+        getAPICongestion();
     }, [nearestHot, gu])
 
     return (
         <div>
 
             <Container
-                className='container_style detailPage'
+                className='container_style detailPage pd-top0'
                 style={{
                     minHeight: "75wh"
                 }}>
                 <div className=''>
-                    <div>
+                    <div className='place_section first'>
                         <div class='image_box'>
                             <img class='_storejpg' src={photo}></img>
                         </div>
                         <div className='text-center'>
                             <div class="m-0a title_box">
-                                <div>
-                                    <span class='_conjest'>
+                                <div className='mb-1'>
+                                    <span class='_congest'>
                                         <div>{congestMessage}
                                             {congestIcon}</div>
                                         {/* <div>혼잡 😫</div> */}
                                     </span>
                                 </div>
-                                <div>
+                                <div className='mb-1'>
                                     <span class="title mr-05r">{name}
                                     </span>
                                     <span class="category">{category}</span>
                                 </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" class="_star">
-                                    <path
-                                        d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path>
-                                </svg>
-                                <span className=''>{rating}</span>
-                                <span className='mr-05r'>/5</span>
-                                <a href="#방문자 리뷰" className='mr-05r'>
-                                    <span class='_blue'>방문자리뷰
-                                    </span>
-                                    <span>{visitorCnt}
-                                    </span>
-                                </a>
-                                <a href="#블로그 리뷰">
-                                    <span class='_blue'>블로그리뷰
-                                    </span>
-                                    <span>{blogCnt}
-                                    </span>
-                                </a>
-                                <br></br>
+                                <div className='mb-1'>
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" class="_star">
+                                      <path
+                                          d="M8.26 4.68h4.26a.48.48 0 01.28.87L9.35 8.02l1.33 4.01a.48.48 0 01-.18.54.48.48 0 01-.56 0l-3.44-2.5-3.44 2.5a.48.48 0 01-.74-.54l1.33-4L.2 5.54a.48.48 0 01.28-.87h4.26l1.3-4a.48.48 0 01.92 0l1.3 4z"></path>
+                                  </svg>
+                                  <span className=''>{rating}</span>
+                                  <span className='mr-05r'>/5</span>
+                                  <a href="#방문자 리뷰" className='mr-05r'>
+                                      <span class='_blue'>방문자리뷰
+                                      </span>
+                                      <span>({visitorCnt})
+                                      </span>
+                                  </a>
+                                  <a href="#블로그 리뷰">
+                                      <span class='_blue'>블로그리뷰
+                                      </span>
+                                      <span>({blogCnt})
+                                      </span>
+                                  </a>
+                                </div>
+                                
                                 <ShowTags keywords={keywords}/>
                             </div>
                         </div>
                         <div class='main'>
                           <div className='main-topic'>상세정보</div>
                             <div class="left_margin_box">
-                                <div>
-                                    <span class='_blue'>전화번호
-                                    </span>
+                                <div className='mb-05r'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pageIcon">
+                                      <path
+                                          d="M2.92 1.15L.15 3.93a.5.5 0 00-.14.45 16.09 16.09 0 0012.6 12.61.5.5 0 00.46-.14l2.78-2.78a.5.5 0 000-.71l-4.18-4.18-.07-.06a.5.5 0 00-.64.06l-1.9 1.9-.28-.18a9.53 9.53 0 01-2.65-2.63L5.96 8 7.88 6.1a.5.5 0 000-.71L4.41 1.93l-.78-.78a.5.5 0 00-.7 0zm5.62 10.79l.37.21.09.04a.5.5 0 00.49-.13l1.82-1.82 3.48 3.47-2.24 2.24-.07-.01A15.1 15.1 0 011.14 4.84l-.1-.4 2.24-2.23 3.54 3.53-1.84 1.84a.5.5 0 00-.08.6 10.54 10.54 0 003.64 3.76z"></path>
+                                    </svg>
                                     <span>{tel}</span>
                                 </div>
-                                <div>
-                                    <span class='_blue'>주소
-                                    </span>
+                                <div className='mb-05r'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pageIcon">
+                                      <path
+                                          d="M15 6.97a6.92 6.92 0 01-1.12 3.77l-5.51 7.08a.47.47 0 01-.74 0L2.1 10.71A6.93 6.93 0 011 6.97 7 7 0 018 0v.93V0a7 7 0 017 6.97zm-13 0c0 1.15.4 2.3.99 3.24L8 16.7l5.04-6.5A5.95 5.95 0 008 1C4.66 1 2 3.64 2 6.97zm6-1.54A1.58 1.58 0 008 8.6a1.57 1.57 0 000-3.16zm0-.93a2.51 2.51 0 010 5.02A2.51 2.51 0 118 4.5z"></path>
+                                    </svg>
                                     <span>{address}</span>
                                 </div>
-                                <div>
-                                    <span class="_blue">네이버 지도에서 보기
-                                    </span>
+                                <div className='mb-05r'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pageIcon">
+                                      <path
+                                          d="M7.42 1.92l3.54 3.56L3.55 13H0V9.44l7.42-7.52zM14 12.3v.7H5.6v-.7H14zM10.34 0a2.54 2.54 0 011.91 4.17l-.02.02-.78.79-3.54-3.55.79-.79C9.17.24 9.73 0 10.34 0z"></path>
+                                    </svg>
                                     <a href={detailURL} target="_blank" role="button" class="naver_map_link">
                                         {/* <i class="naver_logo"></i> */}
-                                        네이버 지도
+                                        네이버 지도에서 보기
                                     </a>
                                 </div>
                             </div>
-                            <hr></hr>
 
-                            <div class="place_section">
+                            
+                        </div>
+                    </div>
+                    <div class="place_section">
+                        <div class="main">
+                            <span className='main-topic'>혼잡도 예측</span>
+                            <div class="review_box">
+                                <ul className='list-group'>
+                                    <li className='list-group-item'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pageIcon2">
+                                        <path d="M17.997 18h-.998c0-1.552.06-1.775-.88-1.993-1.438-.332-2.797-.645-3.293-1.729-.18-.396-.301-1.048.155-1.907 1.021-1.929 1.277-3.583.702-4.538-.672-1.115-2.707-1.12-3.385.017-.576.968-.316 2.613.713 4.512.465.856.348 1.51.168 1.908-.49 1.089-1.836 1.4-3.262 1.728-.982.227-.92.435-.92 2.002h-.995l-.002-.623c0-1.259.1-1.985 1.588-2.329 1.682-.389 3.344-.736 2.545-2.209-2.366-4.365-.676-6.839 1.865-6.839 2.492 0 4.227 2.383 1.867 6.839-.775 1.464.824 1.812 2.545 2.209 1.49.344 1.589 1.072 1.589 2.333l-.002.619zm4.81-2.214c-1.289-.298-2.489-.559-1.908-1.657 1.77-3.342.47-5.129-1.4-5.129-1.265 0-2.248.817-2.248 2.325 0 1.269.574 2.175.904 2.925h1.048c-.17-.75-1.466-2.562-.766-3.736.412-.692 1.704-.693 2.114-.012.38.631.181 1.812-.534 3.161-.388.733-.28 1.301-.121 1.648.305.666.977.987 1.737 1.208 1.507.441 1.368.042 1.368 1.48h.997l.002-.463c0-.945-.074-1.492-1.193-1.75zm-22.805 2.214h.997c0-1.438-.139-1.039 1.368-1.48.761-.221 1.433-.542 1.737-1.208.159-.348.267-.915-.121-1.648-.715-1.349-.914-2.53-.534-3.161.41-.682 1.702-.681 2.114.012.7 1.175-.596 2.986-.766 3.736h1.048c.33-.75.904-1.656.904-2.925.001-1.509-.982-2.326-2.247-2.326-1.87 0-3.17 1.787-1.4 5.129.581 1.099-.619 1.359-1.908 1.657-1.12.258-1.194.805-1.194 1.751l.002.463z"/>
+                                    </svg>
+                                        현재: {congestMessage} {congestIcon}
+                                    </li>
+                                    <li className='list-group-item'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="pageIcon">
+                                        <path
+                                            d="M8 16A7 7 0 108 2a7 7 0 000 14zm0 1A8 8 0 118 1a8 8 0 010 16zm.5-7.8l3.02 1.76a.5.5 0 01.19.68.5.5 0 01-.69.19L7.8 9.96a.5.5 0 01-.3-.46v-5a.5.5 0 011 0v4.7z"></path>
+                                        </svg>
+                                        1시간 뒤 : <span className='fw-bold'>{message_h01}</span> 예정
+                                    </li>
+                                    <li className='list-group-item'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="pageIcon">
+                                        <path
+                                            d="M8 16A7 7 0 108 2a7 7 0 000 14zm0 1A8 8 0 118 1a8 8 0 010 16zm.5-7.8l3.02 1.76a.5.5 0 01.19.68.5.5 0 01-.69.19L7.8 9.96a.5.5 0 01-.3-.46v-5a.5.5 0 011 0v4.7z"></path>
+                                        </svg>
+                                        2시간 뒤 : <span className='fw-bold'>{message_h02}</span> 예정
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className='review_content pd-b5'>
+                                <ShowCongestion></ShowCongestion>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="place_section">
+                        <div class="main">
+                            <div>
                                 <div class="place_section_title">
-                                    <span>"방문하신 분들이 뽑은 장점"</span>
+                                    <span>방문자 리뷰 후기</span>
                                 </div>
                                 <div class="place_section_content">
                                     <div class="bar_chart">
@@ -607,39 +657,22 @@ const DetailBody = () => {
                                     </div>
                                 </div>
                             </div>
-                            <hr></hr>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="review_box">
-                            <span className='review_title'>혼잡도 예측</span>
                             <div class="review_box">
-                                <ul className='list-group'>
-                                    <li className='list-group-item'>현재: {congestMessage}</li>
-                                    <li className='list-group-item'>현재 실시간 인구지표 최소값: ({ppltnMin})</li>
-                                    <li className='list-group-item'>1시간 뒤에는: {message_h01}</li>
-                                    <li className='list-group-item'>2시간 뒤에는: {message_h02}</li>
-                                </ul>
-                            </div>
-                            <div className='review_content'>
-                                <ShowCongestion></ShowCongestion>
+                                <a name="방문자 리뷰"></a>
+                                <div className='review_content'>
+                                    <ShowVisitorReview></ShowVisitorReview>
+                                </div>
                             </div>
                         </div>
-                        <hr></hr>
-
-                        <div class="review_box">
-                            <a name="방문자 리뷰"></a>
-                            <span className='review_title'>방문자 리뷰</span>
-                            <div className='review_content'>
-                                <ShowVisitorReview></ShowVisitorReview>
-                            </div>
-                        </div>
-                        <hr></hr>
-
-                        <div className='review_box'>
+                      
+                    </div>
+                    
+                    <div class="place_section">
+                        <div className='main'>
                             <a name="블로그 리뷰"></a>
-                            <span className='review_title'>블로그 리뷰</span>
+                            <div class="place_section_title mb-1r">
+                                <span className='main_topic'>네이버 블로그 리뷰</span>
+                            </div>
                             <div className='review_content'>
                                 <ShowBlogReview></ShowBlogReview>
                                 {/* <div>{blogReview.title[0]}</div>
