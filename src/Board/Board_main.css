@@ -351,6 +351,7 @@ table.dataTable td {
 
 .attach_box {
   margin-top: 35px;
+  margin-bottom: 35px;
 }
 
 .mr-7 {
@@ -375,7 +376,7 @@ table.dataTable td {
 
 .cmt_submit {
   width: "100%";
-  font-size: 18px;
+  font-size: 17px;
   color: rgb(255, 255, 255);
   text-align: center;
   background: rgb(250, 150, 0);
@@ -387,4 +388,47 @@ table.dataTable td {
 
 .j-center {
   justify-content: center;
+}
+
+.mr-12 {
+  margin-right: 12px;
+}
+
+.j-bw {
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+.change_remove {
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background: lightgray;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  opacity: 80%;
+}
+
+.btn_wrap {
+  display: block;
+  font-size: 0;
+  text-align: center;
+  margin-top: 90px;
+}
+
+.list_btn {
+  width: "100%";
+  font-size: 19px;
+  font-weight: 545;
+  color: #ffa432;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 17px 84px;
+  opacity: 80%;
 }

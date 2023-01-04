@@ -39,10 +39,20 @@ const Board_detail = () => {
         if(commentList != []){
             return (
                 <>
-                    <div>
-                        <h5 className='attach_text mt-20'>
-                            댓글 {thisCommentList.length}개
-                        </h5>
+                    <div className='flex j-bw'>
+                        <div>
+                            <h5 className='attach_text mt-20'>
+                                댓글 {thisCommentList.length}개
+                            </h5>
+                        </div>
+                        <div className='flex ai-center'>
+                            <div>
+                                <a onClick={goPostEdit} className={token?"change_remove mr-12":"change_remove mr-12 display-none"} >수정</a>
+                            </div>
+                            <div>
+                                <a onClick={pressDelete} className={token?"change_remove mr-12":"change_remove mr-12 display-none"}>삭제</a>
+                            </div>
+                        </div>
                     </div>
                     <div className='comment-box'>
                         {/* <h5>
@@ -234,7 +244,7 @@ const Board_detail = () => {
                 </div><br/>
             </div>
             <LoadComments></LoadComments>
-            <div class="mb-3">
+            <div className={token?"mb-3":"mb-3 display-none"}>
                 <h4 for="exampleFormControlTextarea1" class="form-label attach_text mt-50">댓글 작성</h4>
                 <div>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={comment} onChange={(event) => setComment(event.target.value)}></textarea>
@@ -250,17 +260,15 @@ const Board_detail = () => {
                 <a onClick={goPostEdit} class = "board_cancel_button" >수정</a>
                 <a onClick={pressDelete} class = "board_cancel_button" >삭제</a>
             </div> */}
-            <div className='bt_wrap flex j-center'>
-                <div>
-                    <a href="/board" class="on">목록</a>
-                </div>
-                <div>
-                    <a onClick={goPostEdit} class = "board_cancel_button" >수정</a>
-                </div>
-                <div>
-                    <a onClick={pressDelete} class = "board_cancel_button" >삭제</a>
-                </div>
+
+
+            <div className='btn_wrap'>
+                <a href="/board" className="list_btn">목록</a>
             </div>                
+
+            
+
+
         </div>
     </div>
 
