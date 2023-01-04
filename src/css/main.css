@@ -474,8 +474,6 @@ img.hot-place-sparkle {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding-right: 40px;
-    width: 1400px;
     height: 500px;
 }
 .swiper-box-sns {
