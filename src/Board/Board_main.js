@@ -14,6 +14,7 @@ function Board_main(){
     const [postsWithIdx, setPostsWithIdx] = useState(0);
     const [count, setCount] = useState("");
     const [limit, setLimit] = useState(10);
+    const token = sessionStorage.getItem("token");
     const [page, setPage] = useState(1);
     const offset = (page - 1) * limit;
     // const [results, setResults] = useState([]);
@@ -132,7 +133,7 @@ function Board_main(){
                 
             </div>
 
-            <div class="bt_wrap">
+            <div class={token?"bt_wrap on":"btn_wrap on display-none"}>
                 <a href="/board/write" class="on">글쓰기</a>
             </div>
 
