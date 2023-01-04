@@ -679,3 +679,6 @@ ul{
 .mr-05r{
     margin-right:0.5rem;
 }
+.display-none{
+    display: none;
+}
