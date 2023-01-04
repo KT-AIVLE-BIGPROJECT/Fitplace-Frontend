@@ -315,12 +315,12 @@ table.dataTable td {
   margin-top: 20px;
 }
 
-.top_box {
+/* .top_box {
   padding: 100px 0 40px;
-}
+} */
 
 .font-20 {
-  font-size: 22px;
+  font-size: 18px;
   color: dimgray;
   font-weight: 500;
 }
@@ -347,4 +347,44 @@ table.dataTable td {
 
 .board_list .title {
   color: inherit;
+}
+
+.attach_box {
+  margin-top: 35px;
+}
+
+.mr-7 {
+  margin-right: 7px;
+}
+
+.attach_text {
+  line-height: 1.28;
+  font-size: 17.5px;
+  font-weight: 550;
+  color: dimgray;
+}
+
+.cmt_btn {
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.f-20 {
+  font-size: 20px;
+}
+
+.cmt_submit {
+  width: "100%";
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background: rgb(250, 150, 0);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  opacity: 80%;
+}
+
+.j-center {
+  justify-content: center;
 }

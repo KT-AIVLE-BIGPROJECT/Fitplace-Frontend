@@ -4,66 +4,64 @@ function Pagination({ total, limit, page, setPage }) {
   const numPages = Math.ceil(total / limit);
 
   return (
-    <>
-      <Nav>
-        <Button onClick={() => setPage(page - 1)} disabled={page === 1}>
+      <div class="text-center m-tb80">
+        <button onClick={() => setPage(page - 1)} disabled={page === 1} className="btn btn-default btn-transparent">
           &lt;
-        </Button>
+        </button>
         {Array(numPages)
           .fill()
           .map((_, i) => (
-            <Button
+            <button
               key={i + 1}
               onClick={() => setPage(i + 1)}
               aria-current={page === i + 1 ? "page" : null}
               className={page==i+1?"btn btn-default activeBtn":"btn btn-default"}
             >
               {i + 1}
-            </Button>
+            </button>
           ))}
-        <Button onClick={() => setPage(page + 1)} disabled={page === numPages} className="btn btn-default">
+        <button onClick={() => setPage(page + 1)} disabled={page === numPages} className="btn btn-default btn-transparent">
           &gt;
-        </Button>
-      </Nav>
-    </>
+        </button>
+      </div>
   );
 }
 
-const Nav = styled.nav`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  margin: 16px;
-`;
+// const Nav = styled.nav`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 4px;
+//   margin: 16px;
+// `;
 
 const Button = styled.button`
-  border: none;
-  border-radius: 8px;
-  padding: 8px;
-  margin: 0;
-  // background: orange;
-  color: white;
-  font-size: 1rem;
+  // border: none;
+  // border-radius: 8px;
+  // padding: 8px;
+  // margin: 0;
+  // // background: orange;
+  // color: black;
+  // font-size: 1rem;
 
-  &:hover {
-    // background: tomato;
-    cursor: pointer;
-    transform: translateY(-2px);
-  }
+  // &:hover {
+  //   // background: tomato;
+  //   cursor: pointer;
+  //   transform: translateY(-2px);
+  // }
 
-  &[disabled] {
-    // background: grey;
-    cursor: revert;
-    transform: revert;
-  }
+  // &[disabled] {
+  //   // background: grey;
+  //   cursor: revert;
+  //   transform: revert;
+  // }
 
-  &[aria-current] {
-    // background: deeppink;
-    font-weight: bold;
-    cursor: revert;
-    transform: revert;
-  }
+  // &[aria-current] {
+  //   // background: deeppink;
+  //   font-weight: bold;
+  //   cursor: revert;
+  //   transform: revert;
+  // }
 `;
 
 export default Pagination;
