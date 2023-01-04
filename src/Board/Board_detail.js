@@ -38,23 +38,30 @@ const Board_detail = () => {
     const LoadComments = () => {
         if(commentList != []){
             return (
-                <div className='comment-box'>
-                    <h5>
-                        댓글 {thisCommentList.length}개
-                    </h5>
-                    {thisCommentList.map((comment, idx) => {
-                        return (
-                            <li key={idx} style={{marginBottom: "5px"}}>
-                                <div>
-                                    {nameMasking(comment.profile.nickname)} {comment.published_date.substr(0,10) + " " + comment.published_date.substr(12,7)}
-                                </div>
-                                <div>
-                                    {comment.text}
-                                </div>
-                            </li>
-                        )
-                    })}
-                </div>
+                <>
+                    <div>
+                        <h5 className='attach_text mt-20'>
+                            댓글 {thisCommentList.length}개
+                        </h5>
+                    </div>
+                    <div className='comment-box'>
+                        {/* <h5>
+                            댓글 {thisCommentList.length}개
+                        </h5> */}
+                        {thisCommentList.map((comment, idx) => {
+                            return (
+                                <li key={idx} style={{marginBottom: "20px"}}>
+                                    <div>
+                                        {nameMasking(comment.profile.nickname)} {comment.published_date.substr(0,10) + " " + comment.published_date.substr(12,7)}
+                                    </div>
+                                    <div>
+                                        {comment.text}
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </div>
+                </>
             )
         }
     }
@@ -187,7 +194,7 @@ const Board_detail = () => {
     <div class="board_wrap">
         <div class="board_title">
             <strong class = "FAQ">FAQs</strong>
-            <p>질문을 남겨주세요.</p>
+            {/* <p>질문을 남겨주세요.</p> */}
         </div>
         <div class="board_view_wrap">
             <div class="board_view">
@@ -212,24 +219,48 @@ const Board_detail = () => {
                     {body}
                 </div>
             </div>
-            <div>
-                <a href={image} target="_blank"> 첨부파일 확인</a>
-            </div><br/>
+
+            <div className='attach_box'>
+                <p className='attach_text'>첨부 파일 확인</p>
+                <div>
+                    <div className='flex'>
+                        <div className='mr-7'>
+                            <img className="homeImg" src={require("../img/clip.png")}/>
+                        </div>
+                        <div>
+                            <a href={image} target="_blank">{image}</a>
+                        </div>
+                    </div>
+                </div><br/>
+            </div>
             <LoadComments></LoadComments>
             <div class="mb-3">
-                <h4 for="exampleFormControlTextarea1" class="form-label">댓글 작성</h4>
+                <h4 for="exampleFormControlTextarea1" class="form-label attach_text mt-50">댓글 작성</h4>
                 <div>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" value={comment} onChange={(event) => setComment(event.target.value)}></textarea>
-                    <button onClick={addComment} className="board_write_button">
-                        댓글 등록
-                    </button>
+                    <div className='flex cmt_btn'>
+                        <button onClick={addComment} className="cmt_submit">
+                            댓글 등록
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="bt_wrap">
+            {/* <div class="bt_wrap">
                 <a href="/board" class="on">목록</a>
                 <a onClick={goPostEdit} class = "board_cancel_button" >수정</a>
                 <a onClick={pressDelete} class = "board_cancel_button" >삭제</a>
-            </div>
+            </div> */}
+            <div className='bt_wrap flex j-center'>
+                <div>
+                    <a href="/board" class="on">목록</a>
+                </div>
+                <div>
+                    <a onClick={goPostEdit} class = "board_cancel_button" >수정</a>
+                </div>
+                <div>
+                    <a onClick={pressDelete} class = "board_cancel_button" >삭제</a>
+                </div>
+            </div>                
         </div>
     </div>
 
