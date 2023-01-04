@@ -57,37 +57,45 @@ const MainSns = () => {
                         if(tweetmediaInfoList[i].url != ""){
                             default_img = tweetmediaInfoList[i].url;
                         } else{
-                            default_img = require("../img/no_image.jpg");
+                            // default_img = require("../img/no_image.jpg");
+                            default_img = "https://blog.kakaocdn.net/dn/AcIGI/btqxtp2xkg2/EGABG3i2NAMq3kRu1VaGzk/img.jpg";
                         }
                         return (
                             <SwiperSlide key={idx}>
                                 <div className="swiper-box-sns">
-                                    <div className="profile-bar h-row-center margin-top grey-color" onClick={()=>{alert("프로필 URL", tweetUserInfoList[i].url)}}>
+                                    <div className="profile-bar h-row-center margin-top grey-color">
                                         {/* 프로필 */}
+                                        <img class="profile-img" style={{objectFit: "cover", borderRadius: "50px"}} src={profile_img}></img>
                                         <div>
-                                            <img class="profile-img" style={{objectFit: "cover", borderRadius: "50px"}} src={profile_img}></img>
+                                            <div className='tw-user1'>{tweetUserInfoList[i].name}</div>
+                                            <div className='tw-user2'>@{tweetUserInfoList[i].username}</div>
                                         </div>
-                                        <div>{tweetUserInfoList[i].name}</div>
-                                        <div style={{marginLeft: "5px"}}>@{tweetUserInfoList[i].username}</div>
                                     </div>
                                     <div className='body-area'>
                                         {/* 본문 */}
-                                        <div className='sns-img'>
-                                            <img style={{objectFit: "contain"}} src={default_img}></img>
+                                        <div className='grey-color tw-text-area'>{tweets[i].text.substr(0,90)+"..."}</div>
+                                        <div className={default_img===tweetmediaInfoList[i].url ? 'body-img1  tw-img-area' : 'bird-img1  tw-img-area'}>
+                                            <img className={default_img===tweetmediaInfoList[i].url ? 'body-img2' : 'bird-img2'} src={default_img}></img>
                                         </div>
-                                        <div>{tweets[i].text.substr(0,100)+"..."}</div>
                                     </div>
                                     {/* 댓글, 좋아요 등 */}
-                                    <div className="retweet-area h-row-center">
-                                        <div className="retweet-area-txt"><img className="location-img" src ={require("../img/fitplace_logo.png")} />
-                                            리트윗 횟수{tweets[i].public_metrics.retweet_count}
+                                    <div className="retweet-area">
+                                        <div className="retweet-area-txt grey-color">
+                                            {/* 리트윗 */}
+                                            <img className="retweet-img" src={require("../img/twitter_retweet.png")} />
+                                            {tweets[i].public_metrics.retweet_count}
                                         </div>
-                                        <div className='retweet-area-txt'>
-                                            <div class="hot-rating">
-                                                <img src = {require("../img/star.png")} className="hot-rating-img"/>
-                                                좋아요 {tweets[i].public_metrics.like_count}
+                                        <div className='retweet-area-txt grey-color'>
+                                            <div>
+                                                {/* 좋아요 */}
+                                                <img src={require("../img/twitter_heart.png")} className="tw-like-img"/>
+                                                {tweets[i].public_metrics.like_count}
                                             </div>
-                                            <div style={{marginLeft: "10px"}}>댓글 {tweets[i].public_metrics.reply_count}</div>
+                                            <div style={{marginLeft: "15px"}}>
+                                                {/* 댓글 */}
+                                                <img src={require("../img/twitter_comment.png")} className="tw-like-img"/>
+                                                {tweets[i].public_metrics.reply_count}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

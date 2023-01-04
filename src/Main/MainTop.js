@@ -12,6 +12,7 @@ const MainTop = () => {
   const [age, setAge] = useState("age_none");
   const [gender, setGender] = useState("gender_none");
   const [mbti, setMbti] = useState("mbti_none");
+  const [loginMsg, setLoginMsg] = useState("");
 
   const age_dict = {
     "age_10": "10대가 좋아하는 장소",
@@ -21,13 +22,13 @@ const MainTop = () => {
     "age_50": "50대가 좋아하는 장소",
     "age_60": "60대가 좋아하는 장소",
     "age_none": "연령대를 설정하고 추천을 받아보세요.",
-    "age_not_login": "로그인하여 연령대를 설정해주세요."
+    "age_not_login": ""
   };
   const gender_dict = {
     "gender_male": "남성이 좋아하는 장소",
     "gender_female": "여성이 좋아하는 장소",
     "gender_none": "성별을 설정하고 추천을 받아보세요.",
-    "gender_not_login": "로그인하여 성별을 설정해주세요."
+    "gender_not_login": ""
   };
   const mbti_dict = {
     "mbti_istj": "ISTJ가 좋아하는 장소",
@@ -47,7 +48,7 @@ const MainTop = () => {
     "mbti_enfj": "ENFJ가 좋아하는 장소",
     "mbti_enfp": "ENFP가 좋아하는 장소",
     "mbti_none": "MBTI를 설정하고 추천을 받아보세요.",
-    "mbti_not_login": "로그인하여 MBTI를 설정해주세요."
+    "mbti_not_login": ""
   };
 
 
@@ -86,6 +87,7 @@ const MainTop = () => {
         setAge("age_not_login");
         setGender("gender_not_login");
         setMbti("mbti_not_login");
+        setLoginMsg("로그인 후 연령대, 성별, MBTI에 따른 추천을 받아보세요.");
     }
   }, []);
 
@@ -122,6 +124,7 @@ const MainTop = () => {
                     <h6 className='h_button_detail'>상세보기</h6>
                 </div>
             </div>
+            <div className='login-msg grey-color'>{loginMsg}</div>
         </div>
     </div>
     
