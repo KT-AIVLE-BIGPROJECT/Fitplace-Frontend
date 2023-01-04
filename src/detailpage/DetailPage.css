@@ -3,7 +3,6 @@
   }
 .detailPage{
     width:40%;
-    background-color: white;
 }
 @media ( max-width: 992px ) {
     .detailPage {
@@ -26,7 +25,28 @@
   ._star{
     width: 12px;
     height: 12px;
-    fill: red;
+    fill: #fdb45a;
+    margin-top: -4px;
+    margin-right: 3px;
+  }
+  .pageIcon{
+    display: inline-block;
+    vertical-align: top;
+    fill: #9e9e9e;
+    width: 33px;
+    height: 18px;
+    margin-left: 14px;
+    /* margin-right: 14px; */
+    margin-top: 6px;
+  }
+  .pageIcon2{
+    display: inline-block;
+    vertical-align: top;
+    fill: #9e9e9e;
+    width: 33px;
+    height: 18px;
+    margin-left: 14px;
+    /* margin-right: 14px; */
   }
   span._blue{
     font-size: 1.1rem;
@@ -72,7 +92,7 @@
     color: rgb(4,207,92);
     padding: 1px 15px;
     border: 1px solid rgb(4,207,92);
-    border-radius: 18px;
+    border-radius: 6px;
     font-weight: bold;
   }
   /* .naver_logo{
@@ -106,7 +126,7 @@
     /* color:rgba(255,164,50,.8); */
   }
   .place_section_content{
-    padding: 0 18px;
+    
   }
   .bar_chart{
     position: relative;
@@ -126,12 +146,12 @@
     border-radius: 5px;
     background: #f4f7f8;
     line-height: 3rem;
-    margin: 10px;
     padding: 0;
+    margin-top: 7px;
   }
   .bar{
     display: flex;
-    background:rgba(255,164,50,.8);
+    background:rgb(255 193 116 / 80%);
     /* background:rgba(0,180,155,.35); */
     position: absolute;
     top: 0;
@@ -154,10 +174,10 @@
     display: flex;
     /* vertical-align: middle; */
     /* align-items: center; */
-    color: #242424;
+    color: #3a3a3a;
   }
   .review_summary_cnt{
-    color:rgba(255,164,50,.8);
+    color:rgb(255 193 116 / 80%);
     /* font-size: 1.3rem; */
     /* flex: none;
     margin-left: 7px;
@@ -181,25 +201,21 @@
   
   .review_box{
     display: block;
+    margin-bottom: 16px;
   }
   
-  .review_content{
-    padding-inline-start: 40px;
-  }
   
   .blog-review-box{
     border: solid 1px #cfcfcf;
-    border-radius: 12px;
+    border-radius: 6px;
     margin-bottom: 20px;
     border-radius: 12px;
   }
   
   .blog-image{
-    border-bottom: solid 1px #cfcfcf;
-    border-radius: 12px;
+    border-radius: 6px;
     position: relative;
-    width: 100%;
-    height: 500px;
+    width: 25%;
     overflow: hidden;
     cursor: pointer;
     display: inline-block;
@@ -207,13 +223,15 @@
   }
   
   .blog-body{
-    
+    color: #636363;
+    width: 75%;
   }
   
   .blog-title{
     font-weight: bold;
-    font-size: 20px;
-    padding-top:5px;
+    font-size: 18px;
+    padding-top: 5px;
+    color: #c2781b;
     padding-left: 10px;
   }
   
@@ -230,3 +248,34 @@
     font-size: 1.2rem;
     margin-bottom: 7px;
   }
+  .faceImg{
+    width: 20px;
+    margin-top: -3px;
+    margin-left:1px;
+  }
+  .heartImg{
+    width: 20px;
+    z-index: 1;
+    margin-top: 1px;
+  }
+  .ml-27{
+    margin-left: 27px;
+  }
+
+  .place_section{
+    background: white;
+    padding: 27px 0 15px;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-bottom: 17px;
+  }
+  .first{
+    padding-top: 70px;
+  }
+
+  li.list-group-item {
+    border-radius: 0px;
+    border-bottom: 1px solid rgb(236,240,242)!important;
+    border:0px;
+    padding:10px 0;
+}

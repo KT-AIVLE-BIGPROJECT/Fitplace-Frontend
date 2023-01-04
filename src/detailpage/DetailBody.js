@@ -524,6 +524,7 @@ const DetailBody = () => {
 
     return (
         <div>
+
             <Container
                 className='container_style detailPage'
                 style={{
