@@ -124,7 +124,7 @@ const MainTop = () => {
                     <h6 className='h_button_detail'>상세보기</h6>
                 </div>
             </div>
-            <div className='login-msg grey-color'>{loginMsg}</div>
+            {/* <div className='login-msg grey-color'>{loginMsg}</div> */}
         </div>
     </div>
     
