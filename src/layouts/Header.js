@@ -94,7 +94,7 @@ const Header = () => {
                                     <a class="nav-link fw-bold" href="/search">장소추천<img className="location-img" src ={require("../img/find-location.png")} /></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-bold" href="/board">FAQs</a>
+                                    <a class="nav-link fw-bold" href="/board">자유게시판</a>
                                 </li>
                             </Nav>
                             <Nav>{welcomeMent}</Nav>
