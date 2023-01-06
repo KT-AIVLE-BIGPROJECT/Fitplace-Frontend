@@ -421,7 +421,7 @@ hr.m-tb {
 .hot-name{
     margin-top: 14px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 14px;
     color: rgb(27, 29, 31);
 }
@@ -759,4 +759,9 @@ h5.main_top_text {
 }
 .top_img{
     filter: brightness(0.7);
+}
+
+.swiper-pagination-bullet-active {
+    color: white;
+    background: white!important;
 }
