@@ -4,7 +4,7 @@ function Pagination({ total, limit, page, setPage }) {
   const numPages = Math.ceil(total / limit);
 
   return (
-      <div class="text-center m-tb80">
+      <div class="text-center m-tb80 pd-buttom100">
         <button onClick={() => setPage(page - 1)} disabled={page === 1} className="btn btn-default btn-transparent">
           &lt;
         </button>

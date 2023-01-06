@@ -53,10 +53,11 @@ function Board_write(){
 
     return (
     <Layout>
+        <Container className="container_style">
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">게시글 등록</strong>
-            <p>자유롭게 의견을 나눠주세요.</p>
+            <strong class = "FAQ">자유게시판</strong>
+            <p>자유롭게 글을 작성해주세요</p>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
@@ -93,6 +94,7 @@ function Board_write(){
             </div>
         </div>
     </div>
+    </Container>
     </Layout>
     )
 }

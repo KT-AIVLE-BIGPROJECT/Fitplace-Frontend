@@ -72,10 +72,11 @@ function Board_edit(){
 
     return (
     <Layout>
+        <Container className='container_style'>
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">게시글 수정</strong>
-            <p>수정을 완료하면 수정 버튼을 눌러주세요.</p>
+            <strong class = "FAQ">자유게시판</strong>
+            <p>글을 수정해주세요.</p>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">
@@ -98,7 +99,7 @@ function Board_edit(){
                         </div>
                         </Form.Group>  
                     <div class="bt_wrap">
-                        <button className="board_write_button" onClick={() => HandleQuestionSubmit({results_re})}>
+                        <button className="board_edit_button" onClick={() => HandleQuestionSubmit({results_re})}>
                             수정
                         </button>
         
@@ -109,6 +110,7 @@ function Board_edit(){
             </div>
         </div>
     </div>
+    </Container>
     </Layout>
   )
 }

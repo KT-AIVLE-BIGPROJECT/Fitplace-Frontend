@@ -1,6 +1,5 @@
 .board_wrap {
-    width: 1000px;
-    margin: 100px auto;
+    margin: 100px 0 200px auto;
 }
 
 .board_title {
@@ -23,7 +22,6 @@
     margin-top: 30px;
     text-align: end;
     font-size: 0;
-    margin-right: 22px;
     margin-bottom: 54px;
 }
 
@@ -41,7 +39,7 @@
     margin-left: 0;
 }
 
-.bt_wrap a.on {
+.bt_wrap a.on,.board_write_button,.board_edit_button {
     background: rgb(250, 150, 0);
     border: none;
     border-radius: 5px;
@@ -51,6 +49,23 @@
     padding-right: 15px;
     height: 44px;
     opacity: 80%;
+    cursor: pointer;
+}
+.board_write_button,.board_edit_button{
+    width:80px;
+}
+.board_cancel_button {
+    cursor: pointer;
+    background: rgb(228, 186, 101);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    font-size: 17px!important;
+    padding-right: 15px;
+    height: 44px;
+    opacity: 80%;
+    width:80px;
 }
 
 .board_list {
@@ -95,6 +110,7 @@
     width: 50%;
     text-align: left;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .board_list .top .title {
@@ -223,7 +239,7 @@ BORDER:#999 1px solid; COLOR: #666;
 }
 
 .board_view .cont {
-    padding: 30px 20px 50px;
+    padding: 30px 20px;
     border-bottom: 1px solid #eaeaea;
     line-height: 160%;
     font-size: 20px;
@@ -298,7 +314,7 @@ BORDER:#999 1px solid; COLOR: #666;
     resize: vertical;
 }
 
-.board_write_button {
+/* .board_write_button {
     width: "100%";
     font-size: 1.5rem;
     color: rgb(255, 255, 255);
@@ -308,8 +324,19 @@ BORDER:#999 1px solid; COLOR: #666;
     border-radius: 5px;
     padding: 10px;
     opacity: 80%;
-}
+} */
 
+/* .board_edit_button {
+    width: "100%";
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    background: rgb(250, 150, 0);
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 80%;
+} */
 .board_cancel_button{
     width: "100%";
     font-size: 1.5rem;
@@ -319,6 +346,7 @@ BORDER:#999 1px solid; COLOR: #666;
     border: none !important;
     border-radius: 5px !important;
     padding: 10px;
+    cursor: pointer;
 }
 
 .FAQ{
@@ -331,6 +359,7 @@ BORDER:#999 1px solid; COLOR: #666;
 .comment-box {
     /* border: solid 1px #cfcfcf;; */
     /* border-radius: 12px; */
+    min-height: 50px;
     padding: 5px 10px;
     margin-bottom: 20px;
     border: 1px solid rgba(0,0,0,.1);

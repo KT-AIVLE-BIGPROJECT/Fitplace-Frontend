@@ -375,7 +375,7 @@ table.dataTable td {
 }
 
 .cmt_submit {
-  width: "100%";
+  width: 107px;
   font-size: 17px;
   color: rgb(255, 255, 255);
   text-align: center;
@@ -403,15 +403,29 @@ table.dataTable td {
   align-items: center;
 }
 
-.change_remove {
+.change_btn {
   font-size: 15px;
   color: rgb(255, 255, 255);
   text-align: center;
-  background: lightgray;
+  background: rgb(228, 186, 101);
   border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 20px;
   opacity: 80%;
+  width: 80px;
+  cursor: pointer;
+}
+.remove_btn{
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background: rgb(245 73 73);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  opacity: 80%;
+  width: 80px;
+  cursor: pointer;
 }
 
 .btn_wrap {
@@ -422,13 +436,13 @@ table.dataTable td {
 }
 
 .list_btn {
-  width: "100%";
   font-size: 19px;
   font-weight: 545;
-  color: #ffa432;
+  background: #ffa432;
   text-align: center;
-  border: 1px solid;
+  /* border: 1px solid; */
   border-radius: 5px;
   padding: 17px 84px;
+  color: white;
   opacity: 80%;
 }

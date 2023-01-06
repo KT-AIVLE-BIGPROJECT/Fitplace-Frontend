@@ -46,14 +46,6 @@ const Board_detail = () => {
                                 댓글 {thisCommentList.length}개
                             </h5>
                         </div>
-                        <div className='flex ai-center'>
-                            <div>
-                                <a onClick={goPostEdit} className={token?"change_remove mr-12":"change_remove mr-12 display-none"} >수정</a>
-                            </div>
-                            <div>
-                                <a onClick={pressDelete} className={token?"change_remove mr-12":"change_remove mr-12 display-none"}>삭제</a>
-                            </div>
-                        </div>
                     </div>
                     <div className='comment-box'>
                         {/* <h5>
@@ -202,7 +194,17 @@ const Board_detail = () => {
 
     return (
     <Layout>
+        <Container className='container_style'>
     <div class="board_wrap">
+        <div className='linemap area'>
+            <div>
+                <a href="/"><img className="homeImg" src={require("../img/home.png")}/></a>
+            </div>
+            <div className='subtitle'>
+                &gt;
+                <span>자유게시판</span>
+            </div>
+        </div>
         <div class="board_title">
             <strong class = "FAQ">자유게시판</strong>
             {/* <p>질문을 남겨주세요.</p> */}
@@ -210,7 +212,17 @@ const Board_detail = () => {
         <div class="board_view_wrap">
             <div class="board_view">
                 <div class="title">
+                    <div class="flex hot-category">
                     {title}
+                    <div className='flex ai-center'>
+                        <div>
+                            <a onClick={goPostEdit} className={token?"change_btn mr-12":"change_remove mr-12 display-none"} >수정</a>
+                        </div>
+                        <div>
+                            <a onClick={pressDelete} className={token?"remove_btn mr-12":"change_remove mr-12 display-none"}>삭제</a>
+                        </div>
+                    </div>
+                    </div>
                 </div>
                 <div class="info">
                     <dl>
@@ -230,7 +242,6 @@ const Board_detail = () => {
                     {body}
                 </div>
             </div>
-
             <div className='attach_box'>
                 <p className='attach_text'>첨부 파일 확인</p>
                 <div>
@@ -244,6 +255,9 @@ const Board_detail = () => {
                     </div>
                 </div><br/>
             </div>
+            
+            
+            <hr/>
             <LoadComments></LoadComments>
             <div className={token?"mb-3":"mb-3 display-none"}>
                 <h4 for="exampleFormControlTextarea1" class="form-label attach_text mt-50">댓글 작성</h4>
@@ -273,7 +287,7 @@ const Board_detail = () => {
         </div>
     </div>
 
-
+    </Container>
     </Layout>
   )
 }
