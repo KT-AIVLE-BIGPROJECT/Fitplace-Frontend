@@ -55,8 +55,8 @@ function Board_write(){
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">FAQs</strong>
-            <p>질문을 남겨주세요.</p>
+            <strong class = "FAQ">게시글 등록</strong>
+            <p>자유롭게 의견을 나눠주세요.</p>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">

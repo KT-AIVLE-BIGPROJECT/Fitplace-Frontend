@@ -5,13 +5,16 @@ import "./Board_style.css"
 import Board_pagination from "./Board_pagination";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import nameMasking from '../functions/functions';
 
 
 function Board_main(){
-    const [posts, setPosts] = useState([]);
-    const [postsWithIdx, setPostsWithIdx] = useState(0);
+    const navigate = useNavigate();
+
+    const [posts, setPosts] = useState([]); // 받아온 게시글 데이터
+    const [postsWithIdx, setPostsWithIdx] = useState(0); // 인덱스 번호 붙은 게시글 데이터
     const [count, setCount] = useState("");
     const [limit, setLimit] = useState(10);
     const token = sessionStorage.getItem("token");
@@ -58,8 +61,20 @@ function Board_main(){
                 <div class = "Board_Reader">
                   <div className="num">{count-post.post_num+1}</div>
                  
-                    <Link to={`/board/detail/${post.pk}`} className="title">{ post.title }
-                    </Link>
+                    {/* <Link to={`/board/detail/${post.pk}`} className="title">{ post.title }
+                    </Link> */}
+                    <div onClick={()=>{
+                      navigate(`/board/detail/${post.pk}`, {
+                        state: {
+                          num: count-post.post_num+1
+                        }
+                      });
+                      }
+                    }
+                      className="title"
+                    >
+                      { post.title }
+                    </div>
                   
                   <div className="writer">{nameMasking(post.profile.nickname)}</div>
                   <div className="date">{date[0]}</div>

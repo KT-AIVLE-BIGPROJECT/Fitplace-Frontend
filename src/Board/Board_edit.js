@@ -74,8 +74,8 @@ function Board_edit(){
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">FAQs</strong>
-            <p>질문을 수정해주세요.</p>
+            <strong class = "FAQ">게시글 수정</strong>
+            <p>수정을 완료하면 수정 버튼을 눌러주세요.</p>
         </div>
         <div class="board_write_wrap">
             <div class="board_write">

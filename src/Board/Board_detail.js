@@ -14,7 +14,8 @@ const Board_detail = () => {
     const [ data, setData ] = useState({});
     const navigate = useNavigate();
     const location = useLocation();
-    const getPath = location.pathname.split('/')
+    const getPath = location.pathname.split('/');
+    const num = location.state.num;
 
     const [profile, setProfile] = useState({}) // 게시글 작성자 프로필
     const [nickname, setNickname] = useState("");
@@ -203,7 +204,7 @@ const Board_detail = () => {
     <Layout>
     <div class="board_wrap">
         <div class="board_title">
-            <strong class = "FAQ">FAQs</strong>
+            <strong class = "FAQ">자유게시판</strong>
             {/* <p>질문을 남겨주세요.</p> */}
         </div>
         <div class="board_view_wrap">
@@ -214,7 +215,7 @@ const Board_detail = () => {
                 <div class="info">
                     <dl>
                         <dt>번호</dt>
-                        <dd>{pk}</dd>
+                        <dd>{num}</dd>
                     </dl>
                     <dl>
                         <dt>글쓴이</dt>
