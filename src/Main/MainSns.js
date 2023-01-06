@@ -39,12 +39,13 @@ const MainSns = () => {
                 loopIdx.push(i);
             }
             return (
-                <Swiper spaceBetween={10} autoplay={{ delay: 10000, disableOnInteraction: false }} loop={true} 
+                <Swiper spaceBetween={10} loop={true} 
                     breakpoints={{
-                        720: { slidesPerView: 1.5, spaceBetween: 20 },
+                        720: { slidesPerView: 1.5, spaceBetween: 10 },
                         1024: { slidesPerView: 2.5, spaceBetween: 20 },
-                        1400: { slidesPerView: 3.5, spaceBetween: 10 }
+                        1400: { slidesPerView: 3.5, spaceBetween: 30 }
                     }}
+                    pagination={{ clickable: true }}
                 >
                     {loopIdx.map((i, idx) => {
                         var profile_img;
@@ -119,13 +120,14 @@ const MainSns = () => {
         var region = ['강남', '구로', '마포', '용산', '종로']
         var random_region = region[Math.floor(Math.random() * region.length)];
         setRandomRegion(random_region);
-        var query = random_region + '%23승연아_우즈야_여기야 OR %23신동_넌이미먹었겠지 OR %23박지성_단1g도안줌 OR %23제노의_맛그당어 OR %23런쥔이_밥무거쒀 OR %23확신해찬맛집 OR %23몬베베가_몬베베에게_추천하는_맛집 OR %23백현이를_위한_맛집투어 OR %23황제님을위한메뉴판 OR %23강다니엘_염염긋 OR %23완전_장원영_스타일_아니냐구 OR %23ㄷㅂㅇㅈ OR %23런쥔이의_맛집내비게이션 OR %23승철이_이거먹고_볼빵빵했꾸마 OR %23정한아_마니머거여ㅎㅎ OR %23조슈아_먹어보슈아 OR %23순영아_이거_맛있어 OR %23원우야_여기_테이스티 OR %23민규라고치고_디너쇼해도돼 OR %23도겸이도_도아할_맛집 OR %23믿고먹어boo세요';
+        let query = random_region + '%23승연아_우즈야_여기야 OR %23신동_넌이미먹었겠지 OR %23박지성_단1g도안줌 OR %23제노의_맛그당어 OR %23런쥔이_밥무거쒀 OR %23확신해찬맛집 OR %23몬베베가_몬베베에게_추천하는_맛집 OR %23백현이를_위한_맛집투어 OR %23황제님을위한메뉴판 OR %23강다니엘_염염긋 OR %23완전_장원영_스타일_아니냐구 OR %23ㄷㅂㅇㅈ OR %23런쥔이의_맛집내비게이션 OR %23승철이_이거먹고_볼빵빵했꾸마 OR %23정한아_마니머거여ㅎㅎ OR %23조슈아_먹어보슈아 OR %23순영아_이거_맛있어 OR %23원우야_여기_테이스티 OR %23민규라고치고_디너쇼해도돼 OR %23도겸이도_도아할_맛집 OR %23믿고먹어boo세요';
         var body = {
             "query": query
         };
         try{
             axios.post(`http://localhost:8000/twitter/`, body)
             .then((response)=>{
+                console.log(body);
                 // console.log(response.data.data);
                 // console.log(response.data.includes.users);
                 // console.log(response.data.includes.media);
@@ -246,15 +248,14 @@ const MainSns = () => {
 
     return (
         <div>
-            <div className='h_row_center'>
-                <h4>
-                    # SNS 둘러보기
-                    <img className='twitter-logo' src="https://blog.kakaocdn.net/dn/AcIGI/btqxtp2xkg2/EGABG3i2NAMq3kRu1VaGzk/img.jpg" alt="twitter_logo" />
-                    #{randomRegion}구
-                </h4>
+            <div className='flex'>
+                <img className='twitter-logo' src="https://blog.kakaocdn.net/dn/AcIGI/btqxtp2xkg2/EGABG3i2NAMq3kRu1VaGzk/img.jpg" alt="twitter_logo" />
+                <h5>
+                    # {randomRegion}구
+                </h5>
             </div>
     
-            <div className='margin_box'>
+            <div className='margin_box mb-130'>
                 <div className='h_row2'>
                     {/* <div className='single_box'>
                         <img className='snsimg' src="https://blog.kakaocdn.net/dn/CHb0U/btqxrW04Y5b/mzimBHhLuGMBYvCS33uyh0/img.jpg" alt="insta_logo" />

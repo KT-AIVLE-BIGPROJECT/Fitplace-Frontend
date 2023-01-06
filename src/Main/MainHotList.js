@@ -37,16 +37,16 @@ const Places100List = ({places}) =>{
             loop={true}
             breakpoints={{
                 720: {
-                    slidesPerView: 2.5,
-                    spaceBetween: 20
+                    slidesPerView: 1.5,
+                    spaceBetween: 10
                   },
                   1024: {
                     slidesPerView: 3.5,
                     spaceBetween: 20
                   },
                   1400: {
-                    slidesPerView: 5.5,
-                    spaceBetween: 25
+                    slidesPerView: 4.5,
+                    spaceBetween: 30
                   }
             }}
         >

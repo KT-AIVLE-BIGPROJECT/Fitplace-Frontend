@@ -90,10 +90,11 @@ img {
     position: absolute;
     left: 20px;
     bottom: 20px;
-    width: 62px;
-    height: 28px;
+    width: 6rem;
+    height: 2rem;
     background: rgb(255, 255, 255);
     border-radius: 4px;
+    vertical-align: middle;
 }
 
 .h_button_detail {
@@ -396,7 +397,7 @@ hr.m-tb {
     border-radius: 12px;
     cursor: pointer;
     margin: 13px 4px;
-    height: 260px;
+    height: 261px;
     overflow: hidden;
 }
 .hot-title {
@@ -408,7 +409,7 @@ hr.m-tb {
 .hot-detail{
     position: relative;
     padding: 10px 14px 22px;
-    font-size: 11px;
+    font-size: 12px;
 }
 .hot-category{
     justify-content: space-between;
@@ -420,7 +421,7 @@ hr.m-tb {
 .hot-name{
     margin-top: 14px;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 16px;
     line-height: 14px;
     color: rgb(27, 29, 31);
 }
@@ -456,51 +457,50 @@ hr.m-tb {
     cursor: pointer;
 }
 .h-row-center.margin-top.fw-light {
-    font-size: 10px;
+    font-size: 13px;
 }
 img.hot-place-sparkle {
     width: 31px;
     margin-bottom: 4px;
+    margin-right: 10px;
 }
 
 /* SNS 페이지 */
 .twitter-logo {
-    width: 50px; 
-    height: 50px;
-    margin-left: 30px;
-    margin-right: 20px;
+    width: 35px;
+    margin-right: 14px;
 }
 .h_row2 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    height: 500px;
+    height: 550px;
 }
+
 .swiper-box-sns {
     position: relative;
-    box-shadow: 3px 3px 12px 0 #e9e9e9;
-    border-radius: 12px;
-    cursor: pointer;
-    /* margin: 13px 4px; */
-    height: 465px;
-    width: 300px;
+    border: 1px solid #e6e6e6;
+    padding: 0 30px;
+    width: 100%;
+    height: 86%;
     justify-content: space-between;
     align-items: center;
     object-fit: contain;
+    border-radius: 8px;
     /* overflow: hidden; */
     /* flex-wrap: wrap; */
 }
 .profile-bar {
     /* border-bottom: solid 1px #cfcfcf; */
     /* border-radius: 12px; */
-    padding: 10px;
     justify-content: left;
+    height: 81px;
 }
 .profile-img {
     border-radius: 50px;
     width: 40px;
     height: 40px;
-    margin-right: 10px;
+    margin-right: 15px;
 }
 .tw-user1 {
     font-size: 15px;
@@ -513,19 +513,16 @@ img.hot-place-sparkle {
 .body-area {
     /* border-bottom: solid 1px #cfcfcf; */
     flex-direction: column;
-    padding: 10px;
 }
 .tw-text-area {
     width: 100%;
-    height: 170px;
-    /* background-color: pink; */
-    padding: 3px 10px;
+    font-size: 15px;
+    height: 124px;
 }
 .tw-img-area {
     width: 100%;
     height: 170px;
     /* background-color: skyblue; */
-    padding: 3px 10px;
     justify-content: center;
     align-items: center;
 }
@@ -534,22 +531,20 @@ img.hot-place-sparkle {
     /* border-radius: 12px; */
     position: static;
     width: 100%;
-    height: 170px;
+    height: 200px;
     overflow: hidden;
 }
 .body-img2{
-    object-fit: contain;
     width: 100%;
-    height: auto;
 }
 .bird-img1{
     /* border-bottom: solid 1px #cfcfcf; */
     /* border-radius: 12px; */
     position: relative;
     width: 100%;
-    height: 170px;
+    height: 200px;
     overflow: hidden;
-    padding: 60px;
+    padding: 80px;
 }
 .bird-img2{
     object-fit: contain;
@@ -557,7 +552,7 @@ img.hot-place-sparkle {
 .retweet-area{
     justify-content: space-between;
     align-items: center;
-    padding: 5px 25px;
+    padding:10px 0;
     display: flex;
 }
 .retweet-area-txt{
@@ -743,4 +738,25 @@ ul{
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+/**/
+.items_top{
+    position: relative;
+    width: 100%;
+    height: 210px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+}
+h5.main_top_text {
+    position: relative;
+    /* margin-top: -45px; */
+    margin-top: -120px;
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+}
+.top_img{
+    filter: brightness(0.7);
 }
