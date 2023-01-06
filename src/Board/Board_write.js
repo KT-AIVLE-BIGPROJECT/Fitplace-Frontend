@@ -36,13 +36,13 @@ function Board_write(){
             }
             )
             .then((response) => {
-                // if(response.status < 300) {
+                if(response.status < 300) {
                 alert("등록이 완료되었습니다!");
                 window.location.replace('http://localhost:3000/board/');
-                // }
-                // else{
-                //     alert("등록이 실패했습니다!");
-                // }
+                }
+                else{
+                    alert("등록이 실패했습니다!");
+                }
             })
         
 

@@ -91,14 +91,14 @@ function Board_main(){
           </div>
           <div className='subtitle'>
               &gt;
-              <span>FAQs</span>
+              <span>자유게시판</span>
           </div>
       </div>
       <br/>
       <div>
         <div className='top_box'>
-        <h1 class = "FAQ">FAQs</h1>
-        <p className='font-20'>자주 하는 질문</p>
+        <h1 class = "FAQ">자유게시판</h1>
+        <p className='font-20'>자유롭게 의견을 나눠주세요.</p>
         </div>
       </div>
       <div className='align-r font-16'>
