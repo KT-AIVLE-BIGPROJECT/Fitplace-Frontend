@@ -1,6 +1,6 @@
 # 사용자 맞춤 장소 추천 서비스 **FIT.PLACE**
 
-<img width="736" alt="image" src="/Users/kim-youngbin/Desktop/KT_AIVLE_SCHOOL/dev/my-react/my-app/src/img/fitplace.png">
+![fitplace](https://user-images.githubusercontent.com/89764127/214752303-7d9109c9-64e6-4e7d-8891-efb3c290b37c.png)
 
 ---
 ## **서비스 기획 배경**
