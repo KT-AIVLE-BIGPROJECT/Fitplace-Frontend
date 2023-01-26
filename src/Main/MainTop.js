@@ -93,7 +93,7 @@ const MainTop = () => {
     <Container className="container_style" style={age=="age_none"&&gender=="gender_none"&&mbti=="mbti_none"?{"display":"none","padding-top":"24px"}:{"padding-top":"24px"}}>
     <div>
         <div class="hot-title fw">
-            <img className='hot-place-sparkle' src = {require("../img/fire.png")}/>FIT.PALCE PICK
+            <img className='hot-place-sparkle' src = {require("../img/fire.png")}/>FIT.PLACE PICK
         </div>
 
     <Swiper
