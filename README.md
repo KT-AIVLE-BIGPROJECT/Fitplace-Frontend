@@ -50,6 +50,7 @@
 <p align="center"><img width="553" alt="메인화면+로그인화면페이지" src="https://user-images.githubusercontent.com/89764127/214750249-e1840844-5f36-45c5-b575-272ba2c103ea.png"></p>
 
 - **프로필 수정**
+  - 회원정보 수정, 취향 키워드 설정 가능
 <p align="center"><img width="553" alt="프로필수정페이지" src="https://user-images.githubusercontent.com/89764127/214750422-8eaf0d07-fdbd-4247-bae2-1b83c96cc57c.png"></p>
 <p align="center"><img width="553" alt="취향키워드수정페이지" src="https://user-images.githubusercontent.com/89764127/214750480-fd4d1b77-1770-4211-9bb3-764463f0624d.png"></p>
 
@@ -57,10 +58,13 @@
 <p align="center"><img width="553" alt="장소추천페이지" src="https://user-images.githubusercontent.com/89764127/214750546-92488b7b-e238-4c27-b884-37ba7fc88ab2.png"></p>
 
 - **장소 상세화면**
+  - 크롤링한 장소 데이터의 상세정보( 장소이름, 주소, 별점, 전화번호, 방문자리뷰수, 블로그리뷰수 )
 <p align="center"><img width="553" alt="214751438-9c80cc0b-b7b7-4c2e-8d87-47b381fd45f5" src="https://user-images.githubusercontent.com/90843573/218916229-8353a3bc-89b2-48f7-89e3-f068882ef00b.png"></p>
 
 - **혼잡도 예측**
-<img width="653" alt="image" src="https://user-images.githubusercontent.com/89764127/214751557-f611efcd-e0c8-4daa-b52e-64e15857193c.png">
+  - 장소 데이터와 가까운 인구밀집지역의 실시간 혼잡도(여유, 보통, 붐빔, 매우 붐빔)
+  - 1시간,2시간 후 혼잡도 예측결과 출력
+<p align="center"><img width="553" alt="image" src="https://user-images.githubusercontent.com/89764127/214751557-f611efcd-e0c8-4daa-b52e-64e15857193c.png"></p>
 
 
 
