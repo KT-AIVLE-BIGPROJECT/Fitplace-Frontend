@@ -58,11 +58,11 @@
   - 카테고리 별 분류 가능 ( 전체, 먹기, 마시기, 놀기, 걷기 )
   - 지역별, 평점순, 리뷰순으로 필터링 가능
   <p align="center"><img width="50%" alt="장소추천페이지" src="https://user-images.githubusercontent.com/90843573/220876781-b3d0420e-b3ab-46e9-a9b2-f9f6cd91c731.png"><img width="50%" alt="장소추천페이지" src="https://user-images.githubusercontent.com/90843573/220877251-abdffe74-8730-44a1-b364-20482ea3087a.png"></p>
-  ![image](https://user-images.githubusercontent.com/90843573/220877251-abdffe74-8730-44a1-b364-20482ea3087a.png)
 
 
 - **장소 상세화면**
   - 크롤링한 장소 데이터의 상세정보( 장소이름, 주소, 별점, 전화번호, 방문자리뷰수, 블로그리뷰수 )
+  - 실시간으로 네이버 블로그 리뷰 크롤링
 <p align="center"><img width="553" alt="214751438-9c80cc0b-b7b7-4c2e-8d87-47b381fd45f5" src="https://user-images.githubusercontent.com/90843573/218916229-8353a3bc-89b2-48f7-89e3-f068882ef00b.png"></p>
 
 - **혼잡도 예측**
