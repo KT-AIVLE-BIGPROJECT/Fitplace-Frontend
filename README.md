@@ -45,17 +45,21 @@
 ---
 ## 🖥 개발 화면
 - **메인화면 + 로그인**
-  - [네이버리뷰 수 + 블로그리뷰 수]가 높은 인기있는 장소를 랜덤하게 보여줌
+  - [네이버리뷰 수 + 블로그리뷰 수]가 높은 인기있는 장소를 100개 중 7개를 랜덤하게 보여줌
   - 트위터 API를 사용하여 트위터 유저들이 많이 이용하는 맛집 태그로 검색 태그로 검색된 내용을 확인 가능
-<p align="center"><img width="553" alt="메인화면+로그인화면페이지" src="https://user-images.githubusercontent.com/89764127/214750249-e1840844-5f36-45c5-b575-272ba2c103ea.png"></p>
+  - 로그인 시 사용자 프로필 입력 토대로 장소 추천 배너 생성
+  <p align="center"><img width="50%" alt="메인화면+로그인화면페이지" src="https://user-images.githubusercontent.com/90843573/220873292-f51d0e0e-5def-42a9-99c3-267a41373d5f.png"><img width="50%" alt="메인화면+로그인화면페이지" src="https://user-images.githubusercontent.com/90843573/220874180-8d856946-58e3-41ee-b215-a85da927f23d.png"></p>
 
 - **프로필 수정**
   - 회원정보 수정, 취향 키워드 설정 가능
-<p align="center"><img width="553" alt="프로필수정페이지" src="https://user-images.githubusercontent.com/89764127/214750422-8eaf0d07-fdbd-4247-bae2-1b83c96cc57c.png"></p>
-<p align="center"><img width="553" alt="취향키워드수정페이지" src="https://user-images.githubusercontent.com/89764127/214750480-fd4d1b77-1770-4211-9bb3-764463f0624d.png"></p>
+  <p align="center"><img width="50%" alt="취향키워드수정페이지" src="https://user-images.githubusercontent.com/90843573/220876235-21df6f64-d07d-46b9-9985-2a9660af1dd6.png"><img width="50%"  alt="프로필수정페이지" src="https://user-images.githubusercontent.com/90843573/220876135-59deb61c-50ce-4001-b018-4ef1514a525e.png"></p>
 
 - **사용자별 장소추천 결과**(로그인 후 이용가능)
-<p align="center"><img width="553" alt="장소추천페이지" src="https://user-images.githubusercontent.com/89764127/214750546-92488b7b-e238-4c27-b884-37ba7fc88ab2.png"></p>
+  - 카테고리 별 분류 가능 ( 전체, 먹기, 마시기, 놀기, 걷기 )
+  - 지역별, 평점순, 리뷰순으로 필터링 가능
+  <p align="center"><img width="50%" alt="장소추천페이지" src="https://user-images.githubusercontent.com/90843573/220876781-b3d0420e-b3ab-46e9-a9b2-f9f6cd91c731.png"><img width="50%" alt="장소추천페이지" src="https://user-images.githubusercontent.com/90843573/220877251-abdffe74-8730-44a1-b364-20482ea3087a.png"></p>
+  ![image](https://user-images.githubusercontent.com/90843573/220877251-abdffe74-8730-44a1-b364-20482ea3087a.png)
+
 
 - **장소 상세화면**
   - 크롤링한 장소 데이터의 상세정보( 장소이름, 주소, 별점, 전화번호, 방문자리뷰수, 블로그리뷰수 )
